@@ -57,7 +57,7 @@ const Navbar = ({ user }) => {
           }}
         >
           <section className="navbar-logo-letter">
-            <img src={logo} alt="STI logo" className="navbarLogo" />
+            <img src={logo} alt="logo" className="navbarLogo" />
             <span className="navbarLogoLetter">BEAUTY AVENUE</span>
           </section>
         </Link>
