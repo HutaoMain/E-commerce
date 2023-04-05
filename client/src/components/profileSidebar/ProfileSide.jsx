@@ -1,0 +1,48 @@
+import "./ProfileSide.css";
+import { useContext } from "react";
+import { BiEditAlt, BiPurchaseTagAlt } from "react-icons/bi";
+import { MdAccountCircle } from "react-icons/md";
+import { AuthContext } from "../../contextAPI/AuthContext";
+import useFetch from "../../contextAPI/useFetch";
+import { Link } from "react-router-dom";
+
+const ProfileSide = () => {
+  const { user } = useContext(AuthContext);
+
+  const { data } = useFetch(
+    `${process.env.REACT_APP_BACKEND_URL}/api/user/${user.email}`
+  );
+
+  return (
+    <div className="profileSide">
+      <div className="profileInfo">
+        <h3>{data.username}</h3>
+        <h3>{data.email}</h3>
+
+        <button className="profileSideEdit">
+          <BiEditAlt />
+          Edit Profile
+        </button>
+      </div>
+      <div className="profileBtns">
+        <Link to="/profile" style={{ textDecoration: "none", color: "black" }}>
+          <button className="profileSideBtn">
+            <MdAccountCircle />
+            My Account
+          </button>
+        </Link>
+        <Link
+          to="/profile/orders"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <button className="profileSideBtn">
+            <BiPurchaseTagAlt />
+            My Purchase
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default ProfileSide;
