@@ -1,0 +1,245 @@
+.profile {
+  display: flex;
+  margin-right: 10px;
+}
+
+.profileManageContainer {
+  flex: 3;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 22%;
+  box-shadow: 5px 5px 5px 5px rgb(0 0 0 / 12%);
+}
+
+.profileManageContainerAll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileInfoIntro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.profileHorizontalLine {
+  width: 75%;
+  height: 1px;
+  background-color: gray;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.profileManageContainerRight {
+  display: flex;
+  width: 75%;
+  flex-direction: column;
+}
+
+.profileManageInfo {
+  margin-left: 70px;
+}
+
+.profileManageInfo span {
+  word-break: break-all;
+  cursor: not-allowed;
+}
+
+.profileManageInfoList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 60%;
+  height: 40px;
+  font-size: 15px;
+}
+
+.profileManageContainerLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.profileManageContainerLeft img {
+  width: auto;
+  height: 150px;
+  margin-bottom: 8px;
+}
+
+.profileVerticalLine {
+  width: 1px;
+  height: 75%;
+  background-color: gray;
+}
+
+.saveProfileInfo {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(to left, #ee790f 0%, #eb525a 100%);
+  color: white;
+  font-size: 20px;
+}
+
+.profileFooterColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileInputTypeFile {
+  display: none;
+}
+
+.profileManageContainerLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+}
+
+.profileImage {
+  width: 500px !important;
+  height: auto !important;
+  margin-top: 10px;
+}
+
+.profileInputLabel {
+  cursor: pointer;
+  width: 150px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px dotted #000;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to left, #ee790f 0%, #eb525a 100%);
+  color: white;
+}
+
+.profileSaveImageBtn {
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  width: 155px;
+  height: 35px;
+  background: linear-gradient(to left, #ee790f 0%, #eb525a 100%);
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* .profileManageName {
+  display: flex;
+} */
+/* 
+.profileManageInfoName {
+  width: 100px;
+  margin-right: 25px;
+  font-size: 15px;
+} */
+
+@media screen and (max-width: 1320px) {
+  .profileManageName {
+    flex-direction: column;
+  }
+  /* .profileManageInfo {
+    margin-top: -10px;
+  } */
+  .profileManageInfoName {
+    width: 60%;
+  }
+  .profileImage {
+    width: 400px !important;
+    height: auto !important;
+  }
+  .profileManageContainerLeft {
+    margin-left: 100px;
+  }
+}
+
+@media screen and (max-width: 1160px) {
+  .profile {
+    margin-right: 0;
+    align-items: center;
+    flex-direction: column;
+  }
+  .profileManageContainer {
+    flex: none;
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .profileManageContainerAll {
+    flex-direction: column;
+  }
+  .profileManageContainerLeft {
+    margin-left: 0;
+  }
+  .profileManageName {
+    flex-direction: column;
+  }
+  .profileManageInfoList {
+    width: 500px;
+  }
+  .profileManageInfoName {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  /* .profile {
+    align-items: center;
+    margin-right: 0;
+    flex-direction: column;
+  } */
+  /* .profileManageContainer {
+    flex: none;
+    margin-right: 0;
+  } */
+  .profileHorizontalLine {
+    width: 360px;
+    margin: 0;
+  }
+  /* .profileManageContainerAll {
+    flex-direction: column;
+  } */
+  .profileImage {
+    width: 300px !important;
+    height: auto !important;
+  }
+  /* .profileManageName {
+    flex-direction: column;
+  } */
+  .profileManageInfoName {
+    width: 300px;
+    margin-right: 0;
+  }
+  .profileManageContainerRight {
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+  }
+  .profileManageInfo {
+    margin-left: 0;
+  }
+  .profileManageInfoList {
+    width: 300px;
+  }
+  .saveProfileInfo {
+    margin-left: 25%;
+  }
+}

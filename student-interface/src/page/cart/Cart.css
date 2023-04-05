@@ -1,0 +1,6 @@
+@media screen and (max-width: 480px) {
+  .ReactModal__Content {
+    width: 250px !important;
+    height: 115px !important;
+  }
+}

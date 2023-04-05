@@ -1,0 +1,265 @@
+.topLoginDesign1 {
+  width: 100%;
+  height: 35px;
+  background-color: #ebd005;
+}
+
+.topLoginDesign2 {
+  width: 100%;
+  height: 35px;
+  background-color: #0071c2;
+}
+
+/* navbar buttons */
+
+.rimstiNavbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 100px;
+  background-color: rgb(221, 221, 221);
+  margin-top: 10px;
+}
+
+.rimstiNavContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  gap: 120px;
+  margin-left: -350px;
+}
+
+.link-text {
+  font-size: 20px;
+}
+
+.sidebar-icon {
+  font-size: 20px;
+}
+
+.navbarLogo {
+  width: 70px;
+  height: 60px;
+  margin-top: 10px;
+  margin-left: -200px;
+}
+
+.navbarLogoLetter {
+  height: 60px;
+  margin-top: 12px;
+}
+
+.rimstiNavbar h1 {
+  color: #0071c2;
+  font-weight: 1000;
+  font-size: 50px;
+  margin-top: 10px;
+}
+
+/* profile Menu */
+
+.profileDropDown {
+  z-index: 5;
+  position: relative;
+}
+
+.topAvatarImg {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.profileMenuContainer {
+  width: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background-color: white;
+  position: absolute;
+  right: -70px;
+  display: none;
+}
+
+.profileDropDown:hover .profileMenuContainer {
+  display: block;
+}
+
+.profileMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.profileMenuTop {
+  word-break: break-all;
+}
+
+.profileMenuTop h5 {
+  font-size: 25px;
+  font-weight: 550;
+  margin-bottom: 5px;
+}
+
+.profileMenuTop p {
+  margin-bottom: 5px;
+}
+
+#circle-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 20px 0px 10px 10px;
+  object-fit: cover;
+}
+
+#circle-avatar span {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.seeProfileBtn {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  width: 200px;
+  cursor: pointer;
+  background-color: inherit;
+  font-size: 17px;
+  height: 45px;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.5);
+  border-top: 1px solid rgb(0, 0, 0, 0.5);
+  border-left: none;
+  border-right: none;
+}
+
+.faBar {
+  display: none;
+}
+
+.seeProfileBtn:hover {
+  background-color: rgb(221, 221, 221);
+}
+
+.btnLogout {
+  margin-bottom: 20px;
+  width: 150px;
+  border: none;
+  height: 50px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btnLogout:hover {
+  background-color: #ebd005;
+}
+
+@media screen and (max-width: 1260px) {
+  .navbarLogo {
+    margin-left: -150px;
+  }
+}
+
+@media screen and (max-width: 1180px) {
+  .rimstiNavContainer {
+    gap: 100px;
+  }
+}
+
+@media screen and (max-width: 1110px) {
+  .rimstiNavContainer {
+    gap: 80px;
+  }
+}
+
+@media screen and (max-width: 1022px) {
+  .rimstiNavContainer {
+    gap: 60px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .rimstiNavContainer {
+    gap: 40px;
+    margin-right: -80px;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .rimstiNavbar {
+    position: relative;
+  }
+  .rimstiNavContainer {
+    display: none;
+  }
+  .navbarLogo {
+    margin-left: -30%;
+  }
+  .faBar {
+    display: block;
+    font-size: 30px;
+    z-index: 11;
+    margin-right: -50px;
+  }
+  .rimstiNavContainerOpen {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    z-index: 10;
+    background-color: #0071c2;
+  }
+  .sidebar-icon {
+    color: white;
+    font-size: 30px;
+  }
+  .link-text {
+    display: none;
+  }
+  .profileDropDown {
+    position: absolute;
+    top: 70px;
+  }
+  .topAvatarImg {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    background-color: white;
+    border: 1px solid black;
+  }
+  #circle-avatar {
+    object-fit: cover;
+    background-color: white;
+    border: 1px solid black;
+  }
+}
+@media screen and (max-width: 620px) {
+  .navbarLogo {
+    margin-left: 0;
+  }
+  .faBar {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .topLoginDesign1 {
+    height: 20px;
+  }
+  .topLoginDesign2 {
+    height: 20px;
+  }
+  .navbarLogo {
+    margin-left: -10px;
+  }
+  .navbarLogoLetter {
+    height: 50px;
+    margin-top: 15px;
+  }
+}
