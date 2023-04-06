@@ -30,8 +30,7 @@ public class RegistrationService {
         }
         String token =  appUserService.signUpUser(
                 new AppUser(
-                        registrationRequest.getFirstName(),
-                        registrationRequest.getLastName(),
+                        registrationRequest.getName(),
                         registrationRequest.getUsername(),
                         registrationRequest.getEmail(),
                         registrationRequest.getPassword(),
@@ -41,7 +40,7 @@ public class RegistrationService {
 
         String link = "https://rimsti-ecommerce-backend.herokuapp.com/api/auth/registration/confirm?token=" + token;
         emailSender.send(registrationRequest.getEmail(),
-                buildEmail(registrationRequest.getFirstName(),
+                buildEmail(registrationRequest.getName(),
                         link));
 
         return token;

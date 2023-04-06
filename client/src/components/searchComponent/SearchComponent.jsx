@@ -6,7 +6,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 const SearchComponent = ({ id }) => {
   // const { data } = useFetch(
-  //   `${process.env.REACT_APP_BACKEND_URL}/api/category/list/${id}`
+  //   `${import.meta.env.VITE_APP_API_URL}/api/category/list/${id}`
   // );
 
   // const [query, setQuery] = useState("");

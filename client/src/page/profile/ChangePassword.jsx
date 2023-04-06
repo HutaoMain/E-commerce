@@ -7,7 +7,7 @@ import { registrationSchema } from "../../validations/RegistrationValidation";
 const ChangePassword = ({ userId }) => {
   const handleChangePass = async () => {
     await axios.put(
-      `${process.env.REACT_APP_BACKEND_URL}/api/user/update/password/${userId}`,
+      `${import.meta.env.VITE_APP_API_URL}/api/user/update/password/${userId}`,
       {
         password: values.password,
       }

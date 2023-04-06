@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom/dist";
 import { AuthContext } from "../../contextAPI/AuthContext";
 import Registration from "./registration/Registration";
 import ForgotPass from "./forgotPassword/ForgotPass";
+import FbLoginButton from "../../components/facebookLogin/FbLoginButton";
+import GoogleLoginButton from "../../components/googleLogin/GoogleLoginButton";
 
 const customStylesRegistration = {
   content: {
@@ -60,7 +62,7 @@ const Login = () => {
   const handleEmailCheck = async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/user/${credentials.email}`
+        `${import.meta.env.VITE_APP_API_URL}/api/user/${credentials.email}`
       );
       setEmailAvailable(res.data.isEnabled);
     } catch (err) {
@@ -82,7 +84,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`,
+        `${import.meta.env.VITE_APP_API_URL}/api/auth/login`,
         credentials
       );
       if (res.status === 200) {
@@ -131,7 +133,7 @@ const Login = () => {
       <div className="loginContainer">
         <div className="leftLogin">
           <img src={logo} alt="Logo" className="loginLogo" />
-          <h1>Welcome to RIMSti</h1>
+          <h1>Welcome to Beauty Avenue</h1>
           <p>
             Reservation and Inventory Management System of School Merchandise
             for STI College Sta.Maria
@@ -156,8 +158,14 @@ const Login = () => {
               >
                 Login
               </button>
+              {/* <div>
+        <FbLoginButton />
+      </div>
+      <div>
+        <GoogleLoginButton />
+      </div> */}
               {error && <span>{error.message}</span>}
-              <span className="forgotPassClick" onClick={toggleModalForgotPass}>
+              {/* <span className="forgotPassClick" onClick={toggleModalForgotPass}>
                 Forgot password?
               </span>
               <Modal
@@ -172,7 +180,7 @@ const Login = () => {
               <span>No existing account ? Create New Account Here</span>
               <button className="createNewAccountBtn" onClick={toggleModal}>
                 Create Account
-              </button>
+              </button> */}
             </div>
 
             <Modal

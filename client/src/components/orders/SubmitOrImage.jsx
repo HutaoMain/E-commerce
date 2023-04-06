@@ -20,7 +20,9 @@ const SubmitOrImage = ({ item, close }) => {
       const { url } = uploadRes.data;
 
       await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/api/order/update/proofPayment/${item.id}`,
+        `${import.meta.env.VITE_APP_API_URL}/api/order/update/proofPayment/${
+          item.id
+        }`,
         {
           proofPayment: url,
         }

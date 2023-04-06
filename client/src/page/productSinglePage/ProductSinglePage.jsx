@@ -175,7 +175,7 @@ const Product = () => {
   const id = location.pathname.split("/")[3];
 
   const { data, loading } = useFetch(
-    `${process.env.REACT_APP_BACKEND_URL}/api/product/list/${id}`
+    `${import.meta.env.VITE_APP_API_URL}/api/product/list/${id}`
   );
 
   const dispatch = useDispatch();
@@ -185,7 +185,7 @@ const Product = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/productVariations/${id}/min`
+        `${import.meta.env.VITE_APP_API_URL}/api/productVariations/${id}/min`
       );
       setClassActive(res.data);
     };
@@ -214,7 +214,9 @@ const Product = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/productVariations/${classActive}`
+        `${
+          import.meta.env.VITE_APP_API_URL
+        }/api/productVariations/${classActive}`
       );
       setProductVariation(res.data);
     };

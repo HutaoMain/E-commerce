@@ -16,10 +16,12 @@
 
 .loginContainer {
   display: flex;
+  height: 80vh;
+  width: 100%;
 }
 
 .leftLogin {
-  flex: 1;
+  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,32 +29,31 @@
 }
 
 .loginLogo {
-  margin-top: 50px;
-  height: 150px;
+  margin-top: 30px;
+  height: 300px;
   width: auto;
 }
 
 .leftLogin h1 {
-  color: #2c5f78;
-  margin-top: 70px;
+  color: #020100;
 }
 
 .leftLogin p {
-  width: 75%;
+  width: 50%;
   text-align: center;
 }
 
 .rightLogin {
-  flex: 1;
   display: flex;
+  width: 50%;
   align-items: center;
   justify-content: center;
 }
 
 .loginBox {
-  height: 100%;
+  height: 75%;
   width: 60%;
-  background-color: #ebd005;
+  background-color: #a09c96;
   border-radius: 30px;
   margin-top: 50px;
   display: flex;
@@ -62,7 +63,7 @@
 }
 
 .loginIconUser {
-  color: #2c5f78;
+  color: #020100;
   font-size: 130px;
 }
 
@@ -76,7 +77,7 @@
 
 .loginInput label {
   margin-bottom: 10px;
-  color: #2c5f78;
+  color: #020100;
   font-size: 20px;
   font-weight: 550;
 }
@@ -94,7 +95,7 @@
   font-size: 20px;
   border: none;
   border-radius: 15px;
-  color: #2c5f78;
+  color: #020100;
   margin-top: 20px;
   cursor: pointer;
 }
@@ -126,7 +127,25 @@
   margin-top: 10px;
 }
 
-@media screen and (max-width: 940px) {
+@media screen and (max-width: 940px) and (min-width: 767px) {
+  .loginContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .loginBox {
+    width: 90%;
+    height: 50vh;
+  }
+
+  .rightLogin {
+    width: 70%;
+  }
+
+  .leftLogin {
+    width: 70%;
+  }
+
   .loginIconUser {
     font-size: 100px;
   }
@@ -138,11 +157,65 @@
     margin-top: 30px;
   }
   .leftLogin p {
-    font-size: 14px;
+    display: none;
   }
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 767px) {
+  .loginContainer {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .loginContainer {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .leftLogin h1 {
+    margin-top: 50px;
+    font-size: 25px;
+  }
+
+  .rightLogin {
+    width: 80%;
+  }
+
+  .leftLogin p {
+    display: none;
+  }
+
+  .loginLogo {
+    display: none;
+  }
+
+  .loginBox {
+    width: 360px;
+    height: 65vh;
+  }
+}
+
+@media screen and (max-height: 730px) and (max-width: 940px) {
+  .loginContainer {
+    justify-content: center;
+  }
+
+  .leftLogin p {
+    display: none;
+  }
+
+  .loginLogo {
+    display: none;
+  }
+
+  .loginBox {
+    width: 360px;
+    height: 65vh;
+  }
+}
+
+/* @media screen and (max-width: 767px) {
   .topLoginDesign1 {
     height: 10px;
   }
@@ -152,11 +225,11 @@
   .loginContainer {
     display: flex;
     flex-direction: column;
-    margin-top: -30px;
+    margin-top: -10px;
   }
   .loginLogo {
     width: auto;
-    height: 70px;
+    height: 130px;
   }
   .leftLogin h1 {
     margin-top: 3px;
@@ -168,7 +241,7 @@
   .loginBox {
     width: 80%;
     height: auto;
-    margin-top: 10px;
+    margin-top: 30px;
   }
   .loginIconUser {
     margin-top: 10px;
@@ -185,8 +258,9 @@
     margin-bottom: 5px;
   }
   .loginButton {
-    margin-top: 5px;
+    margin-top: 10px;
     height: 40px;
+    margin-bottom: 20px;
   }
   .forgotPassClick {
     font-size: 13px;
@@ -198,4 +272,4 @@
     margin-bottom: 10px;
     height: 40px;
   }
-}
+} */

@@ -13,7 +13,7 @@ const OrderConfirmationModal = ({ carttotal, setIsOpen }) => {
   const { user } = useContext(AuthContext);
 
   const { data } = useFetch(
-    `${process.env.REACT_APP_BACKEND_URL}/api/user/${user.email}`
+    `${import.meta.env.VITE_APP_API_URL}/api/user/${user.email}`
   );
 
   console.log(data);
@@ -40,14 +40,14 @@ const OrderConfirmationModal = ({ carttotal, setIsOpen }) => {
   //         productDesc: product?.description,
   //         createdDateInMonth: day,
   //       };
-  //       await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/order/create`, postOrder);
+  //       await axios.post(`${import.meta.env.VITE_APP_API_URL}/api/order/create`, postOrder);
 
   //       const res = await axios.get(
-  //         `${process.env.REACT_APP_BACKEND_URL}/api/productVariations/${product.id}`
+  //         `${import.meta.env.VITE_APP_API_URL}/api/productVariations/${product.id}`
   //       );
 
   //       await axios.put(
-  //         `${process.env.REACT_APP_BACKEND_URL}/api/productVariations/update/quantity/${product.id}`,
+  //         `${import.meta.env.VITE_APP_API_URL}/api/productVariations/update/quantity/${product.id}`,
   //         {
   //           productId: product.id,
   //           quantity: res.data?.quantity - product.quantity,
@@ -79,17 +79,21 @@ const OrderConfirmationModal = ({ carttotal, setIsOpen }) => {
         createdDateInMonth: day,
       };
       await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/order/create`,
+        `${import.meta.env.VITE_APP_API_URL}/api/order/create`,
         postOrder
       );
 
       for (let product of products) {
         const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/api/productVariations/${product.id}`
+          `${import.meta.env.VITE_APP_API_URL}/api/productVariations/${
+            product.id
+          }`
         );
 
         await axios.put(
-          `${process.env.REACT_APP_BACKEND_URL}/api/productVariations/update/quantity/${product.id}`,
+          `${
+            import.meta.env.VITE_APP_API_URL
+          }/api/productVariations/update/quantity/${product.id}`,
           {
             productId: product.id,
             quantity: res.data?.quantity - product.quantity,

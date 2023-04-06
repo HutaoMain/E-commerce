@@ -8,7 +8,7 @@ const ProductMapping = () => {
   const id = location.pathname.split("/")[2];
 
   const { data, loading } = useFetch(
-    `${process.env.REACT_APP_BACKEND_URL}/api/category/list/${id}`
+    `${import.meta.env.VITE_APP_API_URL}/api/category/list/${id}`
   );
 
   console.log(data);

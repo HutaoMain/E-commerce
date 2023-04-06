@@ -41,7 +41,7 @@ const Profile = () => {
   const { user } = useContext(AuthContext);
 
   const { data } = useFetch(
-    `${process.env.REACT_APP_BACKEND_URL}/api/user/${user.email}`
+    `${import.meta.env.VITE_APP_API_URL}/api/user/${user.email}`
   );
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Profile = () => {
   const handleUpdate = async () => {
     try {
       await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/api/user/update/${profileData.id}`,
+        `${import.meta.env.VITE_APP_API_URL}/api/user/update/${profileData.id}`,
         {
           ...profileData,
           birthday: birthday,
@@ -79,7 +79,9 @@ const Profile = () => {
 
     const { url } = uploadRes.data;
     await axios.put(
-      `${process.env.REACT_APP_BACKEND_URL}/api/user/update/image/${profileData.id}`,
+      `${import.meta.env.VITE_APP_API_URL}/api/user/update/image/${
+        profileData.id
+      }`,
       {
         imageUrl: url,
       }

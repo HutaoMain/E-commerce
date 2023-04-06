@@ -7,7 +7,7 @@ const ForgotPass = () => {
 
   const handleForgotPass = async () => {
     await axios.put(
-      `${process.env.REACT_APP_BACKEND_URL}/api/auth/forgotPass/${email}`
+      `${import.meta.env.VITE_APP_API_URL}/api/auth/forgotPass/${email}`
     );
 
     toast.success("✅ Success!", {

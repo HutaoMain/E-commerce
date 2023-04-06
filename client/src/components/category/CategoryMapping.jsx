@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const CategoryMapping = () => {
   const { data } = useFetch(
-    `${process.env.REACT_APP_BACKEND_URL}/api/category/list`
+    `${import.meta.env.VITE_APP_API_URL}/api/category/list`
   );
 
   return (

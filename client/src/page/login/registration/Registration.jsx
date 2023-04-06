@@ -15,7 +15,7 @@ const Registration = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/auth/registration`,
+      `${import.meta.env.VITE_APP_API_URL}/api/auth/registration`,
       values
     );
 
@@ -56,7 +56,7 @@ const Registration = () => {
   });
 
   const { data } = useFetch(
-    `${process.env.REACT_APP_BACKEND_URL}/api/user/${values.email}`
+    `${import.meta.env.VITE_APP_API_URL}/api/user/${values.email}`
   );
 
   return (

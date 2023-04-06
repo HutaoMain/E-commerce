@@ -22,8 +22,8 @@ public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
+
+    private String name;
     private String username;
     private String email;
     private String password;
@@ -32,20 +32,17 @@ public class AppUser implements UserDetails {
     private Boolean isLocked = false;
     private Boolean isEnabled = false;
 
-    @JsonFormat(pattern = "yyy-MM-dd")
     private String imageUrl;
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.REMOVE)
     List<Order> order;
 
-    public AppUser(String firstName,
-                   String lastName,
+    public AppUser(String name,
                    String username,
                    String email,
                    String password,
                    UserRole userRole) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -57,12 +54,8 @@ public class AppUser implements UserDetails {
         return Collections.emptyList();
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
     @Override

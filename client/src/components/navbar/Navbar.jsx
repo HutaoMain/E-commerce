@@ -23,7 +23,7 @@ const Navbar = ({ user }) => {
   const { quantity } = useSelector((state) => state.cart);
 
   const { data } = useFetch(
-    `${process.env.REACT_APP_BACKEND_URL}/api/user/${user?.email}`
+    `${import.meta.env.VITE_APP_API_URL}/api/user/${user?.email}`
   );
 
   const toggleOpen = () => {
