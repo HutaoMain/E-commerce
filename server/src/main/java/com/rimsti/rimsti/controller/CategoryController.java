@@ -1,8 +1,11 @@
 package com.rimsti.rimsti.controller;
 
+import com.rimsti.rimsti.DTO.CategoryDTO;
+import com.rimsti.rimsti.exceptions.CategoryNotFoundException;
 import com.rimsti.rimsti.model.Category;
 import com.rimsti.rimsti.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +28,19 @@ public class CategoryController {
         return categoryService.getListCategory();
     }
 
-    @GetMapping("/list/{categoryId}")
-    private Category getCategory(@PathVariable("categoryId") int categoryId) {
-        return categoryService.getCategoryById(categoryId);
+//    @GetMapping("/list/{categoryId}")
+//    private Category getCategory(@PathVariable("categoryId") int categoryId) {
+//        return categoryService.getCategoryById(categoryId);
+//    }
+
+    @GetMapping("/list/{id}")
+    public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Integer id) {
+        try {
+            CategoryDTO categoryDTO = categoryService.findCategoryById(id);
+            return ResponseEntity.ok(categoryDTO);
+        } catch (CategoryNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/update/{categoryId}")

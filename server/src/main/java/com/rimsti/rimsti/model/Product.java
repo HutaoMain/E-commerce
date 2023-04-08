@@ -2,6 +2,7 @@ package com.rimsti.rimsti.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,10 +15,11 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "product")
+@NoArgsConstructor
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -41,6 +43,14 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime updatedDate;
 
-    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    @OneToMany(mappedBy = "productId")
     private List<ProductRating> ratings;
+
+    @Transient
+    private Float finalRating;
+
+    public Product(Long id) {
+            this.id = id;
+        }
 }

@@ -15,6 +15,5 @@ public class ProductDTO {
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
     private Integer categoryId;
-    private Long productVariations;
-
+    private Float finalRating;
 }

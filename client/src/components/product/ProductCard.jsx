@@ -1,5 +1,5 @@
 import "./ProductCard.css";
-import Rating from "@mui/material/Rating";
+import { Rating } from "react-simple-star-rating";
 
 import { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,7 @@ import { AuthContext } from "../../contextAPI/AuthContext";
 import axios from "axios";
 
 const ProductCard = ({ product }) => {
-  const [rating, setRating] = useState(product.rating);
+  const [rating, setRating] = useState(product.finalRating);
   const [messageWishList, setMessageWishList] = useState("Add to Wishlist");
   const [messageAddToCart, setMessageAddToCart] = useState("Add to Cart");
   const [disabled, setDisabled] = useState(false);
@@ -83,13 +83,15 @@ const ProductCard = ({ product }) => {
     }, 5000);
   };
 
-  const saveRating = async (newRating) => {
+  const saveRating = async (newRating, productId) => {
     try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_APP_API_URL}/api/product/rate/${
-          product.id
-        }/${userEmail}`,
-        { rating: parseFloat(newRating) } // send the rating as a float
+      const response = await axios.post(
+        `${import.meta.env.VITE_APP_API_URL}/api/productRating/rate`,
+        {
+          rating: parseFloat(newRating),
+          email: user,
+          productId: productId,
+        }
       );
       console.log(response.data);
     } catch (error) {
@@ -107,12 +109,9 @@ const ProductCard = ({ product }) => {
         <p className="product-description">{product.description}</p>
         <div className="product-rating">
           <Rating
-            name="simple-controlled"
-            value={rating}
-            onChange={(e, newValue) => {
-              setRating(newValue);
-              saveRating(newValue); // call a function to save the rating
-            }}
+            initialValue={rating}
+            allowFraction={true}
+            onClick={(rate) => saveRating(rate, product.id)}
           />
         </div>
         <div className="product-price">

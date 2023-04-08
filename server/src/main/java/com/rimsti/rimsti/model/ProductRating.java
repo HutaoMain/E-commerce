@@ -1,6 +1,5 @@
 package com.rimsti.rimsti.model;
 
-import com.rimsti.rimsti.model.appuser.AppUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,11 +15,10 @@ public class ProductRating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   private String email;
-
+    private String email;
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product product;
+    private Product productId;
 
     private float rating;
 }

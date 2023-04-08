@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/wishlist/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/api/wishlist/delete/**").permitAll()
 
-                .antMatchers(HttpMethod.PUT, "/api/productRating/**/rate/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/productRating/**").permitAll()
 
                 .anyRequest()
                 .authenticated()

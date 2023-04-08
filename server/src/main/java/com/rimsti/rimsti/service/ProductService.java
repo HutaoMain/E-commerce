@@ -3,6 +3,7 @@ package com.rimsti.rimsti.service;
 import com.rimsti.rimsti.DTO.ProductDTO;
 import com.rimsti.rimsti.model.Category;
 import com.rimsti.rimsti.model.Product;
+import com.rimsti.rimsti.model.ProductRating;
 import com.rimsti.rimsti.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,25 +32,38 @@ public class ProductService {
         return product;
     }
 
-    public ProductDTO getProductDtos(Product products){
+    private ProductDTO getProductDtos(Product product){
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setId(products.getId());
-        productDTO.setName(products.getName());
-        productDTO.setImageUrl(products.getImageUrl());
-        productDTO.setDescription(products.getDescription());
-        productDTO.setPrice(products.getPrice());
-        productDTO.setQuantity(products.getQuantity());
-        productDTO.setCategoryId(products.getCategory().getId());
-        productDTO.setCreatedDate(products.getCreatedDate());
-        productDTO.setUpdatedDate(products.getUpdatedDate());
+
+        productDTO.setId(product.getId());
+        productDTO.setName(product.getName());
+        productDTO.setImageUrl(product.getImageUrl());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setPrice(product.getPrice());
+        productDTO.setQuantity(product.getQuantity());
+        productDTO.setCategoryId(product.getCategory().getId());
+        productDTO.setCreatedDate(product.getCreatedDate());
+        productDTO.setUpdatedDate(product.getUpdatedDate());
+
+        List<ProductRating> ratings = product.getRatings();
+        float totalRating = 0f;
+        for (ProductRating rating : ratings) {
+            totalRating += rating.getRating();
+        }
+        float finalRating = 0f;
+        if (ratings.size() > 0) {
+            finalRating = totalRating / ratings.size();
+        }
+        productDTO.setFinalRating(finalRating);
+
         return productDTO;
     }
 
     public List<ProductDTO> getListProducts(){
         List<Product> allProducts =  productRepository.findAll();
         List<ProductDTO> productDTOS = new ArrayList<>();
-        for(Product products: allProducts){
-            productDTOS.add(getProductDtos(products));
+        for(Product product : allProducts){
+            productDTOS.add(getProductDtos(product));
         }
         return productDTOS;
     }
