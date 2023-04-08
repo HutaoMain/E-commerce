@@ -20,11 +20,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = "UPDATE heroku_130854f11edee87.orders SET status='Cancelled' where status ='Pending' AND created_date < now();", nativeQuery = true)
     void updateStatus();
 
-//    @Transactional
-//    @Modifying
-//    @Query(value = "UPDATE rimsti.orders SET status='Cancelled' where status ='Pending' AND created_date < now();", nativeQuery = true)
-//    void updateQuantity();
-
     interface sumOfTotalPrice{
         Double getTotalPrice();
         LocalDate getDate_now();

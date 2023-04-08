@@ -41,7 +41,7 @@ const Profile = () => {
   const { user } = useContext(AuthContext);
 
   const { data } = useFetch(
-    `${import.meta.env.VITE_APP_API_URL}/api/user/${user.email}`
+    `${import.meta.env.VITE_APP_API_URL}/api/user/${user}`
   );
 
   useEffect(() => {

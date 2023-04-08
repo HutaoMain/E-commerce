@@ -2,11 +2,9 @@ import styled from "styled-components";
 import { mobile } from "../../responsive";
 import {
   BsFacebook,
-  BsInstagram,
+  BsWhatsapp,
   BsMailbox,
   BsFillTelephoneFill,
-  BsPinterest,
-  BsTwitter,
   BsFillHouseDoorFill,
 } from "react-icons/bs";
 import stilogo from "../../images/logo.png";
@@ -94,7 +92,7 @@ const Footer = () => {
     <Container>
       <Left>
         <Logo>
-          RIMSti{" "}
+          Beauty Avenue
           <img
             src={stilogo}
             alt="sti logo"
@@ -106,50 +104,80 @@ const Footer = () => {
           />
         </Logo>
         <Desc>
-          There are many variations of passages of Lorem Ipsum available, but
-          the majority have suffered alteration in some form, by injected
-          humour, or randomised words which don’t look even slightly believable.
+          Welcome to our Beauty Avenue! We are a team of passionate beauty
+          enthusiasts who believe that everyone deserves to look and feel their
+          best. We offer a wide range of beauty products from top brands,
+          including skincare, makeup, haircare, and fragrance. Our mission is to
+          provide our customers with the best shopping experience possible by
+          offering high-quality products at competitive prices and excellent
+          customer service. We are committed to helping you find the perfect
+          products to enhance your natural beauty and feel confident in your own
+          skin. Thank you for choosing us as your go-to destination for all your
+          beauty needs.
         </Desc>
         <SocialContainer>
           <SocialIcon color="3B5999">
             <BsFacebook />
           </SocialIcon>
-          <SocialIcon color="E4405F">
-            <BsInstagram />
-          </SocialIcon>
-          <SocialIcon color="55ACEE">
-            <BsTwitter />
-          </SocialIcon>
-          <SocialIcon color="E60023">
-            <BsPinterest />
+          <SocialIcon color="49C358">
+            <BsWhatsapp />
           </SocialIcon>
         </SocialContainer>
       </Left>
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Accessories</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
+          <ListItem>
+            <a style={{ textDecoration: "none", color: "black" }} href="/">
+              Home
+            </a>
+          </ListItem>
+          <ListItem>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+              href="/category/4"
+            >
+              Facemask
+            </a>
+          </ListItem>
+          <ListItem>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+              href="/category/1"
+            >
+              Soap
+            </a>
+          </ListItem>
+          <ListItem>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+              href="/category/3"
+            >
+              Glutathione
+            </a>
+          </ListItem>
+          <ListItem>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+              href="/category/2"
+            >
+              Serum
+            </a>
+          </ListItem>
         </List>
       </Center>
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <BsFillHouseDoorFill style={{ marginRight: "10px" }} /> Sta. Maria
-          Bulacan, 3022
+          <BsFillHouseDoorFill style={{ marginRight: "10px" }} /> 0220 OD,
+          Purok12 Brgy.San Agustin Trece Martires City, Cavite 4109
         </ContactItem>
         <ContactItem>
-          <BsFillTelephoneFill style={{ marginRight: "10px" }} /> +1 234 567
+          <BsFillTelephoneFill style={{ marginRight: "10px" }} /> +639687695221
         </ContactItem>
         <ContactItem>
-          <BsMailbox style={{ marginRight: "10px" }} /> contact@rimsti.ph
+          <BsMailbox style={{ marginRight: "10px" }} /> contact@beautyavenue.ph
         </ContactItem>
-        {/* <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" /> */}
       </Right>
     </Container>
   );

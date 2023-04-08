@@ -10,7 +10,6 @@ public class ProductDTO {
     private String name;
     private String imageUrl;
     private String description;
-    private Float rating;
     private Double price;
     private Integer quantity;
     private LocalDateTime createdDate;

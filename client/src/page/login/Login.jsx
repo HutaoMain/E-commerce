@@ -5,7 +5,7 @@ import { FaUserCircle } from "react-icons/fa";
 import Modal from "react-modal";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom/dist";
+import { Link, useNavigate } from "react-router-dom/dist";
 import { AuthContext } from "../../contextAPI/AuthContext";
 import Registration from "./registration/Registration";
 import ForgotPass from "./forgotPassword/ForgotPass";
@@ -88,7 +88,7 @@ const Login = () => {
         credentials
       );
       if (res.status === 200) {
-        dispatch({ type: "LOGIN_SUCCESS", payload: credentials });
+        dispatch({ type: "LOGIN_SUCCESS", payload: credentials.email });
         navigate("/", { replace: true });
       } else {
         dispatch({
@@ -128,8 +128,8 @@ const Login = () => {
 
   return (
     <div className="login">
-      <div className="topLoginDesign1"></div>
-      <div className="topLoginDesign2"></div>
+      <div className="first-bar-design "></div>
+      <div className="second-bar-design"></div>
       <div className="loginContainer">
         <div className="leftLogin">
           <img src={logo} alt="Logo" className="loginLogo" />
@@ -165,6 +165,10 @@ const Login = () => {
         <GoogleLoginButton />
       </div> */}
               {error && <span>{error.message}</span>}
+
+              <Link to="/">
+                <button className="login-close-btn">x</button>
+              </Link>
               {/* <span className="forgotPassClick" onClick={toggleModalForgotPass}>
                 Forgot password?
               </span>

@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/user/update/**").permitAll() // update gender and birthday
                 .antMatchers(HttpMethod.PUT, "/api/user/update/password/**").permitAll() // update password
-                .antMatchers(HttpMethod.POST, "/api/order/**").permitAll() // update password
+                .antMatchers(HttpMethod.POST, "/api/order/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/order/update/**").permitAll() // update password
                 .antMatchers(HttpMethod.PUT, "/api/order/update/status/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/order/update/proofPayment/**").permitAll()
@@ -47,15 +47,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/api/product/update/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/product/list/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/api/product/delete/**").permitAll()
-
-                .antMatchers(HttpMethod.POST, "/api/productVariations/**").permitAll()
-                .antMatchers(HttpMethod.PUT, "/api/productVariations/update/quantity/**").permitAll()
-                .antMatchers(HttpMethod.PUT, "/api/productVariations/update/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/api/productVariations/delete/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/product/rate/**").permitAll()
 
                 .antMatchers(HttpMethod.POST, "/api/category/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/category/update/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/api/delete/**").permitAll()
+
+                .antMatchers(HttpMethod.POST, "/api/wishlist/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/wishlist/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/wishlist/delete/**").permitAll()
+
+                .antMatchers(HttpMethod.PUT, "/api/productRating/**/rate/**").permitAll()
 
                 .anyRequest()
                 .authenticated()

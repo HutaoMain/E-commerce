@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BiAddToQueue } from "react-icons/bi";
 import { CgRemoveR } from "react-icons/cg";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,6 +14,7 @@ import "./Cart.css";
 import { mobile } from "../../responsive";
 import Modal from "react-modal";
 import OrderConfirmationModal from "../../components/orders/orderConfirmationModal/OrderConfirmationModal";
+import { AuthContext } from "../../contextAPI/AuthContext";
 
 const Container = styled.div`
   display: flex;
@@ -157,6 +158,8 @@ const Cart = () => {
 
   const cart = useSelector((state) => state.cart);
 
+  const { user } = useContext(AuthContext);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -192,19 +195,19 @@ const Cart = () => {
                       <Image src={product.imgUrl} />
                       <Details>
                         <ProductName>
-                          <b>Product:</b> {product.name}
+                          <b>Product:</b> {product.productName}
                         </ProductName>
                         <ProductId>
-                          <b>ID:</b> {product.id}
+                          <b>Description:</b> {product.productDes}
                         </ProductId>
                         <button
                           onClick={() => handleRemoveFromCart(product.id)}
                         >
                           Remove
                         </button>
-                        <ProductSize>
+                        {/* <ProductSize>
                           <b>Size:</b> 37.5
-                        </ProductSize>
+                        </ProductSize> */}
                       </Details>
                     </ProductDetail>
                     <PriceDetail>
@@ -238,9 +241,15 @@ const Cart = () => {
                 <SummaryItemText>Total</SummaryItemText>
                 <SummaryItemPrice>₱ {cart.total}</SummaryItemPrice>
               </SummaryItem>
-              <Button disabled={cart.total === 0} onClick={toggleModal}>
-                CHECKOUT NOW
-              </Button>
+              {user ? (
+                <Button disabled={cart.total === 0} onClick={toggleModal}>
+                  CHECKOUT NOW
+                </Button>
+              ) : (
+                <span style={{ fontSize: "30px" }}>
+                  Please login before checking out
+                </span>
+              )}
             </Summary>
             {/* Modal start */}
             <Modal

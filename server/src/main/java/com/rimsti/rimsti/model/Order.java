@@ -20,15 +20,20 @@ public class Order{
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
 
-    private String productName;
+    private String userFullName;
 
     private String email;
 
     private Long productId;
 
-    private Long quantity;
+    private Integer quantity;
 
     private Double totalPrice;
+
+    private String proofPayment;
+
+    @Lob
+    private String orderJsonList;
 
     @Column(name = "status")
     private String status;
@@ -38,20 +43,9 @@ public class Order{
     @JoinColumn(name = "userId")
     AppUser appUser;
 
-    private String userFullName;
-
-    private String imageUrl;
-
-    private String productDesc;
-
     @CreationTimestamp
     private LocalDateTime createdDate;
 
-    private String proofPayment;
-    private String orNum;
-
     @CreationTimestamp
     private LocalDate dateNow;
-
-    private String orderJsonList;
 }

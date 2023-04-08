@@ -51,11 +51,8 @@ const OrderItem = ({ item }) => {
               </div>
               <div className="orderDetailsContainer">
                 <h1 className="orderProductName">
-                  <i>Product Name:</i> {arrayItem.name}
+                  <i>Product Name:</i> {arrayItem.productName}
                 </h1>
-                <span className="orderVariationName">
-                  <i>Variation:</i> {arrayItem.variationName}
-                </span>
                 <span className="orderQuanitty">
                   <i>Quantity: </i>
                   {arrayItem.quantity}

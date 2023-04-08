@@ -8,39 +8,25 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "product")
-public class Product {
+@Table(name = "wishlist")
+public class Wishlist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private Long id;
+    private Integer id;
 
-    private String name;
+    @Column(name = "product_id")
+    private Long productId;
 
-    private String imageUrl;
-
-    private String description;
-
-    private Double price;
-
-    private Integer quantity;
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "categoryId")
-    Category category;
+    private String email;
 
     @CreationTimestamp
     private LocalDateTime createdDate;
 
     @UpdateTimestamp
     private LocalDateTime updatedDate;
-
-    @OneToMany(mappedBy = "product")
-    private List<ProductRating> ratings;
 }

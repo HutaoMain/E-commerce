@@ -6,6 +6,7 @@ import com.rimsti.rimsti.model.Product;
 import com.rimsti.rimsti.repository.CategoryRepository;
 import com.rimsti.rimsti.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,4 +60,5 @@ public class ProductController {
     private List<Product> searchProducts(@RequestParam String products) {
         return productService.searchProduct(products);
     }
+
 }

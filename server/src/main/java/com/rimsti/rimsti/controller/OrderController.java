@@ -57,12 +57,6 @@ public class OrderController {
         return order;
     }
 
-    @PutMapping("/update/orNumber/{orderId}")
-    public Order updateOrNumberById(@PathVariable("orderId") long orderId, @RequestBody Order order) {
-        orderService.updateOrNumberByOrderId(orderId, order);
-        return order;
-    }
-
     @DeleteMapping("/delete/{orderId}")
     private String deleteOrderById(@PathVariable("orderId") long orderId, @RequestBody Order order) {
         orderService.deleteOrderById(orderId, order);

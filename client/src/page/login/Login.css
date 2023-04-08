@@ -2,18 +2,6 @@
   height: 100vh;
 }
 
-.topLoginDesign1 {
-  width: 100%;
-  height: 20px;
-  background-color: #ebd005;
-}
-
-.topLoginDesign2 {
-  width: 100%;
-  height: 20px;
-  background-color: #2c5f78;
-}
-
 .loginContainer {
   display: flex;
   height: 80vh;
@@ -60,6 +48,8 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  position: relative;
 }
 
 .loginIconUser {
@@ -97,6 +87,19 @@
   border-radius: 15px;
   color: #020100;
   margin-top: 20px;
+  cursor: pointer;
+}
+
+.login-close-btn {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  border: none;
+  font-size: 30px;
+  font-weight: 700;
+  background-color: transparent;
+  color: #ffff;
+
   cursor: pointer;
 }
 
