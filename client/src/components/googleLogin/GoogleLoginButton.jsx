@@ -1,10 +1,7 @@
-import React from "react";
+import { FcGoogle } from "react-icons/fc";
+import "./GoogleLoginButton.css";
 
 const GoogleLoginButton = () => {
-  //   const handleGoogleLogin = () => {
-  //     window.open(`${import.meta.env.VITE_APP_API_URL}/auth/facebook`);
-  //   };
-
   const handleGoogleLogin = () => {
     window.open(
       `${import.meta.env.VITE_APP_API_URL}/oauth2/authorization/google`,
@@ -14,7 +11,9 @@ const GoogleLoginButton = () => {
 
   return (
     <div>
-      <button onClick={handleGoogleLogin}>Login with Google</button>
+      <button className="google-login-btn" onClick={handleGoogleLogin}>
+        <FcGoogle /> Login with Google
+      </button>
     </div>
   );
 };
