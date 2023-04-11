@@ -8,7 +8,6 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import Confirmation from "../../../../components/confirmationDialog/Confirmation";
-import { UrlPath } from "../../../../UrlPath";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -31,7 +30,9 @@ const UpdateProduct = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
-  const { data } = useFetch(`${UrlPath}/api/product/list/${id}`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/product/list/${id}`
+  );
 
   const [ImageFile, setImageFile] = useState("");
   const [info, setInfo] = useState({});
@@ -53,10 +54,13 @@ const UpdateProduct = () => {
     try {
       if (ImageFile === "") {
         const url = data.imageUrl;
-        await axios.put(`${UrlPath}/api/product/update/${id}`, {
-          ...info,
-          imageUrl: url,
-        });
+        await axios.put(
+          `${import.meta.env.VITE_APP_API_URL}/api/product/update/${id}`,
+          {
+            ...info,
+            imageUrl: url,
+          }
+        );
         navigate("/products");
         console.log("success");
       } else {
@@ -68,10 +72,13 @@ const UpdateProduct = () => {
           data
         );
         const { url } = uploadRes.data;
-        await axios.put(`${UrlPath}/api/product/update/${id}`, {
-          ...info,
-          imageUrl: url,
-        });
+        await axios.put(
+          `${import.meta.env.VITE_APP_API_URL}/api/product/update/${id}`,
+          {
+            ...info,
+            imageUrl: url,
+          }
+        );
         navigate("/products");
         console.log("success");
       }

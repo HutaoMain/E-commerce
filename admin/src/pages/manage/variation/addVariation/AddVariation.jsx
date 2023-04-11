@@ -6,7 +6,6 @@ import { MdOutlineUpload, MdOutlineDownloadDone } from "react-icons/md";
 import useFetch from "../../../../contextApi/useFetch";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { UrlPath } from "../../../../UrlPath";
 import Confirmation from "../../../../components/confirmationDialog/Confirmation";
 import Modal from "react-modal";
 
@@ -27,7 +26,9 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const AddVariation = () => {
-  const { data } = useFetch(`${UrlPath}/api/product/list`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/product/list`
+  );
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [ImageFile, setImageFile] = useState("");
@@ -55,11 +56,14 @@ const AddVariation = () => {
       );
       const { url } = uploadRes.data;
 
-      await axios.post(`${UrlPath}/api/productVariations/create`, {
-        ...info,
-        imgUrl: url,
-        productId: selectedProduct,
-      });
+      await axios.post(
+        `${import.meta.env.VITE_APP_API_URL}/api/productVariations/create`,
+        {
+          ...info,
+          imgUrl: url,
+          productId: selectedProduct,
+        }
+      );
       navigate("/variation");
       console.log("success");
     } catch (err) {}

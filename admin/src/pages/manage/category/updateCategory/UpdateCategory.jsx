@@ -8,7 +8,6 @@ import useFetch from "../../../../contextApi/useFetch";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import { UrlPath } from "../../../../UrlPath";
 import Confirmation from "../../../../components/confirmationDialog/Confirmation";
 import Modal from "react-modal";
 
@@ -32,7 +31,9 @@ const UpdateCategory = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
-  const { data } = useFetch(`${UrlPath}/api/category/list/${id}`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/category/list/${id}`
+  );
 
   const [ImageFile, setImageFile] = useState("");
   const [info, setInfo] = useState({});
@@ -54,10 +55,13 @@ const UpdateCategory = () => {
     try {
       if (ImageFile === "") {
         const url = data.imageUrl;
-        await axios.put(`${UrlPath}/api/category/update/${id}`, {
-          ...info,
-          imageUrl: url,
-        });
+        await axios.put(
+          `${import.meta.env.VITE_APP_API_URL}/api/category/update/${id}`,
+          {
+            ...info,
+            imageUrl: url,
+          }
+        );
         navigate("/category");
         console.log("success");
       } else {
@@ -69,10 +73,13 @@ const UpdateCategory = () => {
           data
         );
         const { url } = uploadRes.data;
-        await axios.put(`${UrlPath}/api/category/update/${id}`, {
-          ...info,
-          imageUrl: url,
-        });
+        await axios.put(
+          `${import.meta.env.VITE_APP_API_URL}/api/category/update/${id}`,
+          {
+            ...info,
+            imageUrl: url,
+          }
+        );
         navigate("/category");
         console.log("success");
       }

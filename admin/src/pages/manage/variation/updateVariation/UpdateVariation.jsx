@@ -6,7 +6,6 @@ import { MdOutlineUpload, MdOutlineDownloadDone } from "react-icons/md";
 import useFetch from "../../../../contextApi/useFetch";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { UrlPath } from "../../../../UrlPath";
 import Confirmation from "../../../../components/confirmationDialog/Confirmation";
 import Modal from "react-modal";
 
@@ -30,7 +29,9 @@ const UpdateVariation = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
-  const { data } = useFetch(`${UrlPath}/api/productVariations/${id}`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/productVariations/${id}`
+  );
 
   const [ImageFile, setImageFile] = useState("");
   const [info, setInfo] = useState({});
@@ -53,10 +54,15 @@ const UpdateVariation = () => {
     try {
       if (ImageFile === "") {
         const url = data.imgUrl;
-        await axios.put(`${UrlPath}/api/productVariations/update/${id}`, {
-          ...info,
-          imgUrl: url,
-        });
+        await axios.put(
+          `${
+            import.meta.env.VITE_APP_API_URL
+          }/api/productVariations/update/${id}`,
+          {
+            ...info,
+            imgUrl: url,
+          }
+        );
         navigate("/variation");
         console.log("success");
       } else {
@@ -68,10 +74,15 @@ const UpdateVariation = () => {
           data
         );
         const { url } = uploadRes.data;
-        await axios.put(`${UrlPath}/api/productVariations/update/${id}`, {
-          ...info,
-          imgUrl: url,
-        });
+        await axios.put(
+          `${
+            import.meta.env.VITE_APP_API_URL
+          }/api/productVariations/update/${id}`,
+          {
+            ...info,
+            imgUrl: url,
+          }
+        );
         navigate("/variation");
         console.log("success");
       }

@@ -5,7 +5,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineUpload, MdOutlineDownloadDone } from "react-icons/md";
 import useFetch from "../../../../contextApi/useFetch";
-import { UrlPath } from "../../../../UrlPath";
 import Confirmation from "../../../../components/confirmationDialog/Confirmation";
 import Modal from "react-modal";
 
@@ -26,7 +25,9 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const AddProducts = () => {
-  const { data } = useFetch(`${UrlPath}/api/category/list`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/category/list`
+  );
 
   const [ImageFile, setImageFile] = useState("");
   const [info, setInfo] = useState({});
@@ -51,11 +52,14 @@ const AddProducts = () => {
       );
       const { url } = uploadRes.data;
 
-      await axios.post(`${UrlPath}/api/product/create`, {
-        ...info,
-        imageUrl: url,
-        categoryId: selectedCategory,
-      });
+      await axios.post(
+        `${import.meta.env.VITE_APP_API_URL}/api/product/create`,
+        {
+          ...info,
+          imageUrl: url,
+          categoryId: selectedCategory,
+        }
+      );
       navigate("/products");
       console.log("success");
     } catch (err) {}

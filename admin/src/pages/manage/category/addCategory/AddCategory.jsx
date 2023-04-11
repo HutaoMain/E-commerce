@@ -5,7 +5,6 @@ import "./AddCategory.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineUpload, MdOutlineDownloadDone } from "react-icons/md";
-import { UrlPath } from "../../../../UrlPath";
 import Confirmation from "../../../../components/confirmationDialog/Confirmation";
 import Modal from "react-modal";
 
@@ -44,10 +43,13 @@ const AddCategory = () => {
       );
       const { url } = uploadRes.data;
 
-      await axios.post(`${UrlPath}/api/category/create`, {
-        ...info,
-        imageUrl: url,
-      });
+      await axios.post(
+        `${import.meta.env.VITE_APP_API_URL}/api/category/create`,
+        {
+          ...info,
+          imageUrl: url,
+        }
+      );
       navigate("/category");
       console.log("success");
     } catch (err) {}

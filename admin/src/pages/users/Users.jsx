@@ -7,7 +7,6 @@ import {
 import useFetch from "../../contextApi/useFetch";
 import SidePanel from "../../components/sidepanel/SidePanel";
 import TopBar from "../../components/topBar/TopBar";
-import { UrlPath } from "../../UrlPath";
 // import { Link } from "react-router-dom";
 // import { MdAddCircle } from "react-icons/md";
 // import { useState } from "react";
@@ -18,7 +17,9 @@ const Users = () => {
   // const [list, setList] = useState([]);
   // const [selectedStatus, setSelectedStatus] = useState("");
 
-  const { data } = useFetch(`${UrlPath}/api/user/list`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/user/list`
+  );
 
   const rowData = data.filter(
     (item) => item.username !== "admin123" && item.username !== "02000112536"

@@ -12,7 +12,6 @@ import { MdAddCircle } from "react-icons/md";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import { UrlPath } from "../../../UrlPath";
 import Modal from "react-modal";
 import Confirmation from "../../../components/confirmationDialog/Confirmation";
 
@@ -37,7 +36,9 @@ const Category = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [paramsId, setParamsId] = useState("");
 
-  const { data } = useFetch(`${UrlPath}/api/category/list`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/category/list`
+  );
 
   useEffect(() => {
     setList(data);
@@ -45,7 +46,9 @@ const Category = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${UrlPath}/api/category/delete/${id}`);
+      await axios.delete(
+        `${import.meta.env.VITE_APP_API_URL}/api/category/delete/${id}`
+      );
       setList(list.filter((item) => item.id !== id));
       window.location.reload();
     } catch (err) {}

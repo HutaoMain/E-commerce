@@ -12,10 +12,11 @@ import {
 } from "chart.js";
 import { useState } from "react";
 import { useEffect } from "react";
-import { UrlPath } from "../../UrlPath";
 
 const Dashboard = () => {
-  const { data } = useFetch(`${UrlPath}/api/order/listByPrice`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/order/listByPrice`
+  );
 
   const [chart, setChart] = useState([]);
 

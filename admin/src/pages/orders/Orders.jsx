@@ -13,7 +13,6 @@ import { useEffect } from "react";
 import axios from "axios";
 import Modal from "react-modal";
 import Confirmation from "../../components/confirmationDialog/Confirmation";
-import { UrlPath } from "../../UrlPath";
 import { Link } from "react-router-dom";
 
 const customStyles = {
@@ -46,17 +45,23 @@ const Orders = () => {
   const [paramsId, setParamsId] = useState("");
   // const [jsonValue, setJsonValue] = useState([]);
 
-  const { data } = useFetch(`${UrlPath}/api/order/list`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/order/list`
+  );
 
   useEffect(() => {
     setList(data);
   }, [data]);
 
+  // update
   const handleUpdateStatus = async (id) => {
     try {
-      await axios.put(`${UrlPath}/api/order/update/status/${id}`, {
-        status: selectedStatus,
-      });
+      await axios.put(
+        `${import.meta.env.VITE_APP_API_URL}/api/order/update/status/${id}`,
+        {
+          status: selectedStatus,
+        }
+      );
       setList(list.filter((item) => item.id !== id));
       window.location.reload();
     } catch (err) {}
@@ -64,20 +69,11 @@ const Orders = () => {
 
   const toggleModal = async (id) => {
     setIsOpen(!isOpen);
-    const res = await axios.get(`${UrlPath}/api/order/list/${id}`);
-    // setList(list.filter((item) => item.id !== id));
+    const res = await axios.get(
+      `${import.meta.env.VITE_APP_API_URL}/api/order/list/${id}`
+    );
     setPayment(res.data);
   };
-
-  // const toggleModalJson = async (id) => {
-  //   setIsOpenJsonData(!isOpenJsonData);
-  //   const res = await axios.get(`${UrlPath}/api/order/list/${id}`);
-  //   setJsonValue(res.data?.orderJsonList);
-  // };
-
-  // const stringToJson = eval(jsonValue);
-
-  // console.log(stringToJson);
 
   const toggleModalCategory = (id) => {
     setParamsId(id);

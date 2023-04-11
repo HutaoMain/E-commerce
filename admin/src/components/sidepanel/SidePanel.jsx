@@ -1,71 +1,3 @@
-// import "./Sidebar.css";
-// import { AiOutlineDashboard, AiOutlineFileSearch } from "react-icons/ai";
-// import { MdOutlinePayments, MdProductionQuantityLimits } from "react-icons/md";
-// // import { FaBars } from "react-icons/fa";
-// import { NavLink } from "react-router-dom";
-// import logo from "../../assets/images/sti.png";
-
-// const Sidebar = ({ children }) => {
-//   // const [isOpen, setIsOpen] = useState(true);
-//   // const toggle = () => setIsOpen(!isOpen);
-//   const menuItem = [
-//     {
-//       path: "/",
-//       name: "Dashboard",
-//       icon: <AiOutlineDashboard />,
-//       exact: true,
-//     },
-//     {
-//       path: "/orders",
-//       name: "Orders",
-//       icon: <AiOutlineFileSearch />,
-//     },
-//     {
-//       path: "/payment",
-//       name: "Payment",
-//       icon: <MdOutlinePayments />,
-//     },
-//     {
-//       path: "/products",
-//       name: "Products",
-//       icon: <MdProductionQuantityLimits />,
-//     },
-//   ];
-
-//   // style={{ width: isOpen ? "250px" : "50px" }} sidebar
-//   // style={{ display: isOpen ? "block" : "none" }} logo
-//   // style={{ marginLeft: isOpen ? "101px" : "0px" }} bars
-//   // style={{ display: isOpen ? "block" : "none" }} link-text
-
-//   return (
-//     <div className="container">
-//       <div className="sidebar">
-//         <div className="top-section">
-//           <img src={logo} alt="STI Logo" className="sidebar-logo" />
-//           {/* <div className="bars">
-//             <FaBars />
-//           </div> */}
-//           <div className="sidebar-title">
-//             <div className="hori-line"></div>
-//             <h1>RIMSti</h1>
-//             <div className="hori-line"></div>
-//           </div>
-//         </div>
-//         {menuItem.map((item, index) => (
-//           <NavLink to={item.path} key={index} className="sidebar-link">
-//             <div className="sidebar-icon">{item.icon}</div>
-//             <div className="link-text">{item.name}</div>
-//           </NavLink>
-//         ))}
-//         <button className="sidebar-button">Logout</button>
-//       </div>
-//       <main>{children}</main>
-//     </div>
-//   );
-// };
-
-// export default Sidebar;
-
 import "./SidePanel.css";
 import { Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
@@ -85,21 +17,8 @@ import {
 import logo from "../../assets/images/logo.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contextApi/AuthContext";
-// import { Badge } from "@mui/material";
 
 const SidePanel = () => {
-  // const [menuCollapse, setMenuCollapse] = useState(false);
-
-  // const { user, dispatch } = useContext(AuthContext);
-
-  // const logout = () => {
-  //   dispatch({ type: "LOGOUT" });
-  // };
-
-  // const menuIconClick = () => {
-  //   setMenuCollapse(!menuCollapse);
-  // };
-
   const [open, setOpen] = useState(true);
 
   const { user, dispatch } = useContext(AuthContext);
@@ -115,10 +34,10 @@ const SidePanel = () => {
   return (
     <div className={open ? "sidebarOpen" : "sidebarClose"}>
       <div className="sidebarTopSection">
-        <img src={logo} alt="STI Logo" className="sidebarLogo" />
+        <img src={logo} alt="Logo" className="sidebarLogo" />
         {open ? (
           <div className="sidebarTopSectionText">
-            <h1>RIMSti</h1>
+            <h1>Beauty Avenue</h1>
             <p style={{ wordBreak: "break-all" }}>{user.email}</p>
           </div>
         ) : (

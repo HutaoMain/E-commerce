@@ -11,7 +11,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import Modal from "react-modal";
-import { UrlPath } from "../../UrlPath";
 import Confirmation from "../../components/confirmationDialog/Confirmation";
 
 const customStyles = {
@@ -43,7 +42,9 @@ const Payment = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [paramsId, setParamsId] = useState("");
 
-  const { data } = useFetch(`${UrlPath}/api/order/list`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/order/list`
+  );
 
   const toClaim = data?.filter((data) => data.status === "ToClaim");
 
@@ -56,10 +57,13 @@ const Payment = () => {
 
   const handleUpdateStatus = async (id) => {
     try {
-      await axios.put(`${UrlPath}/api/order/update/status/${id}`, {
-        status: selectedStatus,
-        // orNum: orNumber,
-      });
+      await axios.put(
+        `${import.meta.env.VITE_APP_API_URL}/api/order/update/status/${id}`,
+        {
+          status: selectedStatus,
+          // orNum: orNumber,
+        }
+      );
       setList(list.filter((item) => item.id !== id));
       window.location.reload();
     } catch (err) {}
@@ -67,7 +71,9 @@ const Payment = () => {
 
   const toggleModal = async (id) => {
     setIsOpen(!isOpen);
-    const res = await axios.get(`${UrlPath}/api/order/list/${id}`);
+    const res = await axios.get(
+      `${import.meta.env.VITE_APP_API_URL}/api/order/list/${id}`
+    );
     setList(list.filter((item) => item.id !== id));
     setPayment(res.data);
   };

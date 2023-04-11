@@ -3,7 +3,6 @@ import "./ProductJson.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useFetch from "../../../contextApi/useFetch";
-import { UrlPath } from "../../../UrlPath";
 import SidePanel from "../../../components/sidepanel/SidePanel";
 import TopBar from "../../../components/topBar/TopBar";
 
@@ -13,7 +12,9 @@ const ProductsJson = () => {
 
   const [orderJson, setOrderJson] = useState([]);
 
-  const { data } = useFetch(`${UrlPath}/api/order/list/${id}`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/order/list/${id}`
+  );
 
   useEffect(() => {
     setOrderJson(data?.orderJsonList);

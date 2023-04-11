@@ -6,7 +6,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom/dist";
 import { AuthContext } from "../../contextApi/AuthContext";
 import useFetch from "../../contextApi/useFetch";
-import { UrlPath } from "../../UrlPath";
 
 const Login = () => {
   const { loading, error, dispatch } = useContext(AuthContext);
@@ -16,9 +15,11 @@ const Login = () => {
     password: undefined,
   });
 
-  const { data } = useFetch(`${UrlPath}/api/user/${credentials?.email}`);
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/user/${credentials?.email}`
+  );
 
-  console.log(data.userRole);
+  console.log(data);
 
   console.log(credentials.email);
 
@@ -32,7 +33,10 @@ const Login = () => {
     if (data?.userRole === "ROLE_ADMIN") {
       dispatch({ type: "LOGIN_START" });
       try {
-        const res = await axios.post(`${UrlPath}/api/auth/login`, credentials);
+        const res = await axios.post(
+          `${import.meta.env.VITE_APP_API_URL}/api/auth/login`,
+          credentials
+        );
         if (res.status === 200) {
           dispatch({ type: "LOGIN_SUCCESS", payload: credentials });
           navigate("/", { replace: true });
