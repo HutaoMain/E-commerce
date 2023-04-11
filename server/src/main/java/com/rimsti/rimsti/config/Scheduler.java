@@ -16,9 +16,9 @@ public class Scheduler {
     @Autowired
     OrderRepository orderRepository;
 
-    @Scheduled(cron = "0 0 0 */5 * *")
-    void updateStatusWhenPending(){
-        orderRepository.updateStatus();
-        log.info("updated");
-    }
+//    @Scheduled(cron = "0 0 0 */5 * *")
+//    void updateStatusWhenPending(){
+//        orderRepository.updateStatus();
+//        log.info("updated");
+//    }
 }

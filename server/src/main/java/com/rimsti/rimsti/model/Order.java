@@ -1,7 +1,6 @@
 package com.rimsti.rimsti.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.rimsti.rimsti.model.appuser.AppUser;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,10 +22,10 @@ public class Order{
     private String userFullName;
 
     private String email;
-
-    private Long productId;
-
-    private Integer quantity;
+//
+//    private Long productId;
+//
+//    private Integer quantity;
 
     private Double totalPrice;
 
@@ -41,7 +40,7 @@ public class Order{
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "userId")
-    AppUser appUser;
+    User user;
 
     @CreationTimestamp
     private LocalDateTime createdDate;

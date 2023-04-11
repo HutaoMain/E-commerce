@@ -2,16 +2,27 @@ package com.rimsti.rimsti.DTO;
 
 import lombok.Data;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Data
 public class SignUpDTO {
-    private String firstName;
-    private String lastName;
-    private String username;
+    private Long id;
+
     private String email;
+
+    private String name;
+
+    private String imageUrl;
+
     private String password;
-    private Date birthday;
-    private String gender;
+
+    private String userRole;
+
+    private String secretAnswer;
+
+    private String secretQuestion;
 }

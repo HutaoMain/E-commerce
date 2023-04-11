@@ -4,6 +4,7 @@ import com.rimsti.rimsti.DTO.ProductDTO;
 import com.rimsti.rimsti.model.Category;
 import com.rimsti.rimsti.model.Product;
 import com.rimsti.rimsti.model.ProductRating;
+import com.rimsti.rimsti.repository.CategoryRepository;
 import com.rimsti.rimsti.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,10 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public Product createProduct(ProductDTO productDTO, Category category){
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    public Product createProduct(ProductDTO productDTO, Category category) {
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setImageUrl(productDTO.getImageUrl());
@@ -32,7 +36,7 @@ public class ProductService {
         return product;
     }
 
-    private ProductDTO getProductDtos(Product product){
+    private ProductDTO getProductDtos(Product product) {
         ProductDTO productDTO = new ProductDTO();
 
         productDTO.setId(product.getId());
@@ -59,22 +63,22 @@ public class ProductService {
         return productDTO;
     }
 
-    public List<ProductDTO> getListProducts(){
-        List<Product> allProducts =  productRepository.findAll();
+    public List<ProductDTO> getListProducts() {
+        List<Product> allProducts = productRepository.findAll();
         List<ProductDTO> productDTOS = new ArrayList<>();
-        for(Product product : allProducts){
+        for (Product product : allProducts) {
             productDTOS.add(getProductDtos(product));
         }
         return productDTOS;
     }
 
-    public Product getProductById(long productId){
+    public Product getProductById(long productId) {
         return productRepository.findById(productId).orElse(null);
     }
 
     public void updateProduct(ProductDTO productDTO, long productId) {
         Optional<Product> optionalProducts = productRepository.findById(productId);
-        if(!optionalProducts.isPresent()){
+        if (!optionalProducts.isPresent()) {
             try {
                 throw new Exception("Product not present!");
             } catch (Exception e) {
@@ -95,5 +99,36 @@ public class ProductService {
         productRepository.deleteById(productId);
     }
 
-    public List<Product> searchProduct(String products){ return productRepository.searchProduct(products);}
+    public List<Product> searchProduct(String products) {
+        return productRepository.searchProduct(products);
+    }
+
+    public List<Product> getBestSellersPerCategory() {
+        List<Product> bestSellers = new ArrayList<>();
+
+        // Retrieve all the categories
+        List<Category> categories = categoryRepository.findAll();
+
+        // Iterate through each category and retrieve the product with the highest sold
+        for (Category category : categories) {
+            Optional<Product> bestSellerOptional = productRepository.findFirstByCategoryOrderBySoldDesc(category);
+            bestSellerOptional.ifPresent(product -> {
+                // Set the product's bestSeller flag to true
+                product.setBestSeller(true);
+                bestSellers.add(product);
+
+                // Reset the bestSeller flag for all other products in the same category
+                List<Product> otherProducts = productRepository.findAllByCategory(category);
+                for (Product otherProduct : otherProducts) {
+                    if (!otherProduct.equals(product)) {
+                        otherProduct.setBestSeller(false);
+                        productRepository.save(otherProduct);
+                    }
+                }
+            });
+        }
+
+        return bestSellers;
+    }
+
 }

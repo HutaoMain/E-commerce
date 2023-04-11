@@ -3,10 +3,11 @@ import "./GoogleLoginButton.css";
 
 const GoogleLoginButton = () => {
   const handleGoogleLogin = () => {
-    window.open(
-      `${import.meta.env.VITE_APP_API_URL}/oauth2/authorization/google`,
-      "_self"
-    );
+    const redirectUrl = `${
+      import.meta.env.VITE_APP_API_URL
+    }/oauth2/authorization/google`;
+
+    window.open(redirectUrl, "_self");
   };
 
   return (

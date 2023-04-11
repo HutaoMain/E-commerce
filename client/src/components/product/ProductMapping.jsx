@@ -12,8 +12,6 @@ const ProductMapping = () => {
     `${import.meta.env.VITE_APP_API_URL}/api/category/list/${id}`
   );
 
-  console.log(data);
-
   return (
     <>
       <div className="product-mapping">

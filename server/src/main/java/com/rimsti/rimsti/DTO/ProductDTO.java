@@ -16,4 +16,6 @@ public class ProductDTO {
     private LocalDateTime updatedDate;
     private Integer categoryId;
     private Float finalRating;
+    private Integer sold;
+    private Boolean bestSeller;
 }

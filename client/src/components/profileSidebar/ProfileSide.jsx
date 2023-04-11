@@ -16,13 +16,7 @@ const ProfileSide = () => {
   return (
     <div className="profileSide">
       <div className="profileInfo">
-        <h3>{data.username}</h3>
         <h3>{data.email}</h3>
-
-        <button className="profileSideEdit">
-          <BiEditAlt />
-          Edit Profile
-        </button>
       </div>
       <div className="profileBtns">
         <Link to="/profile" style={{ textDecoration: "none", color: "black" }}>

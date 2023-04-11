@@ -5,7 +5,7 @@ import Home from "./page/home/Home";
 import Cart from "./page/cart/Cart";
 import Navbar from "./components/navbar/Navbar";
 import { AuthContext } from "./contextAPI/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Profile from "./page/profile/Profile";
 import MyPurchase from "./page/profile/MyPurchase";
 import ErrorPage from "./page/errorPage/ErrorPage";
@@ -16,9 +16,18 @@ import { useLocation } from "react-router-dom";
 import WishlistMapping from "./components/wishlist/WishlistMapping";
 
 function App() {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
 
-  console.log(user);
+  const params = new URLSearchParams(window.location.search);
+  const email = params.get("email");
+
+  useEffect(() => {
+    if (email) {
+      dispatch({ type: "LOGIN_SUCCESS", payload: email });
+    }
+
+    console.log(email);
+  }, []);
 
   const location = useLocation();
 

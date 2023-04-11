@@ -12,13 +12,13 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    @Query(value = "SELECT total_price, or_num, date_now, status, SUM(total_price) as totalPrice FROM heroku_130854f11edee87.orders where or_num != \"\" && status = \"Completed\" group by date_now;", nativeQuery = true)
+    @Query(value = "SELECT total_price, or_num, date_now, status, SUM(total_price) as totalPrice FROM dbecommerce.orders where status = \"Completed\" group by date_now;", nativeQuery = true)
     List<sumOfTotalPrice> getByDate();
 
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE heroku_130854f11edee87.orders SET status='Cancelled' where status ='Pending' AND created_date < now();", nativeQuery = true)
-    void updateStatus();
+//    @Transactional
+//    @Modifying
+//    @Query(value = "UPDATE Order SET status='Cancelled' where status ='Pending' AND createdDate < now();")
+//    void updateStatus();
 
     interface sumOfTotalPrice{
         Double getTotalPrice();

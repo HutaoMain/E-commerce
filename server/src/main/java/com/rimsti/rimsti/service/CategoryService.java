@@ -25,6 +25,9 @@ public class CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    ProductService productService;
+
     public void createCategory(Category category) {
         categoryRepository.save(category);
     }
@@ -60,6 +63,7 @@ public class CategoryService {
             CategoryDTO categoryDTO = new CategoryDTO();
             BeanUtils.copyProperties(category, categoryDTO);
             categoryDTO.setProducts(productDTOs);
+            productService.getBestSellersPerCategory();
             return categoryDTO;
         } else {
             throw new CategoryNotFoundException("Category not found with id: " + id);

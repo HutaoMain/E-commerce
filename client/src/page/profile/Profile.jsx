@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import ProfileSide from "../../components/profileSidebar/ProfileSide";
 import { AuthContext } from "../../contextAPI/AuthContext";
 import "./Profile.css";
-import DatePicker from "react-datepicker";
 import Footer from "../../components/footer/Footer";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -10,7 +9,7 @@ import { AiOutlineCamera, AiOutlineSave } from "react-icons/ai";
 import useFetch from "../../contextAPI/useFetch";
 import Modal from "react-modal";
 import ChangePassword from "./ChangePassword";
-import moment from "moment";
+import { ToastContainer, toast } from "react-toastify";
 
 const customStyle = {
   content: {
@@ -31,42 +30,52 @@ const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [profileData, setprofileData] = useState("");
   const [imageSelected, setImageSelected] = useState("");
-  const [birthday, setBirthday] = useState(null);
-  // const [gender, setGender] = useState("");
+  const [address, setAddress] = useState("");
+  const [formattedAddress, setFormatedAddress] = useState("");
+
+  const { user } = useContext(AuthContext);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
 
-  const { user } = useContext(AuthContext);
+  // handle onClick event for submit button
+  const handleAddressSubmit = async () => {
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_APP_API_URL}/api/user/${user}/address`,
+        {
+          address: address,
+        }
+      );
+      toast.success("✅ Success!", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      window.location.reload();
+      console.log("success");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const { data } = useFetch(
     `${import.meta.env.VITE_APP_API_URL}/api/user/${user}`
   );
 
   useEffect(() => {
+    const address = data.address || ""; // set default value to empty string if address is undefined
+    const parsedAddress = address ? JSON.parse(address) : {}; // check if address is truthy before parsing
+    setFormatedAddress(parsedAddress.address || ""); // get the 'address' property from the parsed object, set default value to empty string if not found
+
     setprofileData(data);
-
-    const date = new Date(data?.birthday);
-    setBirthday(date.setDate(date.getDate()));
-    // setGender(data?.gender);
-    // setPassword( data.password);
   }, [data]);
-
-  const handleUpdate = async () => {
-    try {
-      await axios.put(
-        `${import.meta.env.VITE_APP_API_URL}/api/user/update/${profileData.id}`,
-        {
-          ...profileData,
-          birthday: birthday,
-          // gender: gender,
-        }
-      );
-      window.location.reload();
-      console.log("success");
-    } catch (error) {}
-  };
 
   const handlePutImage = async () => {
     const data = new FormData();
@@ -86,6 +95,16 @@ const Profile = () => {
         imageUrl: url,
       }
     );
+    toast.success("✅ Success!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     window.location.reload();
     console.log("success");
   };
@@ -146,64 +165,28 @@ const Profile = () => {
             <div className="profileVerticalLine"></div>
             <div className="profileManageContainerRight">
               <div className="profileManageInfo">
-                {/* <label>Student No: </label>
-                <input
-                  className="profileManageInfoList"
-                  type="text"
-                  defaultValue={profileData.studentNo}
-                  onChange={(e) => {
-                    setprofileData((data) => ({
-                      ...data,
-                      studentNo: e.target.value,
-                    }));
-                  }}
-                /> */}
+                <section>
+                  <label>
+                    Fullname: <br />
+                  </label>
+                  <span
+                    className="profileManageInfoList"
+                    style={{ border: "1px solid black" }}
+                  >
+                    {data.name}
+                  </span>
+                </section>
 
-                <label>
-                  Firstname: <br />
-                </label>
-                <span
-                  className="profileManageInfoList"
-                  style={{ border: "1px solid black" }}
-                >
-                  {data.firstName}
-                </span>
+                <section>
+                  <label>Email: </label>
+                  <span
+                    className="profileManageInfoList"
+                    style={{ border: "1px solid black" }}
+                  >
+                    {data.email}
+                  </span>
+                </section>
 
-                <label>
-                  Lastname: <br />
-                </label>
-                <span
-                  className="profileManageInfoList"
-                  style={{ border: "1px solid black" }}
-                >
-                  {data.lastName}
-                </span>
-
-                <label>Student No.: </label>
-                <span
-                  className="profileManageInfoList"
-                  style={{ border: "1px solid black" }}
-                >
-                  {data.username}
-                </span>
-                <label>Email: </label>
-                <span
-                  className="profileManageInfoList"
-                  style={{ border: "1px solid black" }}
-                >
-                  {data.email}
-                </span>
-                {/* <label>Change Password: </label> */}
-                {/* <input
-                  className="profileManageInfoList"
-                  type="password"
-                  onChange={(e) => {
-                    setprofileData((data) => ({
-                      ...data,
-                      password: e.target.value,
-                    }));
-                  }}
-                /> */}
                 <button
                   className="profileManageInfoList"
                   style={{
@@ -212,7 +195,7 @@ const Profile = () => {
                     padding: "10px",
                     marginTop: "10px",
                     cursor: "pointer",
-                    backgroundColor: "#0071c2",
+                    backgroundColor: "#51503F",
                     color: "white",
                   }}
                   onClick={toggleModal}
@@ -220,34 +203,24 @@ const Profile = () => {
                   Change Password
                 </button>
 
-                {/* <label>Gender: </label>
-                <select
-                  className="profileManageInfoList"
-                  onChange={(e) => {
-                    setGender((data) => ({
-                      ...data,
-                      gender: e.target.value,
-                    }));
-                  }}
-                >
-                  <option value="Male" selected={gender === "Male"}>
-                    Male
-                  </option>
-                  <option value="Female" selected={gender === "Female"}>
-                    Female
-                  </option>
-                </select> */}
-                <label>Birthday: </label>
-                <DatePicker
-                  className="profileManageInfoList"
-                  selected={birthday}
-                  dateFormat="yyyy-MM-dd"
-                  maxDate={moment().subtract(15, "years")._d}
-                  onChange={(date) => setBirthday(date)}
-                />
-                <button className="saveProfileInfo" onClick={handleUpdate}>
+                {/* <button className="saveProfileInfo" onClick={handleUpdate}>
                   Save
-                </button>
+                </button> */}
+                <section className="profile-address-itemlist">
+                  <label>Full Address</label>
+                  <input
+                    type="text"
+                    className="profile-address-inputtype"
+                    defaultValue={formattedAddress}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                  <button
+                    className="profile-address-btn"
+                    onClick={handleAddressSubmit}
+                  >
+                    Change Address
+                  </button>
+                </section>
               </div>
             </div>
           </div>

@@ -4,7 +4,8 @@ import com.rimsti.rimsti.DTO.OrderDTO;
 import com.rimsti.rimsti.DTO.ProductQuantityDTO;
 import com.rimsti.rimsti.model.Order;
 import com.rimsti.rimsti.model.Product;
-import com.rimsti.rimsti.model.appuser.AppUser;
+//import com.rimsti.rimsti.model.appuser.AppUser;
+import com.rimsti.rimsti.model.User;
 import com.rimsti.rimsti.repository.OrderRepository;
 import com.rimsti.rimsti.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class OrderService {
     ProductRepository productRepository;
 
     @Transactional
-    public Order createOrder(OrderDTO orderDTO, AppUser appUser) {
+    public Order createOrder(OrderDTO orderDTO, User user) {
         Order order = new Order();
         order.setTotalPrice(orderDTO.getTotalPrice());
         order.setStatus(orderDTO.getStatus());
@@ -34,12 +35,13 @@ public class OrderService {
         order.setProofPayment(orderDTO.getProofPayment());
         order.setDateNow(orderDTO.getDateNow());
         order.setEmail(orderDTO.getEmail());
-        order.setAppUser(appUser);
+        order.setUser(user);
         order.setUserFullName(orderDTO.getUserFullName());
         order.setOrderJsonList(orderDTO.getOrderJsonList());
 
         List<ProductQuantityDTO> productQuantities = orderDTO.getProducts();
         subtractProductsFromInventory(productQuantities);
+        updateProductSold(productQuantities);
 
         orderRepository.save(order);
         return order;
@@ -58,6 +60,18 @@ public class OrderService {
         }
     }
 
+    public void updateProductSold(List<ProductQuantityDTO> productQuantities) {
+        for (ProductQuantityDTO pq : productQuantities) {
+            Optional<Product> productOptional = productRepository.findById(pq.getProductId());
+            if (productOptional.isPresent()) {
+                Product product = productOptional.get();
+                product.setSold(product.getSold() + pq.getQuantity());
+                productRepository.save(product);
+            } else {
+                log.error("error in updateProductSold");
+            }
+        }
+    }
 
     public List<Order> getListOrder(){
         return orderRepository.findAll();
@@ -67,13 +81,13 @@ public class OrderService {
         return orderRepository.findById(orderId).get();
     }
 
-    public void updateOrderById(long orderId, Order getOrder) {
-        Order setOrder = orderRepository.getReferenceById(orderId);
-        setOrder.setProductId(getOrder.getProductId());
-        setOrder.setQuantity(getOrder.getQuantity());
-        setOrder.setTotalPrice(getOrder.getTotalPrice());
-        orderRepository.save(setOrder);
-    }
+//    public void updateOrderById(long orderId, Order getOrder) {
+//        Order setOrder = orderRepository.getReferenceById(orderId);
+//        setOrder.setProductId(getOrder.getProductId());
+//        setOrder.setQuantity(getOrder.getQuantity());
+//        setOrder.setTotalPrice(getOrder.getTotalPrice());
+//        orderRepository.save(setOrder);
+//    }
 
     public void updateStatusById(long orderId, Order getOrder) {
         Order setOrder = orderRepository.getReferenceById(orderId);

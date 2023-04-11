@@ -2,10 +2,10 @@ package com.rimsti.rimsti.service;
 
 import com.rimsti.rimsti.model.Product;
 import com.rimsti.rimsti.model.ProductRating;
-import com.rimsti.rimsti.model.appuser.AppUser;
+//import com.rimsti.rimsti.model.appuser.AppUser;
 import com.rimsti.rimsti.repository.ProductRatingRepository;
 import com.rimsti.rimsti.repository.ProductRepository;
-import com.rimsti.rimsti.repository.appuserrepository.AppUserRepository;
+//import com.rimsti.rimsti.repository.appuserrepository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +15,8 @@ import java.util.Optional;
 @Service
 public class ProductRatingService {
 
-    @Autowired
-    AppUserRepository appUserRepository;
+//    @Autowired
+//    AppUserRepository appUserRepository;
 
     @Autowired
     ProductRatingRepository productRatingRepository;

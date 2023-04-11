@@ -50,6 +50,10 @@ public class Product {
     @Transient
     private Float finalRating;
 
+    private Integer sold = 0;
+
+    private Boolean bestSeller;
+
     public Product(Long id) {
             this.id = id;
         }

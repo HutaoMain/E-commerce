@@ -4,6 +4,10 @@
   margin-top: 20px;
   margin-left: 10px;
   margin-right: 15px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .profileInfo {
@@ -12,6 +16,10 @@
   justify-content: center;
   flex-direction: column;
   gap: 5px;
+}
+
+.profileInfo h3 {
+  margin-bottom: 20px;
 }
 
 .profileSideEdit {
@@ -26,14 +34,16 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  width: 70%;
   gap: 5px;
+  margin-bottom: 20px;
 }
 
 .profileSideBtn {
   width: 100%;
   margin-left: 5px;
   cursor: pointer;
-  background-color: #0071c2;
+  background-color: #51503f;
   border-radius: 10px;
   border: none;
   height: 35px;
@@ -42,7 +52,7 @@
 }
 
 .profileSideBtn:hover {
-  background-color: #ebd005;
+  background-color: #f2eee3;
   color: black;
 }
 

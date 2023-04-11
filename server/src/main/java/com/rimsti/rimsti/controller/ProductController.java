@@ -61,4 +61,9 @@ public class ProductController {
         return productService.searchProduct(products);
     }
 
+    @GetMapping("/best-sellers")
+    public List<Product> getBestSellersPerCategory() {
+        return productService.getBestSellersPerCategory();
+    }
+
 }

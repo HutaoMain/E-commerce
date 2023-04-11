@@ -15,21 +15,35 @@
   justify-content: space-between;
   margin-right: 60px;
   margin-left: 60px;
+
+  margin-top: 20px;
 }
 
 .ordersBtnList {
   width: 140px;
   height: 40px;
   font-size: 17px;
-  /* margin-right: 10px; */
+  border: none;
+  border-bottom: 3px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 700;
 }
 
 .active {
-  width: 150px;
+  /* width: 150px;
   height: 50px;
   font-size: 20px;
   background-color: #0071c2;
-  color: white;
+  color: white; */
+  width: 140px;
+  height: 40px;
+  font-size: 17px;
+  border: none;
+  background-color: transparent;
+  font-weight: 1000;
+
+  border-bottom: 3px solid #4b4b4b;
 }
 
 .changePassBtn {

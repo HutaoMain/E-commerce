@@ -18,27 +18,27 @@ hr {
 
 .myModalInputName {
   height: 35px;
-  width: 45%;
+  width: 90%;
   font-size: 17px;
-  margin-top: 20px;
-  margin-left: 10px;
+  margin-top: 30px;
   margin-bottom: 10px;
+  padding: 0px 10px;
 }
 
 .myModalInputLong {
   height: 35px;
-  width: 95%;
-  margin-left: 10px;
+  width: 90%;
   margin-bottom: 10px;
   font-size: 17px;
+  padding: 0px 10px;
 }
 
 .myModalInputNumber {
   height: 35px;
-  width: 95%;
-  margin-left: 10px;
+  width: 90%;
   margin-bottom: 10px;
   font-size: 17px;
+  padding: 0px 10px;
 }
 
 .myModalInputNumber::-webkit-outer-spin-button,
@@ -102,4 +102,11 @@ hr {
   cursor: not-allowed;
   margin-top: 3px;
   color: gray;
+}
+
+.my-modal-selected-question {
+  height: 35px;
+  width: 96%;
+  padding: 0 13px;
+  margin-bottom: 10px;
 }

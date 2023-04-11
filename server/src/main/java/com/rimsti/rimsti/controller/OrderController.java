@@ -1,12 +1,18 @@
 package com.rimsti.rimsti.controller;
 
 import com.rimsti.rimsti.DTO.OrderDTO;
+import com.rimsti.rimsti.DTO.ProductQuantityDTO;
 import com.rimsti.rimsti.model.Order;
-import com.rimsti.rimsti.model.appuser.AppUser;
+//import com.rimsti.rimsti.model.appuser.AppUser;
+import com.rimsti.rimsti.model.User;
 import com.rimsti.rimsti.repository.OrderRepository;
-import com.rimsti.rimsti.repository.appuserrepository.AppUserRepository;
+//import com.rimsti.rimsti.repository.appuserrepository.AppUserRepository;
+import com.rimsti.rimsti.repository.ProductRepository;
+import com.rimsti.rimsti.repository.UserRepository;
 import com.rimsti.rimsti.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,11 +26,12 @@ public class OrderController {
     OrderService orderService;
 
     @Autowired
-    AppUserRepository appUserRepository;
+    UserRepository userRepository;
+
 
     @PostMapping(value = "/create")
     public OrderDTO createOrder(@RequestBody OrderDTO orderDTO) {
-        Optional<AppUser> optionalUser = appUserRepository.findById(orderDTO.getUserId());
+        Optional<User> optionalUser = userRepository.findById(orderDTO.getUserId());
         optionalUser.ifPresent(appUser -> orderService.createOrder(orderDTO, appUser));
         return orderDTO;
     }
@@ -39,11 +46,11 @@ public class OrderController {
         return orderService.getOrderById(orderId);
     }
 
-    @PutMapping("/update/{orderId}")
-    public Order updateOrderById(@PathVariable("orderId") long orderId, @RequestBody Order order) {
-        orderService.updateOrderById(orderId, order);
-        return order;
-    }
+//    @PutMapping("/update/{orderId}")
+//    public Order updateOrderById(@PathVariable("orderId") long orderId, @RequestBody Order order) {
+//        orderService.updateOrderById(orderId, order);
+//        return order;
+//    }
 
     @PutMapping("/update/status/{orderId}")
     public Order updateStatusById(@PathVariable("orderId") long orderId, @RequestBody Order order) {
@@ -67,4 +74,5 @@ public class OrderController {
     private List<OrderRepository.sumOfTotalPrice> getByDayPrice(){
         return orderService.priceByDay();
     }
+
 }

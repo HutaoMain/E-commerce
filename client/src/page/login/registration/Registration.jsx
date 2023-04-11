@@ -1,27 +1,35 @@
 import "./Registration.css";
 import { registrationSchema } from "../../../validations/RegistrationValidation";
 import { useFormik } from "formik";
-// import DatePicker from "react-datepicker";
 import { Link } from "react-router-dom";
 import axios from "axios";
-// import { useState } from "react";
-// import PopupMessage from "../../../components/popupMessage/PopupMessage";
 import useFetch from "../../../contextAPI/useFetch";
 import { ToastContainer, toast } from "react-toastify";
+import { useState } from "react";
 
 const Registration = () => {
-  // const [open, setOpen] = useState(false);
+  const [selectedQuestion, setSelectedQuestion] = useState("");
+
+  const secretQuestions = [
+    "What is your mother's maiden name?",
+    "What was the name of your first pet?",
+    "In what city were you born?",
+    "What is your favorite book?",
+    "What is your favorite movie?",
+  ];
+
+  console.log(selectedQuestion);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post(
-      `${import.meta.env.VITE_APP_API_URL}/api/auth/registration`,
+      `${import.meta.env.VITE_APP_API_URL}/api/user/register`,
       values
     );
 
     toast.success("✅ Success!", {
-      position: "center",
-      autoClose: 5000,
+      position: "bottom-right",
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -31,29 +39,18 @@ const Registration = () => {
     });
   };
 
-  const {
-    values,
-    touched,
-    errors,
-    isValid,
-    dirty,
-    handleBlur,
-    handleChange,
-    // setFieldValue,
-  } = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      // birthday: new Date(),
-      // gender: "Male",
-    },
-    validationSchema: registrationSchema,
-    onSubmit,
-  });
+  const { values, touched, errors, isValid, dirty, handleBlur, handleChange } =
+    useFormik({
+      initialValues: {
+        name: "",
+        email: "",
+        password: "",
+        secretQuestion: "",
+        secretAnswer: "",
+      },
+      validationSchema: registrationSchema,
+      onSubmit,
+    });
 
   const { data } = useFetch(
     `${import.meta.env.VITE_APP_API_URL}/api/user/${values.email}`
@@ -67,50 +64,16 @@ const Registration = () => {
 
       <form>
         <input
-          value={values.firstName}
+          value={values.name}
           onChange={handleChange}
           onBlur={handleBlur}
           type="text"
-          id="firstName"
-          placeholder="First Name"
+          id="name"
+          placeholder="Name"
           className="myModalInputName"
         />
-        {errors.firstName && touched.firstName && (
-          <div className="error-message">{errors.firstName}</div>
-        )}
-
-        <input
-          value={values.lastName}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          type="text"
-          id="lastName"
-          placeholder="Last Name"
-          className="myModalInputName"
-        />
-        {errors.lastName && touched.lastName && (
-          <div className="error-message">{errors.lastName}</div>
-        )}
-
-        <br />
-        <input
-          value={values.username}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          type="text"
-          id="username"
-          placeholder="Student No."
-          className="myModalInputNumber"
-        />
-        {errors.username && touched.username && (
-          <div className="error-message">{errors.username}</div>
-        )}
-        {data.username === values.username ? (
-          <p style={{ color: "red", fontSize: "13px" }}>
-            Username already exist
-          </p>
-        ) : (
-          ""
+        {errors.name && touched.name && (
+          <div className="error-message">{errors.name}</div>
         )}
 
         <br />
@@ -155,37 +118,37 @@ const Registration = () => {
           placeholder="Confirm Password"
           className="myModalInputLong"
         />
+
         {errors.confirmPassword && touched.confirmPassword && (
           <div className="error-message">{errors.confirmPassword}</div>
         )}
 
-        {/* <br />
-        <label className="myModalLabel">
-          Birthday: <i style={{ fontSize: "10px" }}>optional</i>
-        </label>
-        <DatePicker
-          className="myModalBirthday"
-          selected={values.birthday}
-          dateFormat="yyyy-MM-dd"
-          onChange={(date) => setFieldValue("birthday", date)}
-        />
-        {errors.birthday && (
-          <div className="error-message">{errors.birthday}</div>
-        )}
-
-        <label className="myModalLabel">
-          Gender: <i style={{ fontSize: "10px" }}>optional</i>
-        </label>
         <select
-          value={values.gender}
+          className="my-modal-selected-question"
+          value={values.secretQuestion}
+          onChange={(event) => {
+            handleChange(event);
+            setSelectedQuestion(event.target.value);
+          }}
+          name="secretQuestion"
+        >
+          <option value="">Select a secret question</option>
+          {secretQuestions.map((question, index) => (
+            <option key={index} value={question}>
+              {question}
+            </option>
+          ))}
+        </select>
+
+        <input
+          value={values.secretAnswer}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="myModalGender"
-          id="gender"
-        >
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select> */}
+          type="text"
+          id="secretAnswer"
+          placeholder="Please Answer"
+          className="myModalInputLong"
+        />
 
         <p className="myModalTermsnCondition">
           By clicking Sign Up, you agree to our
@@ -210,12 +173,6 @@ const Registration = () => {
             Sign Up
           </button>
           <ToastContainer />
-          {/* {open ? (
-            <PopupMessage
-              text="Successful Registration!"
-              closePopup={() => setOpen(false)}
-            />
-          ) : null} */}
         </Link>
       </form>
     </div>

@@ -246,7 +246,14 @@ const Navbar = ({ user }) => {
                   <div className="profile-menu-container">
                     <div className="profile-menu">
                       <div className="profile-menu-top">
-                        <img src={data.imageUrl} alt="" id="circle-avatar" />
+                        <img
+                          src={
+                            data.imageUrl ||
+                            "https://i.ibb.co/MBtjqXQ/no=avatar.gif"
+                          }
+                          alt=""
+                          id="circle-avatar"
+                        />
                         <p>{data.email}</p>
                       </div>
                       <Link

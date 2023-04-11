@@ -1,7 +1,7 @@
 import "./ProductCard.css";
 import { Rating } from "react-simple-star-rating";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartRedux";
 
@@ -102,8 +102,14 @@ const ProductCard = ({ product }) => {
   return (
     <div className="product-card">
       <div className="product-image">
+        {product.bestSeller === true ? (
+          <div className="best-seller-badge">Best Seller</div>
+        ) : (
+          <div></div>
+        )}
         <img src={product.imageUrl} alt={product.name} />
       </div>
+
       <div className="product-info">
         <h3 className="product-name">{product.name}</h3>
         <p className="product-description">{product.description}</p>
@@ -121,6 +127,10 @@ const ProductCard = ({ product }) => {
         <div className="product-quantity">
           <span className="quantity-label">Quantity:</span>
           <span>{product.quantity}</span>
+        </div>
+        <div className="product-quantity">
+          <span className="quantity-label">Sold:</span>
+          <span>{product.sold}</span>
         </div>
         <div className="product-quantity-btns">
           <CgRemoveR

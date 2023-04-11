@@ -1,0 +1,21 @@
+.variationPrice::-webkit-outer-spin-button,
+.variationPrice::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.variationPrice {
+  font-size: 15px;
+  width: 145px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.addVariationNumber {
+  display: flex;
+  margin: 15px 0;
+}
+
+.addVariationNumber label {
+  font-size: 15px;
+}
