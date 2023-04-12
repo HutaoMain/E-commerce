@@ -3,15 +3,13 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useFormik } from "formik";
 import { registrationSchema } from "../../validations/RegistrationValidation";
+import { UrlPath } from "../../UrlPath";
 
 const ChangePassword = ({ userId }) => {
   const handleChangePass = async () => {
-    await axios.put(
-      `${import.meta.env.VITE_APP_API_URL}/api/user/update/password/${userId}`,
-      {
-        password: values.password,
-      }
-    );
+    await axios.put(`${UrlPath}/api/user/update/password/${userId}`, {
+      password: values.password,
+    });
 
     toast.success("✅ Success!", {
       position: "center",

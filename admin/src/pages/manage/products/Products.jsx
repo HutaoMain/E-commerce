@@ -34,7 +34,7 @@ Modal.setAppElement("#root");
 const Products = () => {
   const [list, setList] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [paramsId, setParamsId] = useState("");
+  // const [paramsId, setParamsId] = useState("");
 
   const { data } = useFetch(
     `${import.meta.env.VITE_APP_API_URL}/api/product/list`
@@ -54,8 +54,7 @@ const Products = () => {
     } catch (err) {}
   };
 
-  const toggleModalCategory = (id) => {
-    setParamsId(id);
+  const toggleModalCategory = () => {
     setIsOpenModal(!isOpenModal);
   };
 
@@ -73,16 +72,34 @@ const Products = () => {
       align: "center",
       width: 150,
     },
-    // {
-    //   field: "description",
-    //   headerName: "Product Description",
-    //   headerAlign: "center",
-    //   align: "center",
-    //   width: 200,
-    // },
     {
-      field: "categoryId",
-      headerName: "Category ID",
+      field: "description",
+      headerName: "Product Description",
+      headerAlign: "center",
+      align: "center",
+      width: 200,
+    },
+    {
+      field: "price",
+      headerName: "Price",
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "quantity",
+      headerName: "Quantity",
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "finalRating",
+      headerName: "Rating",
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "sold",
+      headerName: "No of Sold",
       headerAlign: "center",
       align: "center",
     },
@@ -114,10 +131,15 @@ const Products = () => {
         return (
           <div>
             <Link to={`${params.row.id}`} style={{ textDecoration: "none" }}>
-              <button className="actionButton">Update</button>
+              <button
+                className="product-actionbtn"
+                style={{ backgroundColor: "blue" }}
+              >
+                Update
+              </button>
             </Link>
             <button
-              className="actionButton"
+              className="product-actionbtn"
               style={{ backgroundColor: "red" }}
               onClick={() => toggleModalCategory(params.row.id)}
             >
@@ -132,7 +154,7 @@ const Products = () => {
               <Confirmation
                 action="delete"
                 whatItem="product"
-                btnConfirm={() => handleDelete(paramsId)}
+                btnConfirm={() => handleDelete(params.row.id)}
                 closeModal={toggleModalCategory}
               />
             </Modal>

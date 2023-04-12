@@ -52,7 +52,7 @@ public class Product {
 
     private Integer sold = 0;
 
-    private Boolean bestSeller;
+    private Boolean bestSeller = false;
 
     public Product(Long id) {
             this.id = id;

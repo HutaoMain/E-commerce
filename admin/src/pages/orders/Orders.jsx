@@ -89,18 +89,18 @@ const Orders = () => {
     },
     {
       field: "userFullName",
-      headerName: "Student Name",
+      headerName: "Customer Name",
       headerAlign: "center",
       align: "center",
       width: 200,
     },
-    {
-      field: "username",
-      headerName: "Student No.",
-      headerAlign: "center",
-      align: "center",
-      width: 200,
-    },
+    // {
+    //   field: "username",
+    //   headerName: "Student No.",
+    //   headerAlign: "center",
+    //   align: "center",
+    //   width: 200,
+    // },
     // {
     //   field: "quantity",
     //   headerName: "Quantity",
@@ -133,12 +133,12 @@ const Orders = () => {
       align: "center",
       width: 200,
     },
-    {
-      field: "orNum",
-      headerName: "OR Number",
-      headerAlign: "center",
-      align: "center",
-    },
+    // {
+    //   field: "orNum",
+    //   headerName: "OR Number",
+    //   headerAlign: "center",
+    //   align: "center",
+    // },
     {
       field: "proofPayment",
       headerName: "Proof of Payment",
@@ -198,7 +198,7 @@ const Orders = () => {
         return (
           <div>
             <button
-              className="actionButton"
+              className="order-actionbtn"
               style={{ backgroundColor: "green" }}
               onClick={() => toggleModal(params.row.id)}
             >
@@ -206,7 +206,7 @@ const Orders = () => {
             </button>
             <Link to={`/productJson/${params.row.id}`}>
               <button
-                className="actionButton"
+                className="order-actionbtn"
                 style={{ backgroundColor: "green" }}
                 // onClick={() => toggleModalJson(params.row.id)}
               >
@@ -232,7 +232,8 @@ const Orders = () => {
               ))}
             </Modal> */}
             <button
-              className="actionButton"
+              className="order-actionbtn"
+              style={{ backgroundColor: "#0071c2" }}
               onClick={() => toggleModalCategory(params.row.id)}
             >
               Update

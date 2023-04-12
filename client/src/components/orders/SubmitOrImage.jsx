@@ -2,6 +2,7 @@ import axios from "axios";
 import { MdOutlineUpload } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
+import { UrlPath } from "../../UrlPath";
 // import { useEffect } from "react";
 
 const SubmitOrImage = ({ item, close }) => {
@@ -19,14 +20,9 @@ const SubmitOrImage = ({ item, close }) => {
       );
       const { url } = uploadRes.data;
 
-      await axios.put(
-        `${import.meta.env.VITE_APP_API_URL}/api/order/update/proofPayment/${
-          item.id
-        }`,
-        {
-          proofPayment: url,
-        }
-      );
+      await axios.put(`${UrlPath}/api/order/update/proofPayment/${item.id}`, {
+        proofPayment: url,
+      });
       toast.success("✅ Success!", {
         position: "top-center",
         autoClose: 1000,

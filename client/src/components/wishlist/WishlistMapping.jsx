@@ -4,6 +4,7 @@ import Footer from "../footer/Footer";
 import { AuthContext } from "../../contextAPI/AuthContext";
 import WishlistCard from "./WishlistCard";
 import axios from "axios";
+import { UrlPath } from "../../UrlPath";
 
 const WishlistMapping = () => {
   const { user } = useContext(AuthContext);
@@ -15,7 +16,7 @@ const WishlistMapping = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_APP_API_URL}/api/wishlist/product/${user}`
+          `${UrlPath}/api/wishlist/product/${user}`
         );
         if (mounted) {
           setWishListData(response.data);

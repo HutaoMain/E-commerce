@@ -8,7 +8,7 @@
 
 .addCategoryTitle {
   width: 100%;
-  background: #0071c2;
+  background: #a09c96;
   margin-bottom: 10px;
   padding: 10px;
 }
@@ -16,6 +16,7 @@
 .addCategoryTitle h1 {
   margin-left: 30px;
   color: white;
+  font-weight: 700;
 }
 
 .addCatLeftRightContainer {

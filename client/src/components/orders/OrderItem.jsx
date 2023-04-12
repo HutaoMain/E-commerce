@@ -100,14 +100,16 @@ const OrderItem = ({ item }) => {
             >
               Upload Proof of Payment
             </button>
+            {"   "}
+            <span>tracking # here: 091397410741</span>
             <span style={{ marginLeft: "10px" }}>
-              Alternative payment click here: {"   "}
+              Please track your order here {"   "}
               <a
-                href="https://www.sti.edu/paymentsoptions2/sti_payments.aspx?sch_code=085"
+                href="https://www.jtexpress.ph/"
                 target="_blank"
                 rel="noreferrer"
               >
-                STI Website
+                J&T website
               </a>
             </span>
             {/* You can also pay here{" "} */}

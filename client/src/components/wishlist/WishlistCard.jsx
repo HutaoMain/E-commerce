@@ -7,6 +7,7 @@ import { addProduct } from "../../redux/cartRedux";
 import { CgRemoveR } from "react-icons/cg";
 import { BiAddToQueue } from "react-icons/bi";
 import axios from "axios";
+import { UrlPath } from "../../UrlPath";
 
 const WishlistCard = ({ wishlist }) => {
   const [rating, setRating] = useState(wishlist.rating);
@@ -43,9 +44,7 @@ const WishlistCard = ({ wishlist }) => {
 
   // handle remove to wishlist
   const handleRemoveWishlist = async () => {
-    await axios.delete(
-      `${import.meta.env.VITE_APP_API_URL}/api/wishlist/delete/${wishlist.id}`
-    );
+    await axios.delete(`${UrlPath}/api/wishlist/delete/${wishlist.id}`);
   };
 
   return (

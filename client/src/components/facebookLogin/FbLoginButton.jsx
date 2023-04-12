@@ -1,5 +1,5 @@
 import { AiFillFacebook } from "react-icons/ai";
-import "./FbLoginButton.css";
+
 const FbLoginButton = () => {
   const handleFacebookLogin = () => {
     const redirectUrl = `${

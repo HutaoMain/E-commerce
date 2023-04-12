@@ -18,4 +18,10 @@ public class ProductRatingController {
         productRatingService.addRating(productRating);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/customerRating")
+    public ResponseEntity<Float> getAverageRatingPercentage() {
+        float averageRatingPercentage = productRatingService.getAverageRatingPercentage();
+        return ResponseEntity.ok(averageRatingPercentage);
+    }
 }

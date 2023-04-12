@@ -134,6 +134,7 @@ import { useContext, useState, useEffect } from "react";
 import useFetch from "../../contextAPI/useFetch";
 import Badge from "@mui/material/Badge";
 import { useSelector } from "react-redux";
+import { UrlPath } from "../../UrlPath";
 
 const Navbar = ({ user }) => {
   const { dispatch } = useContext(AuthContext);
@@ -145,9 +146,7 @@ const Navbar = ({ user }) => {
 
   const { quantity } = useSelector((state) => state.cart);
 
-  const { data } = useFetch(
-    `${import.meta.env.VITE_APP_API_URL}/api/user/${user}`
-  );
+  const { data } = useFetch(`${UrlPath}/api/user/${user}`);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);

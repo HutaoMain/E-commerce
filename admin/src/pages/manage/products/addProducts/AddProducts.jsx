@@ -136,7 +136,7 @@ const AddProducts = () => {
                 />
               </div>
 
-              {/* <div className="addCategoryItem">
+              <div className="addCategoryItem">
                 <textarea
                   className="addCategoryInput"
                   placeholder="description"
@@ -149,7 +149,40 @@ const AddProducts = () => {
                     }));
                   }}
                 ></textarea>
-              </div> */}
+              </div>
+
+              <div className="addVariationNumber">
+                <div style={{ marginRight: "5px" }}>
+                  <label>
+                    Price: <br />
+                  </label>
+                  <input
+                    type="number"
+                    className="variationPrice"
+                    onChange={(e) => {
+                      setInfo((data) => ({
+                        ...data,
+                        price: e.target.value,
+                      }));
+                    }}
+                  />
+                </div>
+                <div>
+                  <label>
+                    Quantity: <br />
+                  </label>
+                  <input
+                    type="number"
+                    className="variationPrice"
+                    onChange={(e) => {
+                      setInfo((data) => ({
+                        ...data,
+                        quantity: e.target.value,
+                      }));
+                    }}
+                  />
+                </div>
+              </div>
 
               <div className="addCategoryItem">
                 <label style={{ marginTop: "30px", fontSize: "15px" }}>

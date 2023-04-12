@@ -7,37 +7,13 @@ import {
 import useFetch from "../../contextApi/useFetch";
 import SidePanel from "../../components/sidepanel/SidePanel";
 import TopBar from "../../components/topBar/TopBar";
-// import { Link } from "react-router-dom";
-// import { MdAddCircle } from "react-icons/md";
-// import { useState } from "react";
-// import { useEffect } from "react";
-// import axios from "axios";
 
 const Users = () => {
-  // const [list, setList] = useState([]);
-  // const [selectedStatus, setSelectedStatus] = useState("");
-
   const { data } = useFetch(
     `${import.meta.env.VITE_APP_API_URL}/api/user/list`
   );
 
-  const rowData = data.filter(
-    (item) => item.username !== "admin123" && item.username !== "02000112536"
-  );
-
-  // useEffect(() => {
-  //   setList(data);
-  // }, [data]);
-
-  // const handleUpdateStatus = async (id) => {
-  //   try {
-  //     await axios.put(`http://localhost:8080/api/order/update/status/${id}`, {
-  //       orderStatus: selectedStatus,
-  //     });
-  //     setList(list.filter((item) => item.id !== id));
-  //     window.location.reload();
-  //   } catch (err) {}
-  // };
+  const rowData = data.filter((item) => item.email !== "admin@gmail.com");
 
   const usersColumn = [
     {
@@ -54,37 +30,11 @@ const Users = () => {
       width: 300,
     },
     {
-      field: "username",
-      headerName: "Student No.",
+      field: "name",
+      headerName: "Fullname",
       headerAlign: "center",
       align: "center",
-      width: 200,
-    },
-    {
-      field: "firstName",
-      headerName: "First Name",
-      headerAlign: "center",
-      align: "center",
-      width: 150,
-    },
-    {
-      field: "lastName",
-      headerName: "Last Name",
-      headerAlign: "center",
-      align: "center",
-      width: 150,
-    },
-    {
-      field: "birthday",
-      headerName: "Birthday",
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      field: "gender",
-      headerName: "Gender",
-      headerAlign: "center",
-      align: "center",
+      width: 300,
     },
     {
       field: "imgUrl",
@@ -104,23 +54,6 @@ const Users = () => {
         );
       },
     },
-    // {
-    //   field: "actionButton",
-    //   headerName: "Action Button",
-    //   headerAlign: "center",
-    //   align: "center",
-    //   width: 230,
-    //   renderCell: (params) => {
-    //     return (
-    //       <div>
-    //         <button className="actionButton">Update</button>
-    //         <button className="actionButton" style={{ backgroundColor: "red" }}>
-    //           Delete
-    //         </button>
-    //       </div>
-    //     );
-    //   },
-    // },
   ];
 
   function CustomToolbar() {
@@ -140,11 +73,6 @@ const Users = () => {
         <p style={{ marginLeft: "20px", marginBottom: "10px" }}>
           List of Users
         </p>
-        {/* <Link to="/addVariation">
-          <button className="variationAddBtn">
-            <MdAddCircle /> Add Product Variations
-          </button>
-        </Link> */}
         <DataGrid
           style={{ overflowX: "scroll", height: "700px" }}
           rows={rowData}

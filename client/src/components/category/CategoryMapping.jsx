@@ -2,6 +2,7 @@ import styled from "styled-components";
 import CategoryCard from "./CategoryCard";
 import { mobile } from "../../responsive";
 import useFetch from "../../contextAPI/useFetch";
+import { UrlPath } from "../../UrlPath";
 
 const Container = styled.div`
   padding: 20px;
@@ -12,9 +13,7 @@ const Container = styled.div`
 `;
 
 const CategoryMapping = () => {
-  const { data } = useFetch(
-    `${import.meta.env.VITE_APP_API_URL}/api/category/list`
-  );
+  const { data } = useFetch(`${UrlPath}/api/category/list`);
 
   return (
     <Container>

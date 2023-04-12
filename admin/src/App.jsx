@@ -4,15 +4,12 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Orders from "./pages/orders/Orders";
 import Payment from "./pages/payment/Payment";
 import Products from "./pages/manage/products/Products";
-import Variation from "./pages/manage/variation/Variation";
 import Category from "./pages/manage/category/Category";
 import Users from "./pages/users/Users";
 import AddCategory from "./pages/manage/category/addCategory/AddCategory";
 import UpdateCategory from "./pages/manage/category/updateCategory/UpdateCategory";
 import AddProducts from "./pages/manage/products/addProducts/AddProducts";
 import UpdateProduct from "./pages/manage/products/updateProducts/UpdateProduct";
-import AddVariation from "./pages/manage/variation/addVariation/AddVariation";
-import UpdateVariation from "./pages/manage/variation/updateVariation/UpdateVariation";
 import { useContext } from "react";
 import { AuthContext } from "./contextApi/AuthContext";
 import Login from "./pages/login/Login";
@@ -58,15 +55,6 @@ function App() {
           element={user ? <UpdateProduct /> : <Login />}
         />
 
-        <Route path="/variation" element={user ? <Variation /> : <Login />} />
-        <Route
-          path="variation/addVariation"
-          element={user ? <AddVariation /> : <Login />}
-        />
-        <Route
-          path="variation/:id"
-          element={user ? <UpdateVariation /> : <Login />}
-        />
         <Route path="/users" element={user ? <Users /> : <Login />} />
         <Route
           path="/productJson/:id"

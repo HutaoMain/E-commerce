@@ -108,10 +108,15 @@ const Category = () => {
         return (
           <div>
             <Link to={`${params.row.id}`} style={{ textDecoration: "none" }}>
-              <button className="actionButton">Update</button>
+              <button
+                className="category-actionbtn"
+                style={{ backgroundColor: "blue" }}
+              >
+                Update
+              </button>
             </Link>
             <button
-              className="actionButton"
+              className="category-actionbtn"
               style={{ backgroundColor: "red" }}
               onClick={() => toggleModalCategory(params.row.id)}
             >
@@ -154,7 +159,7 @@ const Category = () => {
           List of Category
         </p>
         <Link to="/category/addCategory">
-          <button className="variationAddBtn">
+          <button className="productAddBtn">
             <MdAddCircle /> Add Category
           </button>
         </Link>

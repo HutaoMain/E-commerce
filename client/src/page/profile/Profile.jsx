@@ -10,6 +10,7 @@ import useFetch from "../../contextAPI/useFetch";
 import Modal from "react-modal";
 import ChangePassword from "./ChangePassword";
 import { ToastContainer, toast } from "react-toastify";
+import { UrlPath } from "../../UrlPath";
 
 const customStyle = {
   content: {
@@ -42,12 +43,9 @@ const Profile = () => {
   // handle onClick event for submit button
   const handleAddressSubmit = async () => {
     try {
-      await axios.put(
-        `${import.meta.env.VITE_APP_API_URL}/api/user/${user}/address`,
-        {
-          address: address,
-        }
-      );
+      await axios.put(`${UrlPath}/api/user/${user}/address`, {
+        address: address,
+      });
       toast.success("✅ Success!", {
         position: "bottom-right",
         autoClose: 2000,
@@ -65,9 +63,7 @@ const Profile = () => {
     }
   };
 
-  const { data } = useFetch(
-    `${import.meta.env.VITE_APP_API_URL}/api/user/${user}`
-  );
+  const { data } = useFetch(`${UrlPath}/api/user/${user}`);
 
   useEffect(() => {
     const address = data.address || ""; // set default value to empty string if address is undefined
@@ -87,14 +83,9 @@ const Profile = () => {
     );
 
     const { url } = uploadRes.data;
-    await axios.put(
-      `${import.meta.env.VITE_APP_API_URL}/api/user/update/image/${
-        profileData.id
-      }`,
-      {
-        imageUrl: url,
-      }
-    );
+    await axios.put(`${UrlPath}/api/user/update/image/${profileData.id}`, {
+      imageUrl: url,
+    });
     toast.success("✅ Success!", {
       position: "bottom-right",
       autoClose: 2000,

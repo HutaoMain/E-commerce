@@ -9,6 +9,7 @@ import { CgRemoveR } from "react-icons/cg";
 import { BiAddToQueue } from "react-icons/bi";
 import { AuthContext } from "../../contextAPI/AuthContext";
 import axios from "axios";
+import { UrlPath } from "../../UrlPath";
 
 const ProductCard = ({ product }) => {
   const [rating, setRating] = useState(product.finalRating);
@@ -39,22 +40,17 @@ const ProductCard = ({ product }) => {
   const handleAddToWishlist = async () => {
     try {
       // Check if product is already in user's wishlist
-      const wishlist = await axios.get(
-        `${import.meta.env.VITE_APP_API_URL}/api/wishlist/${user}`
-      );
+      const wishlist = await axios.get(`${UrlPath}/api/wishlist/${user}`);
 
       if (wishlist.data.find((item) => item.productId === product.id)) {
         // If product is already in wishlist, disable the button and set message
         setMessageWishList("Product already in wishlist");
         setDisabled(true);
       } else {
-        await axios.post(
-          `${import.meta.env.VITE_APP_API_URL}/api/wishlist/create`,
-          {
-            productId: product.id,
-            email: user,
-          }
-        );
+        await axios.post(`${UrlPath}/api/wishlist/create`, {
+          productId: product.id,
+          email: user,
+        });
         // Set success message and disable button for 5 seconds
         setMessageWishList("Added to wishlist");
         setDisabled(true);
@@ -85,14 +81,11 @@ const ProductCard = ({ product }) => {
 
   const saveRating = async (newRating, productId) => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_APP_API_URL}/api/productRating/rate`,
-        {
-          rating: parseFloat(newRating),
-          email: user,
-          productId: productId,
-        }
-      );
+      const response = await axios.post(`${UrlPath}/api/productRating/rate`, {
+        rating: parseFloat(newRating),
+        email: user,
+        productId: productId,
+      });
       console.log(response.data);
     } catch (error) {
       console.log(error);

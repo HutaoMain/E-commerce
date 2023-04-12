@@ -6,6 +6,7 @@ import axios from "axios";
 import useFetch from "../../../contextAPI/useFetch";
 import { ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
+import { UrlPath } from "../../../UrlPath";
 
 const Registration = () => {
   const [selectedQuestion, setSelectedQuestion] = useState("");
@@ -22,10 +23,7 @@ const Registration = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(
-      `${import.meta.env.VITE_APP_API_URL}/api/user/register`,
-      values
-    );
+    await axios.post(`${UrlPath}/api/user/register`, values);
 
     toast.success("✅ Success!", {
       position: "bottom-right",
@@ -52,9 +50,7 @@ const Registration = () => {
       onSubmit,
     });
 
-  const { data } = useFetch(
-    `${import.meta.env.VITE_APP_API_URL}/api/user/${values.email}`
-  );
+  const { data } = useFetch(`${UrlPath}/api/user/${values.email}`);
 
   return (
     <div className="myModal">

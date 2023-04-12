@@ -48,6 +48,7 @@ public class ProductService {
         productDTO.setCategoryId(product.getCategory().getId());
         productDTO.setCreatedDate(product.getCreatedDate());
         productDTO.setUpdatedDate(product.getUpdatedDate());
+        productDTO.setSold(product.getSold());
 
         List<ProductRating> ratings = product.getRatings();
         float totalRating = 0f;

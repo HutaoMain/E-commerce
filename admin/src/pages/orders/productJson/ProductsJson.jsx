@@ -33,7 +33,9 @@ const ProductsJson = () => {
           Product Ordered
         </h1>
         <div className="orderItem">
-          <h1 style={{ float: "left" }}>Order ID: {data.id}</h1>
+          <h1 style={{ float: "left", paddingLeft: "10px" }}>
+            Order ID: {data.id}
+          </h1>
           <h1 className="orderStatus">{data.status}</h1>
           <div className="orderHorizontalLine"></div>
           {stringToJson?.map((arrayItem, key) => {

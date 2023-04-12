@@ -1,14 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { UrlPath } from "../../../UrlPath";
 
 const ForgotPass = () => {
   const [email, setEmail] = useState("");
 
   const handleForgotPass = async () => {
-    await axios.put(
-      `${import.meta.env.VITE_APP_API_URL}/api/auth/forgotPass/${email}`
-    );
+    await axios.put(`${UrlPath}/api/auth/forgotPass/${email}`);
 
     toast.success("✅ Success!", {
       position: "center",

@@ -14,9 +14,6 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserController {
 
-//    @Autowired
-//    AppUserService appUserService;
-
     @Autowired
     UserService userService;
 
@@ -31,10 +28,10 @@ public class UserController {
         return userService.loginUser(loginDTO.getEmail(), loginDTO.getPassword());
     }
 
-//    @GetMapping("/list")
-//    public List<User> getListUserController(){
-//        return userService.getListUser();
-//    }
+    @GetMapping("/list")
+    public List<User> getListUserController(){
+        return userService.getListUser();
+    }
 
     @GetMapping("/{email}")
     private User getUserByEmail(@PathVariable("email") String email) {

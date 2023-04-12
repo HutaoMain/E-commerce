@@ -4,12 +4,11 @@ import OrderItem from "../../components/orders/OrderItem";
 import { AuthContext } from "../../contextAPI/AuthContext";
 import useFetch from "../../contextAPI/useFetch";
 import "./ToPay.css";
+import { UrlPath } from "../../UrlPath";
 
 const ToPay = () => {
   const { user } = useContext(AuthContext);
-  const { data } = useFetch(
-    `${import.meta.env.VITE_APP_API_URL}/api/user/${user}`
-  );
+  const { data } = useFetch(`${UrlPath}/api/user/${user}`);
 
   const orders = data.order;
   const pending = orders?.filter((data) => data.status === "Pending");

@@ -3,3 +3,12 @@
   height: 60px;
   object-fit: contain;
 }
+
+.category-actionbtn {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}

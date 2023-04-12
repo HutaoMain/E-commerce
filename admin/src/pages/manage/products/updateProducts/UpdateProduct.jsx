@@ -42,6 +42,8 @@ const UpdateProduct = () => {
     setInfo({
       name: data.name,
       description: data.description,
+      price: data.price,
+      quantity: data.quantity,
     });
   }, [data.name, data.description]);
 
@@ -157,7 +159,7 @@ const UpdateProduct = () => {
                 />
               </div>
 
-              {/* <div className="addCategoryItem">
+              <div className="addCategoryItem">
                 <textarea
                   className="addCategoryInput"
                   defaultValue={data.description}
@@ -171,7 +173,42 @@ const UpdateProduct = () => {
                     }));
                   }}
                 ></textarea>
-              </div> */}
+              </div>
+              <div className="addVariationNumber">
+                <div style={{ marginRight: "5px" }}>
+                  <label>
+                    Price: <br />
+                  </label>
+                  <input
+                    type="number"
+                    defaultValue={data.price}
+                    className="variationPrice"
+                    onChange={(e) => {
+                      setInfo((data) => ({
+                        ...data,
+                        price: e.target.value,
+                      }));
+                    }}
+                  />
+                </div>
+                <div>
+                  <label>
+                    Quantity: <br />
+                  </label>
+                  <input
+                    type="number"
+                    className="variationPrice"
+                    defaultValue={data.quantity}
+                    onChange={(e) => {
+                      setInfo((data) => ({
+                        ...data,
+                        quantity: e.target.value,
+                      }));
+                    }}
+                  />
+                </div>
+              </div>
+
               <button className="addCategoryBtn" onClick={toggleModalCategory}>
                 <MdOutlineDownloadDone /> Update Products
               </button>

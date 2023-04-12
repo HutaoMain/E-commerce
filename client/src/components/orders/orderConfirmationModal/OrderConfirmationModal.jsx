@@ -5,15 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contextAPI/AuthContext";
 import useFetch from "../../../contextAPI/useFetch";
 import { useContext } from "react";
+import { UrlPath } from "../../../UrlPath";
 
 const OrderConfirmationModal = ({ carttotal, setIsOpen }) => {
   const { products } = useSelector((state) => state.cart);
 
   const { user } = useContext(AuthContext);
 
-  const { data } = useFetch(
-    `${import.meta.env.VITE_APP_API_URL}/api/user/${user}`
-  );
+  const { data } = useFetch(`${UrlPath}/api/user/${user}`);
 
   const navigate = useNavigate();
 
@@ -38,10 +37,7 @@ const OrderConfirmationModal = ({ carttotal, setIsOpen }) => {
       orderJsonList: arrayProducts,
     };
     try {
-      await axios.post(
-        `${import.meta.env.VITE_APP_API_URL}/api/order/create`,
-        orderData
-      );
+      await axios.post(`${UrlPath}/api/order/create`, orderData);
       window.localStorage.removeItem("persist:root");
       navigate("/");
       window.location.reload();

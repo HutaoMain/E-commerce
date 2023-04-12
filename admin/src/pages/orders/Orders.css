@@ -43,11 +43,10 @@
   border-radius: 5px;
 }
 
-.actionButton {
-  padding: 5px;
-  text-align: center;
+.order-actionbtn {
+  padding: 10px;
+  margin: 5px;
   border: none;
-  background-color: #0071c2;
   color: white;
   border-radius: 5px;
   cursor: pointer;

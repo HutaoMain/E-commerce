@@ -11,6 +11,7 @@ import Modal from "react-modal";
 
 import logo from "../../images/logo.png";
 import "./Login.css";
+import { UrlPath } from "../../UrlPath";
 
 const customStylesRegistration = {
   content: {
@@ -67,10 +68,7 @@ function Login() {
   const handleLogin = async () => {
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_APP_API_URL}/api/user/login`,
-        credentials
-      );
+      const res = await axios.post(`${UrlPath}/api/user/login`, credentials);
       if (res.status === 200) {
         dispatch({ type: "LOGIN_SUCCESS", payload: credentials.email });
         navigate("/", { replace: true });

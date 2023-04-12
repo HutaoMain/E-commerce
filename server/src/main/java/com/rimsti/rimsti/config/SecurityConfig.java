@@ -27,11 +27,15 @@ public class SecurityConfig {
                 //users
                 .antMatchers(HttpMethod.POST, "/api/user/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/user/**/address").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/user/list").permitAll()
 
                 //category
+                .antMatchers(HttpMethod.POST, "/api/category/create").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/category/list/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/category/list").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/category/delete/**").permitAll()
 
                 //order
                 .antMatchers(HttpMethod.POST, "/api/order/create").permitAll()
@@ -39,14 +43,27 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/api/order/list").permitAll()
                 .antMatchers(HttpMethod.GET, " /api/order/list/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/order/listByPrice").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/order/list/**").permitAll()
 
                 //product
+                .antMatchers(HttpMethod.POST, "/api/product/create").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/product/list/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/product/best-sellers").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/product/list").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/product/delete/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/product/update/**").permitAll()
+
+                //wishlist
+                .antMatchers(HttpMethod.POST, "/api/wishlist/create").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/wishlist/**").permitAll()
 
                 //socialmedia
                 .antMatchers(HttpMethod.GET, "/oauth2/authorization/google").permitAll()
                 .antMatchers(HttpMethod.GET, "/oauth2/authorization/facebook").permitAll()
                 .antMatchers("/", "/error", "/webjars/**").permitAll()
+
+                //product rating
+                .antMatchers(HttpMethod.GET, "/api/productRating/customerRating").permitAll()
 
                 .anyRequest()
                 .authenticated()

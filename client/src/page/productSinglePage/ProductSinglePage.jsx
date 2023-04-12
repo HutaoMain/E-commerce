@@ -12,6 +12,7 @@ import { addProduct } from "../../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import "./ProductSinglePage.css";
 import axios from "axios";
+import { UrlPath } from "../../UrlPath";
 
 const Container = styled.div`
   display: flex;
@@ -174,9 +175,7 @@ const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[3];
 
-  const { data, loading } = useFetch(
-    `${import.meta.env.VITE_APP_API_URL}/api/product/list/${id}`
-  );
+  const { data, loading } = useFetch(`${UrlPath}/api/product/list/${id}`);
 
   const dispatch = useDispatch();
 
@@ -184,9 +183,7 @@ const Product = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_APP_API_URL}/api/productVariations/${id}/min`
-      );
+      const res = await axios.get(`${UrlPath}/api/productVariations/${id}/min`);
       setClassActive(res.data);
     };
     fetchData();
@@ -214,9 +211,7 @@ const Product = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
-        `${
-          import.meta.env.VITE_APP_API_URL
-        }/api/productVariations/${classActive}`
+        `${UrlPath}/api/productVariations/${classActive}`
       );
       setProductVariation(res.data);
     };
