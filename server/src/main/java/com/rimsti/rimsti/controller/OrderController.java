@@ -75,4 +75,10 @@ public class OrderController {
         return orderService.priceByDay();
     }
 
+    @GetMapping("/total-price")
+    public ResponseEntity<Double> getTotalPriceOfCompletedOrders() {
+        Double totalPrice = orderService.getTotalPriceOfCompletedOrders();
+        return ResponseEntity.ok(totalPrice);
+    }
+
 }

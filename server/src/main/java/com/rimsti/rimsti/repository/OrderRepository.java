@@ -17,10 +17,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = "SELECT total_price, date_now, status, SUM(total_price) as totalPrice FROM dbecommerce.orders where status = \"Completed\" group by date_now;", nativeQuery = true)
     List<sumOfTotalPrice> getByDate();
 
-//    @Transactional
-//    @Modifying
-//    @Query(value = "UPDATE Order SET status='Cancelled' where status ='Pending' AND createdDate < now();")
-//    void updateStatus();
+    List<Order> findByStatus(String status);
 
     interface sumOfTotalPrice{
         Double getTotalPrice();

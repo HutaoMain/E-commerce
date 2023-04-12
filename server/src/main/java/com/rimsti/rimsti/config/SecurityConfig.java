@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, " /api/order/list/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/order/listByPrice").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/order/list/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/order/total-price").permitAll()
 
                 //product
                 .antMatchers(HttpMethod.POST, "/api/product/create").permitAll()

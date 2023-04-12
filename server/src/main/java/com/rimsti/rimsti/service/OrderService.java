@@ -106,4 +106,13 @@ public class OrderService {
     }
 
     public List<OrderRepository.sumOfTotalPrice> priceByDay(){ return orderRepository.getByDate();}
+
+    public Double getTotalPriceOfCompletedOrders() {
+        List<Order> completedOrders = orderRepository.findByStatus("completed");
+        Double totalPrice = 0.0;
+        for (Order order : completedOrders) {
+            totalPrice += order.getTotalPrice();
+        }
+        return totalPrice;
+    }
 }
