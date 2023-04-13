@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PUT, "/api/order/update/status/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/order/list").permitAll()
                 .antMatchers(HttpMethod.GET, " /api/order/list/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/order/listByPrice").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/order/list-sales").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/order/list/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/order/total-price").permitAll()
 

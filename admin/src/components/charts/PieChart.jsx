@@ -51,6 +51,10 @@ const PieChart = () => {
 
   return (
     <div>
+      <span>
+        Overall customer rating based on rating per product. Accumulated product
+        rating over 5
+      </span>
       <Doughnut
         data={chartData}
         options={chartOptions}

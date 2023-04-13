@@ -70,7 +70,7 @@ public class OrderController {
         return "order deleted";
     }
 
-    @GetMapping("/listByPrice")
+    @GetMapping("/list-sales")
     private List<OrderRepository.sumOfTotalPrice> getByDayPrice(){
         return orderService.priceByDay();
     }

@@ -1,1 +1,1 @@
-export const UrlPath = "https://beauty-avenue.herokuapp.com";
+export const UrlPath = import.meta.env.VITE_APP_API_URL;
