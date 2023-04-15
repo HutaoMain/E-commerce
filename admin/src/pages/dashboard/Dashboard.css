@@ -7,8 +7,27 @@
   position: relative;
 }
 
-.barChart {
-  margin: 30px 30px;
+.dashboard-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+.dashboard-pie {
+  margin-top: 15%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
 }
 
 @media screen and (max-width: 1530px) {

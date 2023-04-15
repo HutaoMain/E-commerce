@@ -62,13 +62,8 @@ const BarChart = () => {
   };
 
   return (
-    <div className="barChart" style={{ height: "500px" }}>
-      <span>Total Sold for best selling products</span>
+    <div style={{ height: "200px", width: "45%" }}>
       <Bar data={graph} options={barOptions} />
-      {/* <p style={{ color: "gray", textAlign: "center", marginTop: "10px" }}>
-        Y-Axis: Total Earned that Day &nbsp; &nbsp; X-Axis: Date Format:
-        "yyyy-MM-dd"
-      </p> */}
     </div>
   );
 };

@@ -14,11 +14,16 @@ const Dashboard = () => {
       <SidePanel />
       <div className="dashboard-container">
         <TopBar />
-        <Boxes />
-        {/* <span>₱ {total}</span> */}
-        <BarChart />
-        <PieChart />
-        <LineChart />
+        <section className="dashboard-box">
+          <Boxes />
+        </section>
+        <section className="dashboard-chart">
+          <BarChart />
+          <LineChart />
+        </section>
+        <section className="dashboard-pie">
+          <PieChart />
+        </section>
       </div>
     </div>
   );

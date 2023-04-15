@@ -31,7 +31,7 @@ const customStylesRegistration = {
 Modal.setAppElement("#root");
 
 function Login() {
-  const { loading, error, dispatch } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -77,6 +77,7 @@ function Login() {
           type: "LOGIN_FAILURE",
           payload: { message: "You are not allowed!" },
         });
+        setErrorMessage("You are not allowed!");
       }
     } catch (err) {
       dispatch({
@@ -121,7 +122,7 @@ function Login() {
           <FbLoginButton />
         </section>
         <span className="login-signup-container">
-          Don't have account yet ?{" "}
+          Don't have account yet ?
           <button className="signup" onClick={toggleModal}>
             Sign Up
           </button>
