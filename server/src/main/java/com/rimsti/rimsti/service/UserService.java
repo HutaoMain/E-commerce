@@ -46,4 +46,13 @@ public class UserService {
     public List<User> getListUser() {
         return userRepository.findAll();
     }
+
+
+    public void updatePassword(String email, User user) {
+        User setUser = userRepository.findByEmail(email);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+        String encodedPassword = encoder.encode(user.getPassword());
+        setUser.setPassword(encodedPassword);
+        userRepository.save(user);
+    }
 }

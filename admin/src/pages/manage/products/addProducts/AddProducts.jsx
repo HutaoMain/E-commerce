@@ -130,7 +130,7 @@ const AddProducts = () => {
                   onChange={(e) => {
                     setInfo((data) => ({
                       ...data,
-                      name: e.target.value,
+                      name: e.target.value.toUpperCase(),
                     }));
                   }}
                 />

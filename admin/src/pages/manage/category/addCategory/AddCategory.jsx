@@ -120,7 +120,7 @@ const AddCategory = () => {
                   onChange={(e) => {
                     setInfo((data) => ({
                       ...data,
-                      categoryName: e.target.value,
+                      categoryName: e.target.value.toUpperCase(),
                     }));
                   }}
                 />

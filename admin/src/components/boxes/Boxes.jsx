@@ -13,7 +13,7 @@ const Boxes = () => {
   const orders = data;
   const cancelled = orders?.filter((data) => data?.status === "Cancelled");
   const pending = orders?.filter((data) => data?.status === "Pending");
-  const toClaim = orders?.filter((data) => data?.status === "ToClaim");
+  // const toClaim = orders?.filter((data) => data?.status === "ToClaim");
   const completed = orders?.filter((data) => data?.status === "Completed");
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Boxes = () => {
       <h1 className="widget-title">Dashboard</h1>
       <div className="widget-container">
         {/* toClaim */}
-        <div className="widgetItem">
+        {/* <div className="widgetItem">
           <div className="left">
             <span className="widget-letter">To Claim</span>
             <span className="counter">{toClaim.length}</span>
@@ -41,7 +41,7 @@ const Boxes = () => {
           <div className="right">
             <div className="percentage positive"></div>
           </div>
-        </div>
+        </div> */}
 
         {/* Service */}
         <div className="widgetItem">

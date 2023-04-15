@@ -174,9 +174,9 @@ const Orders = () => {
               <option value="Completed" className="statusCompleted">
                 Completed
               </option>
-              <option value="ToClaim" className="statusToClaim">
+              {/* <option value="ToClaim" className="statusToClaim">
                 ToClaim
-              </option>
+              </option> */}
               <option value="Pending" className="statusPending">
                 Pending
               </option>

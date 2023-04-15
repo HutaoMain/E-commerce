@@ -6,9 +6,26 @@ import { Link, useNavigate } from "react-router-dom/dist";
 import { AuthContext } from "../../contextApi/AuthContext";
 import useFetch from "../../contextApi/useFetch";
 
+import Modal from "react-modal";
+import ForgotPass from "./forgotPassword/ForgotPass";
+
+const customStylesForgotPass = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    transform: "translate(-50%, -50%)",
+    width: "20%",
+    height: "35%",
+    overflow: "hidden",
+  },
+};
+
 const Login = () => {
   const { dispatch } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isOpenForgotPass, setIsOpenForgotPass] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -17,6 +34,10 @@ const Login = () => {
   const { data } = useFetch(
     `${import.meta.env.VITE_APP_API_URL}/api/user/${credentials?.email}`
   );
+
+  const toggleModalForgotPass = () => {
+    setIsOpenForgotPass(!isOpenForgotPass);
+  };
 
   const navigate = useNavigate();
 
@@ -92,51 +113,20 @@ const Login = () => {
             Login
           </button>
         </div>
-        <p>
-          <Link to="/forgotPassword">Forgot Password?</Link>
-        </p>
+        <span style={{ cursor: "pointer" }} onClick={toggleModalForgotPass}>
+          Forgot password?
+        </span>
       </div>
+      <Modal
+        isOpen={isOpenForgotPass}
+        onRequestClose={toggleModalForgotPass}
+        contentLabel="My dialog"
+        style={customStylesForgotPass}
+      >
+        <ForgotPass />
+      </Modal>
     </div>
   );
 };
 
 export default Login;
-
-/* <div className="login">
-<div className="topLoginDesign1"></div>
-<div className="topLoginDesign2"></div>
-<div className="loginContainer">
-  <div className="leftLogin">
-    <img src={logo} alt="Logo" className="loginLogo" />
-    <h1>Welcome to RIMSti</h1>
-    <p>
-      Reservation and Inventory Management System of School Merchandise
-      for STI College Sta.Maria
-    </p>
-  </div>
-  <div className="rightLogin">
-    <div className="loginBox">
-      <FaUserCircle className="loginIconUser" />
-      <p>Admin</p>
-      <div className="loginInput">
-        <label>Username:</label>
-        <input type="text" id="email" onChange={handleChangeLogin} />
-        <label>Password:</label>
-        <input
-          type="password"
-          id="password"
-          onChange={handleChangeLogin}
-        />
-        <button
-          className="loginButton"
-          disabled={loading}
-          onClick={handleLogin}
-        >
-          Login
-        </button>
-        {error && <span>{error.message}</span>}
-      </div>
-    </div>
-  </div>
-</div>
-</div> */

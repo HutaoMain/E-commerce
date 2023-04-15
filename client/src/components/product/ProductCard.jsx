@@ -1,7 +1,7 @@
 import "./ProductCard.css";
 import { Rating } from "react-simple-star-rating";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/cartRedux";
 
@@ -9,13 +9,33 @@ import { CgRemoveR } from "react-icons/cg";
 import { BiAddToQueue } from "react-icons/bi";
 import { AuthContext } from "../../contextAPI/AuthContext";
 import axios from "axios";
+import Modal from "react-modal";
+import ProductBuyNow from "./ProductBuyNow";
 import { UrlPath } from "../../UrlPath";
+
+const modalStyle = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    transform: "translate(-50%, -50%)",
+    width: "20%",
+    height: "15%",
+    overflow: "hidden",
+  },
+};
 
 const ProductCard = ({ product }) => {
   const [rating, setRating] = useState(product.finalRating);
   const [messageWishList, setMessageWishList] = useState("Add to Wishlist");
   const [messageAddToCart, setMessageAddToCart] = useState("Add to Cart");
   const [disabled, setDisabled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
 
   const { user } = useContext(AuthContext);
 
@@ -151,10 +171,22 @@ const ProductCard = ({ product }) => {
           >
             {messageWishList}
           </button>
-
-          {/* <button >Add to Wishlist</button> */}
-          <button className="btn btn-buy">Buy Now</button>
+          <button className="btn btn-buy" onClick={toggleModal}>
+            Buy Now
+          </button>
         </div>
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={toggleModal}
+          contentLabel="My dialog"
+          style={modalStyle}
+        >
+          <ProductBuyNow
+            product={product}
+            setIsOpen={setIsOpen}
+            quantity={quantity}
+          />
+        </Modal>
       </div>
     </div>
   );

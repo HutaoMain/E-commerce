@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/user/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/user/**/address").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/user/changepassword/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/user/list").permitAll()
 
@@ -36,6 +37,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/api/category/list/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/category/list").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/api/category/delete/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/category/update/**").permitAll()
 
                 //order
                 .antMatchers(HttpMethod.POST, "/api/order/create").permitAll()

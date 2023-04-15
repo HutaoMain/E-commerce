@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public List<User> getListUserController(){
+    public List<User> getListUserController() {
         return userService.getListUser();
     }
 
@@ -46,6 +46,12 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @PutMapping("/changepassword/{email}")
+    public ResponseEntity<String> updatePassword(@PathVariable("email") String email, @RequestBody User user) {
+        userService.updatePassword(email, user);
+        return new ResponseEntity<>("Password updated successfully", HttpStatus.OK);
     }
 
 //    @PutMapping("/update/{userId}")

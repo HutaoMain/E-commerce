@@ -1,8 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import { UrlPath } from "../../../UrlPath";
-import useFetch from "../../../contextAPI/useFetch";
+import { useEffect, useState } from "react";
+import useFetch from "../../../contextApi/useFetch";
 
 const secretQuestions = [
   "What is your mother's maiden name?",
@@ -14,8 +12,6 @@ const secretQuestions = [
 
 const ForgotPass = () => {
   const [email, setEmail] = useState("");
-  const [secretQuestion, setSecretQuestion] = useState("");
-  const [secretAnswer, setSecretAnswer] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,10 +21,6 @@ const ForgotPass = () => {
     `${import.meta.env.VITE_APP_API_URL}/api/user/${email}`
   );
 
-  console.log(data);
-
-  console.log("password", password);
-
   const handleForgotPass = async () => {
     if (confirmPassword === password) {
       await axios.put(
@@ -37,23 +29,12 @@ const ForgotPass = () => {
           password,
         }
       );
-
-      toast.success("✅ Success!", {
-        position: "center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      setError("Success!");
+      window.location.reload();
     } else {
       setError("Password and Confirm password not matched!");
     }
   };
-
-  console.log("secret Question", secretQuestion, "secret Answer", secretAnswer);
 
   return (
     <div
@@ -73,27 +54,7 @@ const ForgotPass = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <select
-        onChange={(e) => setSecretQuestion(e.target.value)}
-        style={{ width: "100.5%", height: "32px", fontSize: "20px" }}
-      >
-        <option value="">Select a secret question</option>
-        {secretQuestions.map((question, index) => (
-          <option key={index} value={question}>
-            {question}
-          </option>
-        ))}
-      </select>
-      <input
-        type="text"
-        placeholder="Type your answer"
-        style={{ width: "100%", height: "32px", fontSize: "20px" }}
-        onChange={(e) => setSecretAnswer(e.target.value)}
-      />
-
-      {data &&
-      data.secretQuestion === secretQuestion &&
-      data.secretAnswer === secretAnswer ? (
+      {data.email === email ? (
         <div
           style={{
             display: "flex",
@@ -136,8 +97,6 @@ const ForgotPass = () => {
       ) : (
         <></>
       )}
-
-      <ToastContainer />
     </div>
   );
 };

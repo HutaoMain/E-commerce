@@ -77,9 +77,6 @@ const SidePanel = () => {
           >
             Orders
           </MenuItem>
-          <MenuItem component={<Link to="/payment" />} icon={<CreditCard />}>
-            Payments
-          </MenuItem>
           <MenuItem component={<Link to="/category" />} icon={<Layers />}>
             Category
           </MenuItem>

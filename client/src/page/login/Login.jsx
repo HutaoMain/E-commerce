@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contextAPI/AuthContext";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import FbLoginButton from "../../components/facebookLogin/FbLoginButton";
 import GoogleLoginButton from "../../components/googleLogin/GoogleLoginButton";
@@ -12,6 +12,7 @@ import Modal from "react-modal";
 import logo from "../../images/logo.png";
 import "./Login.css";
 import { UrlPath } from "../../UrlPath";
+import ForgotPass from "./forgotPassword/ForgotPass";
 
 const customStylesRegistration = {
   content: {
@@ -28,12 +29,26 @@ const customStylesRegistration = {
   },
 };
 
+const customStylesForgotPass = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    transform: "translate(-50%, -50%)",
+    width: "30%",
+    height: "35%",
+    overflow: "hidden",
+  },
+};
+
 Modal.setAppElement("#root");
 
 function Login() {
   const { dispatch } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenForgotPass, setIsOpenForgotPass] = useState(false);
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -42,6 +57,10 @@ function Login() {
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleModalForgotPass = () => {
+    setIsOpenForgotPass(!isOpenForgotPass);
   };
 
   const navigate = useNavigate();
@@ -84,6 +103,7 @@ function Login() {
         type: "LOGIN_FAILURE",
         payload: { message: "User not correct!" },
       });
+      setErrorMessage("User not correct!");
     }
   };
 
@@ -114,9 +134,17 @@ function Login() {
             Login
           </button>
         </div>
-        <p>
-          <Link to="/forgotPassword">Forgot Password?</Link>
-        </p>
+        <span style={{ cursor: "pointer" }} onClick={toggleModalForgotPass}>
+          Forgot password?
+        </span>
+        <Modal
+          isOpen={isOpenForgotPass}
+          onRequestClose={toggleModalForgotPass}
+          contentLabel="My dialog"
+          style={customStylesForgotPass}
+        >
+          <ForgotPass />
+        </Modal>
         <section>
           <GoogleLoginButton />
           <FbLoginButton />

@@ -33,7 +33,6 @@ function App() {
           ""
         )}
         <Route path="/orders" element={user ? <Orders /> : <Login />} />
-        <Route path="/payment" element={user ? <Payment /> : <Login />} />
 
         <Route path="/category" element={user ? <Category /> : <Login />} />
         <Route
