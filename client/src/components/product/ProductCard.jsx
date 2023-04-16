@@ -150,7 +150,19 @@ const ProductCard = ({ product }) => {
             onClick={() => handleQuantity("dec")}
             style={{ cursor: "pointer" }}
           />
-          <span className="product-amount">{quantity}</span>
+          {/* <span className="product-amount">{quantity}</span> */}
+          <input
+            type="number"
+            className="product-amount"
+            value={quantity}
+            onChange={(e) => {
+              const value = parseInt(e.target.value);
+              setQuantity(value);
+            }}
+            min="1"
+            max={product.quantity}
+            disabled={product.quantity < 1}
+          />
           <BiAddToQueue
             onClick={() => handleQuantity("inc")}
             style={{ cursor: "pointer" }}

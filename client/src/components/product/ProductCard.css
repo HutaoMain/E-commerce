@@ -123,4 +123,13 @@
   align-items: center;
   justify-content: center;
   margin: 0px 5px;
+
+  text-align: center;
+}
+
+.product-amount::-webkit-inner-spin-button,
+.product-amount::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  display: none;
 }

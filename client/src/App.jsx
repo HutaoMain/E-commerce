@@ -1,18 +1,17 @@
 import Login from "./page/login/Login";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Home from "./page/home/Home";
 import Cart from "./page/cart/Cart";
 import Navbar from "./components/navbar/Navbar";
 import { AuthContext } from "./contextAPI/AuthContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Profile from "./page/profile/Profile";
 import MyPurchase from "./page/profile/MyPurchase";
 import ErrorPage from "./page/errorPage/ErrorPage";
 import "react-toastify/dist/ReactToastify.css";
 import ProductMapping from "./components/product/ProductMapping";
 
-import { useLocation } from "react-router-dom";
 import WishlistMapping from "./components/wishlist/WishlistMapping";
 
 function App() {
@@ -40,9 +39,18 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/category/:id" element={<ProductMapping />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/profile/orders" element={<MyPurchase />} />
-        <Route path="/wishlist/:email" element={<WishlistMapping />} />
+        <Route
+          path="/profile"
+          element={user ? <Profile /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/profile/orders"
+          element={user ? <MyPurchase /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/wishlist/:email"
+          element={user ? <WishlistMapping /> : <Navigate to="/login" />}
+        />
         {/* <Route path="/topay" element={<ToPay />} /> */}
       </Routes>
     </div>
