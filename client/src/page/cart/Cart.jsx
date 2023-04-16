@@ -15,6 +15,8 @@ import { mobile } from "../../responsive";
 import Modal from "react-modal";
 import OrderConfirmationModal from "../../components/orders/orderConfirmationModal/OrderConfirmationModal";
 import { AuthContext } from "../../contextAPI/AuthContext";
+import useFetch from "../../contextAPI/useFetch";
+import { UrlPath } from "../../UrlPath";
 
 const Container = styled.div`
   display: flex;
@@ -158,6 +160,8 @@ const Cart = () => {
 
   const cart = useSelector((state) => state.cart);
 
+  const { data } = useFetch(`${UrlPath}/api/product/list`);
+
   const { user } = useContext(AuthContext);
 
   const dispatch = useDispatch();
@@ -175,7 +179,13 @@ const Cart = () => {
   };
 
   const handleIncreaseCart = (product) => {
-    dispatch(incrementQuantity(product));
+    const item = data.find((item) => item.id === product);
+
+    const cartProduct = cart.products.find((item) => item.id === product);
+
+    if (item.quantity > cartProduct.quantity) {
+      dispatch(incrementQuantity(product));
+    }
   };
 
   const toggleModal = () => {

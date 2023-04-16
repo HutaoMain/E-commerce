@@ -102,7 +102,11 @@ const Navbar = ({ user }) => {
                   badgeContent={toClaim?.length}
                   color={open ? "secondary" : "primary"}
                 >
-                  <MdOutlineNotificationsActive className="sidebar-icon" />
+                  {user ? (
+                    <MdOutlineNotificationsActive className="sidebar-icon" />
+                  ) : (
+                    ""
+                  )}
                 </Badge>
               </Link>
             </div>
