@@ -158,6 +158,12 @@ const ProductCard = ({ product }) => {
             onChange={(e) => {
               const value = parseInt(e.target.value);
               setQuantity(value);
+              if (value > product.quantity) {
+                window.alert(
+                  `The quantity cannot be greater than ${product.quantity}`
+                );
+                setQuantity(product.quantity);
+              }
             }}
             min="1"
             max={product.quantity}
@@ -172,7 +178,7 @@ const ProductCard = ({ product }) => {
           <button
             className="btn btn-cart"
             onClick={handleAddToCart}
-            disabled={product.quantity === 0 || product.quantity <= quantity}
+            disabled={product.quantity === 0 || product.quantity < quantity}
           >
             {messageAddToCart}
           </button>

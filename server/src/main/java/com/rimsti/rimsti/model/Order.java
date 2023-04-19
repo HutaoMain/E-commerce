@@ -47,4 +47,12 @@ public class Order{
 
     @CreationTimestamp
     private LocalDate dateNow;
+
+    private String address;
+
+    private String city;
+
+    private Integer postalCode;
+
+    private String modeOfPayment;
 }

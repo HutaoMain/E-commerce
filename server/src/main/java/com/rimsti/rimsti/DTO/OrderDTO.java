@@ -34,4 +34,12 @@ public class OrderDTO {
     private String email;
 
     private List<ProductQuantityDTO> products;
+
+    private String address;
+
+    private String city;
+
+    private Integer postalCode;
+
+    private String modeOfPayment;
 }

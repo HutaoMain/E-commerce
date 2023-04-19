@@ -38,6 +38,10 @@ public class OrderService {
         order.setUser(user);
         order.setUserFullName(orderDTO.getUserFullName());
         order.setOrderJsonList(orderDTO.getOrderJsonList());
+        order.setAddress(orderDTO.getAddress());
+        order.setCity(orderDTO.getCity());
+        order.setPostalCode(orderDTO.getPostalCode());
+        order.setModeOfPayment(orderDTO.getModeOfPayment());
 
         List<ProductQuantityDTO> productQuantities = orderDTO.getProducts();
         subtractProductsFromInventory(productQuantities);

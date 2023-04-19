@@ -69,8 +69,6 @@ const ProductName = styled.span``;
 
 const ProductId = styled.span``;
 
-const ProductSize = styled.span``;
-
 const PriceDetail = styled.div`
   flex: 1;
   display: flex;
@@ -108,7 +106,6 @@ const Summary = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 10px;
   padding: 20px;
-  height: 50vh;
 `;
 
 const SummaryTitle = styled.h1`
@@ -157,6 +154,52 @@ Modal.setAppElement("#root");
 
 const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState({
+    address: "",
+    city: "",
+    postalCode: "",
+    modeOfPayment: "cod",
+  });
+
+  const [formValid, setFormValid] = useState(false);
+  // const [error, setErrors] = useState({});
+
+  const formIsValid = () => {
+    if (
+      shippingAddress.address !== "" &&
+      shippingAddress.city !== "" &&
+      shippingAddress.postalCode !== ""
+    ) {
+      setFormValid(true);
+    }
+  };
+  // let errors = {};
+  // let formIsValid = true;
+
+  // if (!shippingAddress.address) {
+  //   formIsValid = false;
+  //   errors.address = "Address is required";
+  // }
+
+  // if (!shippingAddress.city) {
+  //   formIsValid = false;
+  //   errors.city = "City is required";
+  // }
+
+  // if (!shippingAddress.postalCode) {
+  //   formIsValid = false;
+  //   errors.postalCode = "Postal code is required";
+  // }
+
+  // if (!shippingAddress.modeOfPayment) {
+  //   formIsValid = false;
+  //   errors.modeOfPayment = "Mode of payment is required";
+  // }
+
+  // setErrors(errors);
+  // setFormValid(formIsValid);
+
+  console.log(formValid);
 
   const cart = useSelector((state) => state.cart);
 
@@ -185,6 +228,8 @@ const Cart = () => {
 
     if (item.quantity > cartProduct.quantity) {
       dispatch(incrementQuantity(product));
+    } else {
+      alert(`Can't add more product, ${item.quantity} the only stock on hand`);
     }
   };
 
@@ -252,9 +297,85 @@ const Cart = () => {
                 <SummaryItemPrice>₱ {cart.total}</SummaryItemPrice>
               </SummaryItem>
               {user ? (
-                <Button disabled={cart.total === 0} onClick={toggleModal}>
-                  CHECKOUT NOW
-                </Button>
+                <div className="cart-shipping-container">
+                  <hr style={{ borderBottom: "2px solid gray" }} />
+                  <div className="cart-shippingaddress">
+                    <h2>Shipping Address</h2>
+                    <div className="cart-shippingaddress-itemlist">
+                      <label>Address</label>
+                      <input
+                        type="text"
+                        placeholder="Address"
+                        onChange={(e) => {
+                          setShippingAddress((data) => ({
+                            ...data,
+                            address: e.target.value,
+                          }));
+                          formIsValid();
+                        }}
+                      />
+                    </div>
+                    <div className="cart-shippingaddress-itemlist">
+                      <label>City</label>
+                      <input
+                        type="text"
+                        placeholder="City"
+                        onChange={(e) => {
+                          setShippingAddress((data) => ({
+                            ...data,
+                            city: e.target.value,
+                          }));
+                          formIsValid();
+                        }}
+                      />
+                    </div>
+                    <div className="cart-shippingaddress-itemlist">
+                      <label>Postal Code</label>
+                      <input
+                        className="cart-postalcode"
+                        type="number"
+                        placeholder="Postal Code"
+                        onChange={(e) => {
+                          setShippingAddress((data) => ({
+                            ...data,
+                            postalCode: e.target.value,
+                          }));
+                          formIsValid();
+                        }}
+                      />
+                    </div>
+                    <div className="cart-shippingaddress-itemlist">
+                      <label>Mode of Payment</label>
+                      <select
+                        className="cart-modeofpayment"
+                        onChange={(e) => {
+                          setShippingAddress((data) => ({
+                            ...data,
+                            modeOfPayment: e.target.value,
+                          }));
+                        }}
+                      >
+                        <option value="cod">COD</option>
+                        <option value="gcash">GCash</option>
+                        <option value="maya">MAYA</option>
+                      </select>
+                    </div>
+                    {formValid ? null : (
+                      <p style={{ color: "red" }}>
+                        {/* {Object.values(error).join(", ")} */}
+                        Please fill in all fields.
+                      </p>
+                    )}
+                  </div>
+
+                  <Button
+                    className="checkout-btn"
+                    disabled={!formValid || cart.total === 0}
+                    onClick={toggleModal}
+                  >
+                    CHECKOUT NOW
+                  </Button>
+                </div>
               ) : (
                 <span style={{ fontSize: "30px" }}>
                   Please login before checking out
@@ -271,6 +392,7 @@ const Cart = () => {
               <OrderConfirmationModal
                 carttotal={cart.total}
                 setIsOpen={setIsOpen}
+                shippingAddress={shippingAddress}
               />
             </Modal>
             {/* Modal end */}

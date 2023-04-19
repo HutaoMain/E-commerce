@@ -7,7 +7,7 @@ import useFetch from "../../../contextAPI/useFetch";
 import { useContext } from "react";
 import { UrlPath } from "../../../UrlPath";
 
-const OrderConfirmationModal = ({ carttotal, setIsOpen }) => {
+const OrderConfirmationModal = ({ carttotal, setIsOpen, shippingAddress }) => {
   const { products } = useSelector((state) => state.cart);
 
   const { user } = useContext(AuthContext);
@@ -35,6 +35,10 @@ const OrderConfirmationModal = ({ carttotal, setIsOpen }) => {
       email: data.email,
       userFullName: data.name,
       orderJsonList: arrayProducts,
+      address: shippingAddress.address,
+      city: shippingAddress.city,
+      postalCode: shippingAddress.postalCode,
+      modeOfPayment: shippingAddress.modeOfPayment,
     };
     try {
       await axios.post(`${UrlPath}/api/order/create`, orderData);

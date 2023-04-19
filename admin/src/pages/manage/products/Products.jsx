@@ -34,7 +34,7 @@ Modal.setAppElement("#root");
 const Products = () => {
   const [list, setList] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  // const [paramsId, setParamsId] = useState("");
+  const [paramsId, setParamsId] = useState("");
 
   const { data } = useFetch(
     `${import.meta.env.VITE_APP_API_URL}/api/product/list`
@@ -54,7 +54,8 @@ const Products = () => {
     } catch (err) {}
   };
 
-  const toggleModalCategory = () => {
+  const toggleModalCategory = (id) => {
+    setParamsId(id);
     setIsOpenModal(!isOpenModal);
   };
 
@@ -154,7 +155,7 @@ const Products = () => {
               <Confirmation
                 action="delete"
                 whatItem="product"
-                btnConfirm={() => handleDelete(params.row.id)}
+                btnConfirm={() => handleDelete(paramsId)}
                 closeModal={toggleModalCategory}
               />
             </Modal>

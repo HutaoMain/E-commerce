@@ -133,3 +133,9 @@
   margin: 0;
   display: none;
 }
+
+.btn.btn-cart:disabled {
+  background-color: gray;
+  color: white;
+  cursor: not-allowed;
+}
