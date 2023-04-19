@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/user/register").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/user/**/address").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/user/changepassword/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/user/changeAddress/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/user/list").permitAll()
 

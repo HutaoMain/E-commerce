@@ -41,37 +41,37 @@ const Profile = () => {
   };
 
   // handle onClick event for submit button
-  const handleAddressSubmit = async () => {
-    try {
-      await axios.put(`${UrlPath}/api/user/${user}/address`, {
-        address: address,
-      });
-      toast.success("✅ Success!", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      window.location.reload();
-      console.log("success");
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const handleAddressSubmit = async () => {
+  //   try {
+  //     await axios.put(`${UrlPath}/api/user/${user}/address`, {
+  //       address: address,
+  //     });
+  //     toast.success("✅ Success!", {
+  //       position: "bottom-right",
+  //       autoClose: 2000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "light",
+  //     });
+  //     window.location.reload();
+  //     console.log("success");
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const { data } = useFetch(`${UrlPath}/api/user/${user}`);
 
-  useEffect(() => {
-    const address = data.address || ""; // set default value to empty string if address is undefined
-    const parsedAddress = address ? JSON.parse(address) : {}; // check if address is truthy before parsing
-    setFormatedAddress(parsedAddress.address || ""); // get the 'address' property from the parsed object, set default value to empty string if not found
+  // useEffect(() => {
+  //   const address = data.address || ""; // set default value to empty string if address is undefined
+  //   const parsedAddress = address ? JSON.parse(address) : {}; // check if address is truthy before parsing
+  //   setFormatedAddress(parsedAddress.address || ""); // get the 'address' property from the parsed object, set default value to empty string if not found
 
-    setprofileData(data);
-  }, [data]);
+  //   setprofileData(data);
+  // }, [data]);
 
   const handlePutImage = async () => {
     const data = new FormData();
@@ -178,6 +178,24 @@ const Profile = () => {
                   </span>
                 </section>
 
+                <section>
+                  <label>
+                    Full Address: <br />
+                  </label>
+                  <span
+                    // className="profile-address-inputtype"
+
+                    // onChange={(e) => setAddress(e.target.value)}
+                    className="profileManageInfoList"
+                    style={{
+                      border: "1px solid black",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {data.address + " " + data.city + " " + data.postalCode}
+                  </span>
+                </section>
+
                 <button
                   className="profileManageInfoList"
                   style={{
@@ -197,21 +215,22 @@ const Profile = () => {
                 {/* <button className="saveProfileInfo" onClick={handleUpdate}>
                   Save
                 </button> */}
-                <section className="profile-address-itemlist">
-                  <label>Full Address</label>
-                  <input
-                    type="text"
-                    className="profile-address-inputtype"
-                    defaultValue={formattedAddress}
-                    onChange={(e) => setAddress(e.target.value)}
-                  />
-                  <button
+                {/* <section className="profile-address-itemlist">
+                  {/* <label>Full Address</label> 
+                <span
+                  // className="profile-address-inputtype"
+                  className="profileManageInfoList"
+                  // onChange={(e) => setAddress(e.target.value)}
+                >
+                  {data.address + " " + data.city + " " + data.postalCode}
+                </span>
+                {/* <button
                     className="profile-address-btn"
-                    onClick={handleAddressSubmit}
+                    // onClick={handleAddressSubmit}
                   >
                     Change Address
-                  </button>
-                </section>
+                  </button> 
+                </section> */}
               </div>
             </div>
           </div>

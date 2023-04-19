@@ -32,6 +32,10 @@ public class User {
 
     private String address;
 
+    private String city;
+
+    private Integer postalCode;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     List<Order> order;
 }

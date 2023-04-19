@@ -158,7 +158,7 @@ const Cart = () => {
     address: "",
     city: "",
     postalCode: "",
-    modeOfPayment: "cod",
+    modeOfPayment: "gcash",
   });
 
   const [formValid, setFormValid] = useState(false);
@@ -355,7 +355,6 @@ const Cart = () => {
                           }));
                         }}
                       >
-                        <option value="cod">COD</option>
                         <option value="gcash">GCash</option>
                         <option value="maya">MAYA</option>
                       </select>
