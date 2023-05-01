@@ -1,11 +1,14 @@
 /* eslint no-eval: 0 */
-// import axios from "axios";
 import { useEffect, useState } from "react";
 import "./OrderItem.css";
-// import { MdOutlineUpload } from "react-icons/md";
-// import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { Rating } from "react-simple-star-rating";
 import Modal from "react-modal";
 import SubmitOrImage from "./SubmitOrImage";
+import { UrlPath } from "../../UrlPath";
+import { useContext } from "react";
+import { AuthContext } from "../../contextAPI/AuthContext";
+import axios from "axios";
 
 const customStyle = {
   content: {
@@ -23,6 +26,7 @@ const customStyle = {
 Modal.setAppElement("#root");
 
 const OrderItem = ({ item }) => {
+  const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const [arrayOfObjects, setArrayOfObjects] = useState([]);
 
@@ -30,9 +34,44 @@ const OrderItem = ({ item }) => {
     setArrayOfObjects(eval(item.orderJsonList));
   }, [item.orderJsonList]);
 
+  const handleSaveRating = async (newRating, arrayItem) => {
+    console.log(arrayItem);
+    try {
+      await axios.post(`${UrlPath}/api/productRating/rate`, {
+        rating: parseFloat(newRating),
+        email: user,
+        productId: arrayItem,
+      });
+      const updatedArrayOfObjects = arrayOfObjects.map((obj) => {
+        if (obj.id === arrayItem) {
+          return { ...obj, productRating: newRating };
+        } else {
+          return obj;
+        }
+      });
+
+      await axios.put(`${UrlPath}/api/order/updateOrderList/${item.id}`, {
+        orderJsonList: JSON.stringify(updatedArrayOfObjects),
+      });
+      toast("Successfully rating the product!", {
+        type: "success",
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const toggleOrPayment = () => {
     setOpen(!open);
   };
+
   return (
     <div className="orderItem">
       <h1 style={{ float: "left", fontWeight: "500" }}>Order ID: {item.id}</h1>
@@ -40,7 +79,7 @@ const OrderItem = ({ item }) => {
       <div className="orderHorizontalLine"></div>
       {arrayOfObjects?.map((arrayItem) => {
         return (
-          <>
+          <div key={arrayItem.id}>
             <div className="orderContainer">
               <div className="orderProductImageContainer">
                 <img
@@ -57,13 +96,25 @@ const OrderItem = ({ item }) => {
                   <i>Quantity: </i>
                   {arrayItem.quantity}
                 </span>
+                {item.status === "Completed" ? (
+                  <div className="orderitem-rating">
+                    <label>Please rate if you love this product.</label>
+                    <Rating
+                      initialValue={arrayItem.productRating}
+                      allowFraction={true}
+                      onClick={(rate) => handleSaveRating(rate, arrayItem.id)}
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
               <span className="orderProductPrice">
                 <i>Price:</i> ₱ {arrayItem.price}
               </span>
             </div>
             <div className="orderHorizontalLineInside"></div>
-          </>
+          </div>
         );
       })}
       <div>
@@ -73,25 +124,6 @@ const OrderItem = ({ item }) => {
       </div>
       {item.status === "Pending" && (
         <div className="orderSubmitProofContainer">
-          {/* <img
-            src={ImageFile && URL.createObjectURL(ImageFile[0])}
-            alt="OR Proof Payment"
-            className="orProof"
-          /> */}
-          {/* <label htmlFor="file-upload" className="orderInputImageLabel">
-            <MdOutlineUpload />{" "}
-            {ImageFile
-              ? URL.createObjectURL(ImageFile)
-              : "Upload your image here"}
-                </label> */}
-          {/* <input
-            type="file"
-            id="file-upload"
-            // onChange={(e) => setImageFile(e.target.files[0])}
-            onClick={toggleOrPayment}
-            style={{ display: "none" }}
-          /> */}
-
           <div style={{ marginTop: "5px" }}>
             <button
               className="orderItemSubmitBtn"
@@ -101,16 +133,11 @@ const OrderItem = ({ item }) => {
               Upload Proof of Payment
             </button>
             {"   "}
-            <span>tracking # here: 091397410741</span>
+            <span>tracking # here: </span>
+            {item?.trackingNum}
             <span style={{ marginLeft: "10px" }}>
               Please track your order here {"   "}
-              <a
-                href="https://www.jtexpress.ph/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                J&T website
-              </a>
+              {item?.courier}
             </span>
             {/* You can also pay here{" "} */}
           </div>

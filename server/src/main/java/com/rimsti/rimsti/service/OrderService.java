@@ -27,7 +27,7 @@ public class OrderService {
     ProductRepository productRepository;
 
     @Transactional
-    public Order createOrder(OrderDTO orderDTO, User user) {
+    public void createOrder(OrderDTO orderDTO, User user) {
         Order order = new Order();
         order.setTotalPrice(orderDTO.getTotalPrice());
         order.setStatus(orderDTO.getStatus());
@@ -38,9 +38,9 @@ public class OrderService {
         order.setUser(user);
         order.setUserFullName(orderDTO.getUserFullName());
         order.setOrderJsonList(orderDTO.getOrderJsonList());
-        order.setAddress(orderDTO.getAddress());
-        order.setCity(orderDTO.getCity());
-        order.setPostalCode(orderDTO.getPostalCode());
+//        order.setAddress(orderDTO.getAddress());
+//        order.setCity(orderDTO.getCity());
+//        order.setPostalCode(orderDTO.getPostalCode());
         order.setModeOfPayment(orderDTO.getModeOfPayment());
 
         List<ProductQuantityDTO> productQuantities = orderDTO.getProducts();
@@ -48,7 +48,6 @@ public class OrderService {
         updateProductSold(productQuantities);
 
         orderRepository.save(order);
-        return order;
     }
 
     private void subtractProductsFromInventory(List<ProductQuantityDTO> productQuantities) {
@@ -77,21 +76,19 @@ public class OrderService {
         }
     }
 
-    public List<Order> getListOrder(){
+    public List<Order> getListOrder() {
         return orderRepository.findAll();
     }
 
     public Order getOrderById(long orderId) {
-        return orderRepository.findById(orderId).get();
+        return orderRepository.findById(orderId).orElse(null);
     }
 
-//    public void updateOrderById(long orderId, Order getOrder) {
-//        Order setOrder = orderRepository.getReferenceById(orderId);
-//        setOrder.setProductId(getOrder.getProductId());
-//        setOrder.setQuantity(getOrder.getQuantity());
-//        setOrder.setTotalPrice(getOrder.getTotalPrice());
-//        orderRepository.save(setOrder);
-//    }
+    public void updateOrderById(long orderId, Order getOrder) {
+        Order setOrder = orderRepository.getReferenceById(orderId);
+        setOrder.setOrderJsonList(getOrder.getOrderJsonList());
+        orderRepository.save(setOrder);
+    }
 
     public void updateStatusById(long orderId, Order getOrder) {
         Order setOrder = orderRepository.getReferenceById(orderId);
@@ -109,7 +106,9 @@ public class OrderService {
         orderRepository.deleteById(orderId);
     }
 
-    public List<OrderRepository.sumOfTotalPrice> priceByDay(){ return orderRepository.getByDate();}
+    public List<OrderRepository.sumOfTotalPrice> priceByDay() {
+        return orderRepository.getByDate();
+    }
 
     public Double getTotalPriceOfCompletedOrders() {
         List<Order> completedOrders = orderRepository.findByStatus("completed");

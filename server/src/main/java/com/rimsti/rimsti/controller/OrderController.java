@@ -1,17 +1,12 @@
 package com.rimsti.rimsti.controller;
 
 import com.rimsti.rimsti.DTO.OrderDTO;
-import com.rimsti.rimsti.DTO.ProductQuantityDTO;
 import com.rimsti.rimsti.model.Order;
-//import com.rimsti.rimsti.model.appuser.AppUser;
 import com.rimsti.rimsti.model.User;
 import com.rimsti.rimsti.repository.OrderRepository;
-//import com.rimsti.rimsti.repository.appuserrepository.AppUserRepository;
-import com.rimsti.rimsti.repository.ProductRepository;
 import com.rimsti.rimsti.repository.UserRepository;
 import com.rimsti.rimsti.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +32,7 @@ public class OrderController {
     }
 
     @GetMapping("/list")
-    public List<Order> getListOrder(){
+    public List<Order> getListOrder() {
         return orderService.getListOrder();
     }
 
@@ -46,11 +41,11 @@ public class OrderController {
         return orderService.getOrderById(orderId);
     }
 
-//    @PutMapping("/update/{orderId}")
-//    public Order updateOrderById(@PathVariable("orderId") long orderId, @RequestBody Order order) {
-//        orderService.updateOrderById(orderId, order);
-//        return order;
-//    }
+    @PutMapping("/updateOrderList/{orderId}")
+    public Order updateOrderById(@PathVariable("orderId") long orderId, @RequestBody Order order) {
+        orderService.updateOrderById(orderId, order);
+        return order;
+    }
 
     @PutMapping("/update/status/{orderId}")
     public Order updateStatusById(@PathVariable("orderId") long orderId, @RequestBody Order order) {
@@ -71,7 +66,7 @@ public class OrderController {
     }
 
     @GetMapping("/list-sales")
-    private List<OrderRepository.sumOfTotalPrice> getByDayPrice(){
+    private List<OrderRepository.sumOfTotalPrice> getByDayPrice() {
         return orderService.priceByDay();
     }
 

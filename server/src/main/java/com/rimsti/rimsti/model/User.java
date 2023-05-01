@@ -30,11 +30,17 @@ public class User {
 
     private String secretQuestion;
 
-    private String address;
+    private String barangay;
+
+    private String street;
+
+    private String municipality;
 
     private String city;
 
     private Integer postalCode;
+
+    private Boolean firstLogin = false;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     List<Order> order;

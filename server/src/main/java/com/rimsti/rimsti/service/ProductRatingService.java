@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductRatingService {
@@ -13,9 +14,18 @@ public class ProductRatingService {
     @Autowired
     ProductRatingRepository productRatingRepository;
 
-    public ProductRating addRating(ProductRating productRating){
-        return productRatingRepository.save(productRating);
+    //service
+    public void addRating(ProductRating productRating){
+        Optional<ProductRating> existingRating = productRatingRepository.findByEmailAndProductId(productRating.getEmail(), productRating.getProductId());
+        if (existingRating.isPresent()) {
+            ProductRating rating = existingRating.get();
+            rating.setRating(productRating.getRating());
+            productRatingRepository.save(rating);
+        } else {
+            productRatingRepository.save(productRating);
+        }
     }
+
 
     public float getAverageRatingPercentage() {
         List<ProductRating> productRatings = productRatingRepository.findAll();

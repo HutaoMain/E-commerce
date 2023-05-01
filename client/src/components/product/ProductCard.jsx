@@ -27,7 +27,6 @@ const modalStyle = {
 };
 
 const ProductCard = ({ product }) => {
-  const [rating, setRating] = useState(product.finalRating);
   const [messageWishList, setMessageWishList] = useState("Add to Wishlist");
   const [messageAddToCart, setMessageAddToCart] = useState("Add to Cart");
   const [disabled, setDisabled] = useState(false);
@@ -99,19 +98,6 @@ const ProductCard = ({ product }) => {
     }, 5000);
   };
 
-  const saveRating = async (newRating, productId) => {
-    try {
-      const response = await axios.post(`${UrlPath}/api/productRating/rate`, {
-        rating: parseFloat(newRating),
-        email: user,
-        productId: productId,
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="product-card">
       <div className="product-image">
@@ -128,9 +114,10 @@ const ProductCard = ({ product }) => {
         <p className="product-description">{product.description}</p>
         <div className="product-rating">
           <Rating
-            initialValue={rating}
+            initialValue={product.finalRating}
             allowFraction={true}
-            onClick={(rate) => saveRating(rate, product.id)}
+            // onClick={(rate) => saveRating(rate, product.id)}
+            readonly={true}
           />
         </div>
         <div className="product-price">

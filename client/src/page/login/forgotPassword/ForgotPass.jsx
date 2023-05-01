@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { UrlPath } from "../../../UrlPath";
 import useFetch from "../../../contextAPI/useFetch";
 
 const secretQuestions = [
@@ -32,13 +31,14 @@ const ForgotPass = () => {
   const handleForgotPass = async () => {
     if (confirmPassword === password) {
       await axios.put(
-        `${import.meta.env.VITE_APP_API_URL}/api/user/changepassword/${email}`,
+        `${import.meta.env.VITE_APP_API_URL}/api/user/changePassword/${email}`,
         {
           password,
         }
       );
 
-      toast.success("✅ Success!", {
+      toast("Successfully change password!", {
+        type: "success",
         position: "center",
         autoClose: 5000,
         hideProgressBar: false,

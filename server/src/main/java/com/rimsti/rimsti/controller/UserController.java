@@ -48,7 +48,7 @@ public class UserController {
 //        }
 //    }
 
-    @PutMapping("/changepassword/{email}")
+    @PutMapping("/changePassword/{email}")
     public ResponseEntity<String> updatePassword(@PathVariable("email") String email, @RequestBody User user) {
         userService.updatePassword(email, user);
         return new ResponseEntity<>("Password updated successfully", HttpStatus.OK);
@@ -57,24 +57,13 @@ public class UserController {
     @PutMapping("/changeAddress/{email}")
     public ResponseEntity<String> updateAddress(@PathVariable("email") String email, @RequestBody User user) {
         userService.updateAddress(email, user);
-        return new ResponseEntity<>("Password updated successfully", HttpStatus.OK);
+        return new ResponseEntity<>("address updated successfully", HttpStatus.OK);
     }
 
-//    @PutMapping("/update/{userId}")
-//    public AppUser updateUser(@PathVariable("userId") int userId, @RequestBody AppUser user) {
-//        appUserService.updateUser(userId, user);
-//        return user;
-//    }
-//
-//    @PutMapping("/update/image/{userId}")
-//    public AppUser updateUserImage(@PathVariable("userId") int userId, @RequestBody AppUser user) {
-//        appUserService.updateUserImage(userId, user);
-//        return user;
-//    }
-//
-//    @PutMapping("/update/password/{userId}")
-//    public AppUser updateUserPassword(@PathVariable("userId") int userId, @RequestBody AppUser user) {
-//        appUserService.updateUserPassword(userId, user);
-//        return user;
-//    }
+    @PutMapping("/image/{email}")
+    public ResponseEntity<String> updateUserImageUrl(@PathVariable("email") String email, @RequestBody User user) {
+        userService.updateUserImageUrl(email, user);
+        return new ResponseEntity<>("ImageUrl updated successfully", HttpStatus.OK);
+    }
+
 }

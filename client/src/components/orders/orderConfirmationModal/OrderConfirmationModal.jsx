@@ -54,7 +54,9 @@ const OrderConfirmationModal = ({ carttotal, setIsOpen, shippingAddress }) => {
 
   const handleUpdateAddress = async () => {
     await axios.put(`${UrlPath}/api/user/changeAddress/${user}`, {
-      address: shippingAddress.address,
+      barangay: shippingAddress.barangay,
+      street: shippingAddress.street,
+      municipality: shippingAddress.municipality,
       city: shippingAddress.city,
       postalCode: shippingAddress.postalCode,
     });
@@ -71,9 +73,6 @@ const OrderConfirmationModal = ({ carttotal, setIsOpen, shippingAddress }) => {
       email: data.email,
       userFullName: data.name,
       orderJsonList: arrayProducts,
-      address: shippingAddress.address,
-      city: shippingAddress.city,
-      postalCode: shippingAddress.postalCode,
       modeOfPayment: shippingAddress.modeOfPayment,
     };
     try {

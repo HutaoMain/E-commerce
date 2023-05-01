@@ -1,14 +1,16 @@
 import "./Registration.css";
 import { registrationSchema } from "../../../validations/RegistrationValidation";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useFetch from "../../../contextAPI/useFetch";
 import { ToastContainer, toast } from "react-toastify";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { UrlPath } from "../../../UrlPath";
+import { AuthContext } from "../../../contextAPI/AuthContext";
 
 const Registration = () => {
+  const { dispatch } = useContext(AuthContext);
   const [selectedQuestion, setSelectedQuestion] = useState("");
 
   const secretQuestions = [
@@ -19,22 +21,51 @@ const Registration = () => {
     "What is your favorite movie?",
   ];
 
+  const navigate = useNavigate();
+
   console.log(selectedQuestion);
+
+  const handleLogin = async (email, password) => {
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post(`${UrlPath}/api/user/login`, {
+        email,
+        password,
+      });
+      if (res.status === 200) {
+        dispatch({ type: "LOGIN_SUCCESS", payload: email });
+        navigate("/", { replace: true });
+      } else {
+        dispatch({
+          type: "LOGIN_FAILURE",
+          payload: { message: "You are not allowed!" },
+        });
+        alert("You are not allowed!");
+      }
+    } catch (err) {
+      dispatch({
+        type: "LOGIN_FAILURE",
+        payload: { message: "User not correct!" },
+      });
+      alert("User not correct!");
+    }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post(`${UrlPath}/api/user/register`, values);
 
-    toast.success("✅ Success!", {
+    toast("Success Registration!", {
+      type: "success",
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
-      theme: "light",
     });
+
+    handleLogin(values.email, values.password);
   };
 
   const { values, touched, errors, isValid, dirty, handleBlur, handleChange } =
@@ -148,9 +179,8 @@ const Registration = () => {
 
         <p className="myModalTermsnCondition">
           By clicking Sign Up, you agree to our
-          <a href="https://www.freeprivacypolicy.com/live/5a46039b-a294-45bd-8f5d-1b3df5d3ff6a?fbclid=IwAR00FCUTAD50fzhm3O-uxbS8oRkjzbIE8o4LcVNDgbsy1wV4KxxAurQaSwE">
+          <a href="https://www.termsfeed.com/live/270b190d-0bb1-4ab6-8aec-0b82e014405b">
             <b style={{ borderBottom: "1px solid black" }}>
-              {" "}
               Terms, Privacy Policy and Cookies Policy.
             </b>
           </a>

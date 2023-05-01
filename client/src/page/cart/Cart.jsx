@@ -17,6 +17,7 @@ import OrderConfirmationModal from "../../components/orders/orderConfirmationMod
 import { AuthContext } from "../../contextAPI/AuthContext";
 import useFetch from "../../contextAPI/useFetch";
 import { UrlPath } from "../../UrlPath";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -155,49 +156,35 @@ Modal.setAppElement("#root");
 const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [shippingAddress, setShippingAddress] = useState({
-    address: "",
+    street: "",
+    barangay: "",
+    municipality: "",
     city: "",
     postalCode: "",
     modeOfPayment: "gcash",
   });
 
   const [formValid, setFormValid] = useState(false);
-  // const [error, setErrors] = useState({});
+  const [userDetail, setUserDetail] = useState({});
 
-  const formIsValid = () => {
+  useEffect(() => {
+    const streetInput = document.getElementById("cart-street");
+    const barangayInput = document.getElementById("cart-barangay");
+    const municipalityInput = document.getElementById("cart-municipality");
+    const cityInput = document.getElementById("cart-city");
+    const postalCodeInput = document.getElementById("cart-postalcode");
     if (
-      shippingAddress.address !== "" &&
-      shippingAddress.city !== "" &&
-      shippingAddress.postalCode !== ""
+      streetInput?.value !== "" &&
+      barangayInput?.value !== "" &&
+      municipalityInput?.value !== "" &&
+      cityInput?.value !== "" &&
+      postalCodeInput?.value !== ""
     ) {
       setFormValid(true);
+    } else {
+      setFormValid(false);
     }
-  };
-  // let errors = {};
-  // let formIsValid = true;
-
-  // if (!shippingAddress.address) {
-  //   formIsValid = false;
-  //   errors.address = "Address is required";
-  // }
-
-  // if (!shippingAddress.city) {
-  //   formIsValid = false;
-  //   errors.city = "City is required";
-  // }
-
-  // if (!shippingAddress.postalCode) {
-  //   formIsValid = false;
-  //   errors.postalCode = "Postal code is required";
-  // }
-
-  // if (!shippingAddress.modeOfPayment) {
-  //   formIsValid = false;
-  //   errors.modeOfPayment = "Mode of payment is required";
-  // }
-
-  // setErrors(errors);
-  // setFormValid(formIsValid);
+  });
 
   console.log(formValid);
 
@@ -206,6 +193,14 @@ const Cart = () => {
   const { data } = useFetch(`${UrlPath}/api/product/list`);
 
   const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await axios.get(`${UrlPath}/api/user/${user}`);
+      setUserDetail(res.data);
+    };
+    fetch();
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -244,8 +239,8 @@ const Cart = () => {
           <Bottom>
             <Info>
               {cart.products?.map((product) => (
-                <>
-                  <Product key={product.id}>
+                <div key={product.id}>
+                  <Product>
                     <ProductDetail>
                       <Image src={product.imgUrl} />
                       <Details>
@@ -283,7 +278,7 @@ const Cart = () => {
                     </PriceDetail>
                   </Product>
                   <Hr />
-                </>
+                </div>
               ))}
             </Info>
             <Summary>
@@ -302,22 +297,55 @@ const Cart = () => {
                   <div className="cart-shippingaddress">
                     <h2>Shipping Address</h2>
                     <div className="cart-shippingaddress-itemlist">
-                      <label>Address</label>
+                      <label>Street</label>
                       <input
+                        defaultValue={userDetail.street}
+                        id="cart-street"
                         type="text"
-                        placeholder="Address"
+                        placeholder="Street"
                         onChange={(e) => {
                           setShippingAddress((data) => ({
                             ...data,
-                            address: e.target.value,
+                            street: e.target.value,
                           }));
-                          formIsValid();
+                        }}
+                      />
+                    </div>
+                    <div className="cart-shippingaddress-itemlist">
+                      <label>Barangay</label>
+                      <input
+                        defaultValue={userDetail.barangay}
+                        id="cart-barangay"
+                        type="text"
+                        placeholder="Barangay"
+                        onChange={(e) => {
+                          setShippingAddress((data) => ({
+                            ...data,
+                            barangay: e.target.value,
+                          }));
+                        }}
+                      />
+                    </div>
+                    <div className="cart-shippingaddress-itemlist">
+                      <label>Municipality</label>
+                      <input
+                        defaultValue={userDetail.municipality}
+                        id="cart-municipality"
+                        type="text"
+                        placeholder="Municipality"
+                        onChange={(e) => {
+                          setShippingAddress((data) => ({
+                            ...data,
+                            municipality: e.target.value,
+                          }));
                         }}
                       />
                     </div>
                     <div className="cart-shippingaddress-itemlist">
                       <label>City</label>
                       <input
+                        defaultValue={userDetail.city}
+                        id="cart-city"
                         type="text"
                         placeholder="City"
                         onChange={(e) => {
@@ -325,13 +353,14 @@ const Cart = () => {
                             ...data,
                             city: e.target.value,
                           }));
-                          formIsValid();
                         }}
                       />
                     </div>
                     <div className="cart-shippingaddress-itemlist">
                       <label>Postal Code</label>
                       <input
+                        defaultValue={userDetail.postalCode}
+                        id="cart-postal"
                         className="cart-postalcode"
                         type="number"
                         placeholder="Postal Code"

@@ -14,13 +14,13 @@ const MyPurchase = () => {
   const [allOpen, setAllOpen] = useState(false);
   const [cancelledOpen, setCancelledOpen] = useState(false);
   const [pendingOpen, setPendingOpen] = useState(false);
-  // const [toClaimOpen, settoClaimOpen] = useState(true);
+  const [toShipOpen, settoShipOpen] = useState(true);
   const [completedOpen, setcompletedOpen] = useState(false);
 
   const toggleAll = () => {
     setCancelledOpen(false);
     setPendingOpen(false);
-    // settoClaimOpen(false);
+    settoShipOpen(false);
     setcompletedOpen(false);
     setAllOpen(true);
   };
@@ -28,7 +28,7 @@ const MyPurchase = () => {
   const toggleCancel = () => {
     setAllOpen(false);
     setPendingOpen(false);
-    // settoClaimOpen(false);
+    settoShipOpen(false);
     setcompletedOpen(false);
     setCancelledOpen(true);
   };
@@ -36,31 +36,31 @@ const MyPurchase = () => {
   const togglePending = () => {
     setAllOpen(false);
     setCancelledOpen(false);
-    // settoClaimOpen(false);
+    settoShipOpen(false);
     setcompletedOpen(false);
     setPendingOpen(true);
   };
 
-  // const toggleToClaim = () => {
-  //   setAllOpen(false);
-  //   setCancelledOpen(false);
-  //   setPendingOpen(false);
-  //   setcompletedOpen(false);
-  //   // settoClaimOpen(true);
-  // };
+  const toggleToShip = () => {
+    setAllOpen(false);
+    setCancelledOpen(false);
+    setPendingOpen(false);
+    setcompletedOpen(false);
+    settoShipOpen(true);
+  };
 
   const toggleCompleted = () => {
     setAllOpen(false);
     setCancelledOpen(false);
     setPendingOpen(false);
-    // settoClaimOpen(false);
+    settoShipOpen(false);
     setcompletedOpen(true);
   };
 
   const orders = data.order;
   const cancelled = orders?.filter((data) => data.status === "Cancelled");
   const pending = orders?.filter((data) => data.status === "Pending");
-  // const toClaim = orders?.filter((data) => data.status === "ToClaim");
+  const toShip = orders?.filter((data) => data.status === "ToShip");
   const completed = orders?.filter((data) => data.status === "Completed");
 
   return (
@@ -81,12 +81,12 @@ const MyPurchase = () => {
             >
               Pending
             </button>
-            {/* <button
-              className={toClaimOpen ? "active" : "ordersBtnList"}
-              onClick={toggleToClaim}
+            <button
+              className={toShipOpen ? "active" : "ordersBtnList"}
+              onClick={toggleToShip}
             >
-              To Claim
-            </button> */}
+              To Ship
+            </button>
             <button
               className={completedOpen ? "active" : "ordersBtnList"}
               onClick={toggleCompleted}

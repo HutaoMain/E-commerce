@@ -15,6 +15,8 @@ public class UserService {
     UserRepository userRepository;
 
     public User registerUser(User user) {
+        User userByEmail = userRepository.findByEmail(user.getEmail());
+
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
@@ -37,16 +39,9 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-//    public void updateUserAddress(String email, String newAddress) {
-//        User user = getUserByEmail(email);
-//        user.setAddress(newAddress);
-//        userRepository.save(user);
-//    }
-
     public List<User> getListUser() {
         return userRepository.findAll();
     }
-
 
     public void updatePassword(String email, User user) {
         User setUser = userRepository.findByEmail(email);
@@ -58,9 +53,18 @@ public class UserService {
 
     public void updateAddress(String email, User user) {
         User setUser = userRepository.findByEmail(email);
-        setUser.setAddress(user.getAddress());
+        setUser.setFirstLogin(true);
+        setUser.setBarangay(user.getBarangay());
+        setUser.setStreet(user.getStreet());
         setUser.setCity(user.getCity());
+        setUser.setMunicipality(user.getMunicipality());
         setUser.setPostalCode(user.getPostalCode());
+        userRepository.save(setUser);
+    }
+
+    public void updateUserImageUrl(String email, User user) {
+        User setUser = userRepository.findByEmail(email);
+        setUser.setImageUrl(user.getImageUrl());
         userRepository.save(setUser);
     }
 }

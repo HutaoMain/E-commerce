@@ -59,9 +59,10 @@ const WishlistCard = ({ wishlist }) => {
           <Rating
             name="simple-controlled"
             value={rating}
-            onChange={(e, newValue) => {
-              setRating(newValue);
-            }}
+            // onChange={(e, newValue) => {
+            //   setRating(newValue);
+            // }}
+            readOnly={true}
           />
         </div>
         <div className="product-price">

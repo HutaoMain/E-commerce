@@ -22,7 +22,7 @@ public class ProductService {
     @Autowired
     CategoryRepository categoryRepository;
 
-    public Product createProduct(ProductDTO productDTO, Category category) {
+    public void createProduct(ProductDTO productDTO, Category category) {
         Product product = new Product();
         product.setName(productDTO.getName());
         product.setImageUrl(productDTO.getImageUrl());
@@ -33,7 +33,6 @@ public class ProductService {
         product.setCreatedDate(productDTO.getCreatedDate());
         product.setUpdatedDate(productDTO.getUpdatedDate());
         productRepository.save(product);
-        return product;
     }
 
     private ProductDTO getProductDtos(Product product) {

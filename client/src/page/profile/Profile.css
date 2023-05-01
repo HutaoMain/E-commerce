@@ -6,7 +6,7 @@
 .profileManageContainer {
   flex: 3;
   margin-top: 10px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   margin-bottom: 5%;
   box-shadow: 5px 5px 5px 5px rgb(0 0 0 / 12%);
 }
@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .profileInfoIntro {
@@ -35,12 +36,13 @@
 
 .profileManageContainerRight {
   display: flex;
+  align-items: center;
   width: 75%;
   flex-direction: column;
 }
 
 .profileManageInfo {
-  margin-left: 70px;
+  /* margin-left: 70px; */
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -48,6 +50,7 @@
 .profileManageInfo span {
   word-break: break-all;
   cursor: not-allowed;
+  width: 500px;
 }
 
 .profileManageInfoList {
@@ -126,9 +129,10 @@
 }
 
 .profileImage {
-  width: 500px !important;
+  width: 200px !important;
   height: auto !important;
   margin-top: 10px;
+  border-radius: 50%;
 }
 
 .profileInputLabel {
@@ -228,6 +232,14 @@
   .profile {
     flex-direction: column;
   }
+
+  .profileManageInfo span {
+    width: 300px;
+  }
+
+  .profileImage {
+    width: 100px;
+  }
 }
 
 @media screen and (max-width: 1320px) {
@@ -243,7 +255,6 @@
   }
 
   .profileImage {
-    width: 400px !important;
     height: auto !important;
   }
 }
@@ -290,7 +301,7 @@
 
 @media screen and (max-width: 760px) {
   .profileHorizontalLine {
-    width: 360px;
+    width: 90%;
     margin: 0;
   }
 
@@ -307,7 +318,8 @@
   }
 
   .profileImage {
-    width: 300px !important;
+    margin-top: 10px;
+    width: 150px !important;
     height: auto !important;
   }
   .profileManageInfoName {

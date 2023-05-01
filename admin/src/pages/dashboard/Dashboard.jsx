@@ -19,9 +19,11 @@ const Dashboard = () => {
         </section>
         <section className="dashboard-chart">
           <BarChart />
+        </section>
+        <section className="dashboard-chart">
           <LineChart />
         </section>
-        <section className="dashboard-pie">
+        <section className="dashboard-chart">
           <PieChart />
         </section>
       </div>

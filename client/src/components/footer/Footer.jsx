@@ -175,9 +175,9 @@ const Footer = () => {
         <ContactItem>
           <BsFillTelephoneFill style={{ marginRight: "10px" }} /> +639687695221
         </ContactItem>
-        <ContactItem>
+        {/* <ContactItem>
           <BsMailbox style={{ marginRight: "10px" }} /> contact@beautyavenue.ph
-        </ContactItem>
+        </ContactItem> */}
       </Right>
     </Container>
   );

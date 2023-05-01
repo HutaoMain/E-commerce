@@ -35,11 +35,13 @@ public class OrderDTO {
 
     private List<ProductQuantityDTO> products;
 
-    private String address;
-
-    private String city;
-
-    private Integer postalCode;
+//    private String barangay;
+//
+//    private String street;
+//
+//    private String city;
+//
+//    private Integer postalCode;
 
     private String modeOfPayment;
 }

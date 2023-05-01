@@ -9,7 +9,7 @@ import { AiOutlineCamera, AiOutlineSave } from "react-icons/ai";
 import useFetch from "../../contextAPI/useFetch";
 import Modal from "react-modal";
 import ChangePassword from "./ChangePassword";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { UrlPath } from "../../UrlPath";
 
 const customStyle = {
@@ -31,8 +31,8 @@ const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [profileData, setprofileData] = useState("");
   const [imageSelected, setImageSelected] = useState("");
-  const [address, setAddress] = useState("");
-  const [formattedAddress, setFormatedAddress] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [formattedAddress, setFormatedAddress] = useState("");
 
   const { user } = useContext(AuthContext);
 
@@ -65,13 +65,15 @@ const Profile = () => {
 
   const { data } = useFetch(`${UrlPath}/api/user/${user}`);
 
-  // useEffect(() => {
-  //   const address = data.address || ""; // set default value to empty string if address is undefined
-  //   const parsedAddress = address ? JSON.parse(address) : {}; // check if address is truthy before parsing
-  //   setFormatedAddress(parsedAddress.address || ""); // get the 'address' property from the parsed object, set default value to empty string if not found
+  useEffect(() => {
+    // const address = data.address || ""; // set default value to empty string if address is undefined
+    // const parsedAddress = address ? JSON.parse(address) : {}; // check if address is truthy before parsing
+    // setFormatedAddress(parsedAddress.address || ""); // get the 'address' property from the parsed object, set default value to empty string if not found
 
-  //   setprofileData(data);
-  // }, [data]);
+    setprofileData(data);
+  }, [data]);
+
+  console.log(profileData);
 
   const handlePutImage = async () => {
     const data = new FormData();
@@ -83,7 +85,7 @@ const Profile = () => {
     );
 
     const { url } = uploadRes.data;
-    await axios.put(`${UrlPath}/api/user/update/image/${profileData.id}`, {
+    await axios.put(`${UrlPath}/api/user/image/${user}`, {
       imageUrl: url,
     });
     toast.success("✅ Success!", {
@@ -134,7 +136,8 @@ const Profile = () => {
                 src={
                   imageSelected
                     ? URL.createObjectURL(imageSelected)
-                    : profileData.imageUrl
+                    : profileData.imageUrl ||
+                      "https://i.ibb.co/MBtjqXQ/no=avatar.gif"
                 }
                 alt="profilePic"
                 className="profileImage"
@@ -206,6 +209,7 @@ const Profile = () => {
                     cursor: "pointer",
                     backgroundColor: "#51503F",
                     color: "white",
+                    marginBottom: "10px",
                   }}
                   onClick={toggleModal}
                 >

@@ -22,10 +22,6 @@ public class Order{
     private String userFullName;
 
     private String email;
-//
-//    private Long productId;
-//
-//    private Integer quantity;
 
     private Double totalPrice;
 
@@ -48,11 +44,9 @@ public class Order{
     @CreationTimestamp
     private LocalDate dateNow;
 
-    private String address;
-
-    private String city;
-
-    private Integer postalCode;
+    private String trackingNum;
 
     private String modeOfPayment;
+
+    private String courier;
 }

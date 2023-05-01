@@ -106,7 +106,8 @@ hr {
 
 .my-modal-selected-question {
   height: 35px;
-  width: 96%;
+  width: 94%;
   padding: 0 13px;
   margin-bottom: 10px;
+  font-size: 18px;
 }

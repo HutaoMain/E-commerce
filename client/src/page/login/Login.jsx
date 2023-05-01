@@ -151,7 +151,7 @@ function Login() {
         </section>
         <span className="login-signup-container">
           Don't have account yet ?
-          <button className="signup" onClick={toggleModal}>
+          <button className="login-signup" onClick={toggleModal}>
             Sign Up
           </button>
         </span>

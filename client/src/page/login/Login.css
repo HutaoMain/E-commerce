@@ -378,11 +378,12 @@ p {
   margin-top: 30px;
 }
 
-.signup {
+.login-signup {
   background-color: transparent;
   color: black;
   border: none;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 900px) and (min-width: 768px) {

@@ -50,7 +50,7 @@ const PieChart = () => {
   };
 
   return (
-    <div style={{ width: "50%" }}>
+    <div style={{ width: "75%", marginTop: "5%" }}>
       <Doughnut
         data={chartData}
         options={chartOptions}
