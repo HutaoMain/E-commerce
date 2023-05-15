@@ -16,9 +16,9 @@
   border-radius: 5px;
 }
 
-.statusToClaim {
+.statusToShip {
   background-color: rgba(0, 128, 0, 0.05);
-  color: green;
+  color: blue;
   padding: 5px;
   text-align: center;
   border: none;
@@ -56,4 +56,15 @@
   width: auto;
   height: 300px;
   object-fit: contain;
+}
+
+.order-trackingnumber {
+  height: 25px;
+  font-size: 18px;
+  border: none;
+  width: 100%;
+}
+
+.order-trackingnumber:focus {
+  outline: none;
 }

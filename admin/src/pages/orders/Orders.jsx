@@ -37,13 +37,12 @@ Modal.setAppElement("#root");
 
 const Orders = () => {
   const [list, setList] = useState([]);
+  const [trackingNumber, setTrackingNumber] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
   const [payment, setPayment] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  // const [isOpenJsonData, setIsOpenJsonData] = useState(false);
   const [paramsId, setParamsId] = useState("");
-  // const [jsonValue, setJsonValue] = useState([]);
 
   const { data } = useFetch(
     `${import.meta.env.VITE_APP_API_URL}/api/order/list`
@@ -60,6 +59,7 @@ const Orders = () => {
         `${import.meta.env.VITE_APP_API_URL}/api/order/update/status/${id}`,
         {
           status: selectedStatus,
+          trackingNum: trackingNumber,
         }
       );
       setList(list.filter((item) => item.id !== id));
@@ -158,6 +158,55 @@ const Orders = () => {
       },
     },
     {
+      field: "trackingNum",
+      headerName: "Tracking Number",
+      headerAlign: "center",
+      width: 170,
+      align: "center",
+      renderCell: (params) => {
+        return (
+          <div>
+            <input
+              className="order-trackingnumber"
+              defaultValue={params.row.trackingNum}
+              onChange={(e) => setTrackingNumber(e.target.value)}
+            />
+          </div>
+        );
+      },
+    },
+    {
+      field: "courier",
+      headerName: "Courier",
+      headerAlign: "center",
+      align: "center",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <div>
+            <select
+              className=""
+              defaultValue={params.row.courier}
+              onChange={(e) => setSelectedStatus(e.target.value)}
+            >
+              <option value="Completed" className="statusCompleted">
+                Completed
+              </option>
+              <option value="ToShip" className="statusToClaim">
+                ToShip
+              </option>
+              <option value="Pending" className="statusPending">
+                Pending
+              </option>
+              <option value="Cancelled" className="statusCancelled">
+                Cancelled
+              </option>
+            </select>
+          </div>
+        );
+      },
+    },
+    {
       field: "status",
       headerName: "Status",
       headerAlign: "center",
@@ -174,9 +223,9 @@ const Orders = () => {
               <option value="Completed" className="statusCompleted">
                 Completed
               </option>
-              {/* <option value="ToClaim" className="statusToClaim">
-                ToClaim
-              </option> */}
+              <option value="ToShip" className="statusToClaim">
+                ToShip
+              </option>
               <option value="Pending" className="statusPending">
                 Pending
               </option>

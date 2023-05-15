@@ -132,18 +132,19 @@ const OrderItem = ({ item }) => {
             >
               Upload Proof of Payment
             </button>
-            {"   "}
-            <span>tracking # here: </span>
-            {item?.trackingNum}
-            <span style={{ marginLeft: "10px" }}>
-              Please track your order here {"   "}
-              {item?.courier}
-            </span>
-            {/* You can also pay here{" "} */}
           </div>
         </div>
       )}
-      {/* <ToastContainer /> */}
+      {item.status === "ToShip" && (
+        <div>
+          <span>tracking # here: </span>
+          {item?.trackingNum}
+          <span style={{ marginLeft: "10px" }}>
+            Please track your order here {"   "}
+            {item?.courier}
+          </span>
+        </div>
+      )}
       <Modal
         isOpen={open}
         onRequestClose={toggleOrPayment}

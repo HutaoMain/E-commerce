@@ -92,7 +92,17 @@ public class OrderService {
 
     public void updateStatusById(long orderId, Order getOrder) {
         Order setOrder = orderRepository.getReferenceById(orderId);
-        setOrder.setStatus(getOrder.getStatus());
+
+        // Retain the current trackingNum if the new value is null or blank
+        if (getOrder.getTrackingNum() != null && !getOrder.getTrackingNum().isEmpty()) {
+            setOrder.setTrackingNum(getOrder.getTrackingNum());
+        }
+
+        // Retain the current status if the new value is null or blank
+        if (getOrder.getStatus() != null && !getOrder.getStatus().isEmpty()) {
+            setOrder.setStatus(getOrder.getStatus());
+        }
+
         orderRepository.save(setOrder);
     }
 

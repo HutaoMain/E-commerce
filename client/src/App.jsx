@@ -17,6 +17,7 @@ import useFetch from "./contextAPI/useFetch";
 import { UrlPath } from "./UrlPath";
 import FirstLogin from "./components/first-login/FirstLogin";
 import { ToastContainer } from "react-toastify";
+import SearchComponent from "./components/searchComponent/SearchComponent";
 
 function App() {
   const { user, dispatch } = useContext(AuthContext);
@@ -38,7 +39,6 @@ function App() {
 
   return (
     <div className="App">
-      {}
       {location.pathname === "/login" ? null : <Navbar user={user} />}
       <Routes>
         <Route path="*" element={<ErrorPage />} />
@@ -49,7 +49,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
-        <Route path="/category/:id" element={<ProductMapping />} />
+        <Route path="/category/:id" element={<SearchComponent />} />
         <Route path="/cart" element={<Cart />} />
         <Route
           path="/profile"

@@ -106,8 +106,8 @@ const MyPurchase = () => {
             cancelled?.map((item) => <OrderItem item={item} key={item.id} />)}
           {pendingOpen &&
             pending?.map((item) => <OrderItem item={item} key={item.id} />)}
-          {/* {toClaimOpen &&
-            toClaim?.map((item) => <OrderItem item={item} key={item.id} />)} */}
+          {toShipOpen &&
+            toShip?.map((item) => <OrderItem item={item} key={item.id} />)}
           {completedOpen &&
             completed?.map((item) => <OrderItem item={item} key={item.id} />)}
         </div>

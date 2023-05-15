@@ -1,21 +1,28 @@
-// import React, { useState } from "react";
-// import useFetch from "../../contextAPI/useFetch";
-// import CategoryMapping from "../category/CategoryMapping";
+import { useState } from "react";
+import useFetch from "../../contextAPI/useFetch";
+import ProductCard from "../product/ProductCard";
 import "./SearchComponent.css";
 import { AiOutlineSearch } from "react-icons/ai";
+import ProductMapping from "../product/ProductMapping";
+import { useLocation } from "react-router-dom";
 
-const SearchComponent = ({ id }) => {
-  // const { data } = useFetch(
-  //   `${import.meta.env.VITE_APP_API_URL}/api/category/list/${id}`
-  // );
+const SearchComponent = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
 
-  // const [query, setQuery] = useState("");
+  const { data } = useFetch(
+    `${import.meta.env.VITE_APP_API_URL}/api/category/list/${id}`
+  );
 
-  // let pattern = RegExp(query, "gi");
+  console.log(data);
 
-  // const search = () => {
-  //   return data.products?.filter((item) => item.name.match(pattern));
-  // };
+  const [query, setQuery] = useState("");
+
+  let pattern = RegExp(query, "gi");
+
+  const search = () => {
+    return data.products?.filter((item) => item.name.match(pattern));
+  };
 
   return (
     <div>
@@ -25,10 +32,11 @@ const SearchComponent = ({ id }) => {
           className="searchInput"
           type="text"
           placeholder="Search Product Name Here...."
-          // onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
         />
       </div>
       {/* <CategoryMapping data={search(data)} /> */}
+      <ProductMapping data={search(data)} />
     </div>
   );
 };
