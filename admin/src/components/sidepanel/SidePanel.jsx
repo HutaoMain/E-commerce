@@ -5,7 +5,7 @@ import {
   Logout,
   Dashboard,
   AddShoppingCart,
-  CreditCard,
+  Settings,
   Person,
   Layers,
   Inventory,
@@ -85,6 +85,9 @@ const SidePanel = () => {
           </MenuItem>
           <MenuItem component={<Link to="/users" />} icon={<Person />}>
             Users
+          </MenuItem>
+          <MenuItem component={<Link to="/settings" />} icon={<Settings />}>
+            Settings
           </MenuItem>
           <MenuItem onClick={logout} icon={<Logout />}>
             Logout

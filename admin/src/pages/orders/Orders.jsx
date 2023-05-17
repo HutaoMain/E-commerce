@@ -39,6 +39,8 @@ const Orders = () => {
   const [list, setList] = useState([]);
   const [trackingNumber, setTrackingNumber] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [courier, setCourier] = useState([]);
+  const [selectedCourier, setSelectedCourier] = useState("");
   const [payment, setPayment] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -49,6 +51,13 @@ const Orders = () => {
   );
 
   useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_API_URL}/api/courier/list`
+      );
+      setCourier(res.data);
+    };
+    fetchData();
     setList(data);
   }, [data]);
 
@@ -60,6 +69,7 @@ const Orders = () => {
         {
           status: selectedStatus,
           trackingNum: trackingNumber,
+          courier: selectedCourier,
         }
       );
       setList(list.filter((item) => item.id !== id));
@@ -180,27 +190,23 @@ const Orders = () => {
       headerName: "Courier",
       headerAlign: "center",
       align: "center",
-      width: 150,
+      width: 250,
       renderCell: (params) => {
         return (
           <div>
             <select
-              className=""
+              className="order-courierlist"
               defaultValue={params.row.courier}
-              onChange={(e) => setSelectedStatus(e.target.value)}
+              onChange={(e) => setSelectedCourier(e.target.value)}
             >
-              <option value="Completed" className="statusCompleted">
-                Completed
-              </option>
-              <option value="ToShip" className="statusToClaim">
-                ToShip
-              </option>
-              <option value="Pending" className="statusPending">
-                Pending
-              </option>
-              <option value="Cancelled" className="statusCancelled">
-                Cancelled
-              </option>
+              <option value="">select courier name</option>
+              {courier.map((item) => {
+                return (
+                  <option value={item.courierWebsite} key={item.id}>
+                    {item.courierName}
+                  </option>
+                );
+              })}
             </select>
           </div>
         );

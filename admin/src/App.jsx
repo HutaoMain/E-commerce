@@ -1,8 +1,8 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Orders from "./pages/orders/Orders";
-import Payment from "./pages/payment/Payment";
 import Products from "./pages/manage/products/Products";
 import Category from "./pages/manage/category/Category";
 import Users from "./pages/users/Users";
@@ -16,6 +16,9 @@ import Login from "./pages/login/Login";
 import ErrorPage from "./pages/errorPage/ErrorPage";
 import ProductsJson from "./pages/orders/productJson/ProductsJson";
 import useFetch from "./contextApi/useFetch";
+import Settings from "./pages/settingsPage/Settings";
+import { ToastContainer } from "react-toastify";
+
 function App() {
   const { user } = useContext(AuthContext);
 
@@ -59,7 +62,9 @@ function App() {
           path="/productJson/:id"
           element={user ? <ProductsJson /> : <Login />}
         />
+        <Route path="/settings" element={user ? <Settings /> : <Login />} />
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

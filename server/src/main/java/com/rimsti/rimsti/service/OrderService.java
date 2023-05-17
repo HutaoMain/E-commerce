@@ -103,6 +103,10 @@ public class OrderService {
             setOrder.setStatus(getOrder.getStatus());
         }
 
+        if (getOrder.getCourier() != null && !getOrder.getCourier().isEmpty()) {
+            setOrder.setCourier(getOrder.getCourier());
+        }
+
         orderRepository.save(setOrder);
     }
 

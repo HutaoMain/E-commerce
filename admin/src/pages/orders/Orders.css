@@ -68,3 +68,10 @@
 .order-trackingnumber:focus {
   outline: none;
 }
+
+.order-courierlist {
+  width: 90%;
+  height: 30px;
+  font-size: 18px;
+  border: none;
+}

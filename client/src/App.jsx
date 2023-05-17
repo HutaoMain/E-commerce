@@ -10,7 +10,6 @@ import Profile from "./page/profile/Profile";
 import MyPurchase from "./page/profile/MyPurchase";
 import ErrorPage from "./page/errorPage/ErrorPage";
 import "react-toastify/dist/ReactToastify.css";
-import ProductMapping from "./components/product/ProductMapping";
 
 import WishlistMapping from "./components/wishlist/WishlistMapping";
 import useFetch from "./contextAPI/useFetch";
